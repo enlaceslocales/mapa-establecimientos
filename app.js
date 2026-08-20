@@ -216,14 +216,14 @@ async function cargarDatos() {
                     correo:
                         colegio.CORREO || "",
 
-                    telefono:
-                        colegio["TELÉFONO"] || "",
+                   telefono:
+                   String(colegio["TELÉFONO"] ?? "").trim(),
 
-                    convivencia:
-                        colegio["CONVIVENCIA ESCOLAR"] || "",
+                  convivencia:
+    String(colegio["CONVIVENCIA ESCOLAR"] ?? "").trim(),
 
-                    telefonoConvivencia:
-                        colegio["TELEFONO CONVIVENCIA"] || "",
+                  telefonoConvivencia:
+    String(colegio["TELEFONO CONVIVENCIA"] ?? "").trim(),
 
                 lat:
     convertirCoordenada(colegio.LATITUD),
