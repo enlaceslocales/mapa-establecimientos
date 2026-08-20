@@ -86,21 +86,51 @@ const marcadores = {};
 
 
 /* =========================================================
-   CREAR URL DE GOOGLE MAPS
+   FUNCIÓN PARA NORMALIZAR NOMBRES DE COLUMNAS
 ========================================================= */
 
-function obtenerUrlGoogleMaps(colegio) {
+function normalizarClave(texto) {
 
-    const consulta =
-        `${colegio.nombre}, ${colegio.direccion}, ${colegio.localidad}, ${colegio.comuna}, Chile`;
+    return String(texto || "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .toUpperCase();
 
-    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(consulta)}`;
 }
 
 
 /* =========================================================
-   CARGAR DATOS DESDE GOOGLE SHEETS
+   OBTENER DATO DE GOOGLE SHEETS
 ========================================================= */
+
+function obtenerDato(colegio, nombreCampo) {
+
+    const claveBuscada =
+        normalizarClave(nombreCampo);
+
+
+    const claveReal =
+        Object.keys(colegio).find(
+            clave =>
+                normalizarClave(clave) ===
+                claveBuscada
+        );
+
+
+    if (!claveReal) {
+
+        return "";
+
+    }
+
+
+    return colegio[claveReal] ?? "";
+
+}
+
+
 /* =========================================================
    CONVERTIR COORDENADAS
 ========================================================= */
@@ -112,41 +142,23 @@ function convertirCoordenada(valor) {
         valor === undefined ||
         valor === ""
     ) {
+
         return null;
+
     }
 
-
-    /*
-     * Convierte el valor a texto
-     */
 
     let coordenada =
         String(valor).trim();
 
 
-    /*
-     * Reemplaza coma decimal por punto
-     *
-     * Ejemplo:
-     * -38,9456 → -38.9456
-     */
-
     coordenada =
         coordenada.replace(",", ".");
 
 
-    /*
-     * Convierte a número
-     */
-
     const numero =
         Number(coordenada);
 
-
-    /*
-     * Verifica que realmente sea
-     * un número válido.
-     */
 
     if (
         !Number.isFinite(numero)
@@ -158,14 +170,36 @@ function convertirCoordenada(valor) {
 
 
     return numero;
+
 }
+
+
+/* =========================================================
+   CREAR URL DE GOOGLE MAPS
+========================================================= */
+
+function obtenerUrlGoogleMaps(colegio) {
+
+    const consulta =
+        `${colegio.nombre}, ${colegio.direccion}, ${colegio.localidad}, ${colegio.comuna}, Chile`;
+
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(consulta)}`;
+
+}
+
+
+/* =========================================================
+   CARGAR DATOS DESDE GOOGLE SHEETS
+========================================================= */
 
 async function cargarDatos() {
 
     try {
 
         const respuesta =
-            await fetch(URL_DATOS);
+            await fetch(
+                URL_DATOS + "?v=" + Date.now()
+            );
 
 
         if (!respuesta.ok) {
@@ -181,61 +215,169 @@ async function cargarDatos() {
             await respuesta.json();
 
 
+        console.log(
+            "Datos originales recibidos desde Google Sheets:",
+            datos
+        );
+
+
         colegios =
             datos
-                .filter(colegio => colegio.ID !== "")
-                .map(colegio => ({
 
-                    id:
-                        Number(colegio.ID),
+                .filter(
+                    colegio =>
+                        obtenerDato(colegio, "ID") !== ""
+                )
 
-                    nombre:
-                        colegio.NOMBRE || "",
+                .map(
+                    colegio => ({
 
-                    rbd:
-                        String(colegio.RBD || ""),
+                        id:
+                            Number(
+                                obtenerDato(
+                                    colegio,
+                                    "ID"
+                                )
+                            ),
 
-                    direccion:
-                        colegio["DIRECCIÓN"] || "",
+                        nombre:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "NOMBRE"
+                                )
+                            ).trim(),
 
-                    localidad:
-                        colegio.LOCALIDAD || "",
+                        rbd:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "RBD"
+                                )
+                            ).trim(),
 
-                    comuna:
-                        colegio.COMUNA || "",
+                        direccion:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "DIRECCIÓN"
+                                )
+                            ).trim(),
 
-                    dependencia:
-                        colegio.DEPENDENCIA || "",
+                        localidad:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "LOCALIDAD"
+                                )
+                            ).trim(),
 
-                    nivel:
-                        colegio.NIVEL || "",
+                        comuna:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "COMUNA"
+                                )
+                            ).trim(),
 
-                    director:
-                        colegio.DIRECTOR || "",
+                        dependencia:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "DEPENDENCIA"
+                                )
+                            ).trim(),
 
-                    correo:
-                        colegio.CORREO || "",
+                        nivel:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "NIVEL"
+                                )
+                            ).trim(),
 
-                   telefono:
-                   String(colegio["TELÉFONO"] ?? "").trim(),
+                        director:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "DIRECTOR"
+                                )
+                            ).trim(),
 
-                  convivencia:
-    String(colegio["CONVIVENCIA ESCOLAR"] ?? "").trim(),
+                        correo:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "CORREO"
+                                )
+                            ).trim(),
 
-                  telefonoConvivencia:
-    String(colegio["TELEFONO CONVIVENCIA"] ?? "").trim(),
+                        telefono:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "TELÉFONO"
+                                )
+                            ).trim(),
 
-                lat:
-    convertirCoordenada(colegio.LATITUD),
+                        convivencia:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "CONVIVENCIA ESCOLAR"
+                                )
+                            ).trim(),
 
-lng:
-    convertirCoordenada(colegio.LONGITUD)
-                }));
+                        telefonoConvivencia:
+                            String(
+                                obtenerDato(
+                                    colegio,
+                                    "TELEFONO CONVIVENCIA"
+                                )
+                            ).trim(),
+
+                        lat:
+                            convertirCoordenada(
+                                obtenerDato(
+                                    colegio,
+                                    "LATITUD"
+                                )
+                            ),
+
+                        lng:
+                            convertirCoordenada(
+                                obtenerDato(
+                                    colegio,
+                                    "LONGITUD"
+                                )
+                            )
+
+                    })
+                );
 
 
         console.log(
-            "Colegios cargados:",
+            "Colegios procesados:",
             colegios
+        );
+
+
+        /*
+         * IMPORTANTE:
+         * Mostramos específicamente los teléfonos
+         * en consola para poder verificar que llegan.
+         */
+
+        console.log(
+            "TELÉFONOS:",
+            colegios.map(
+                colegio => ({
+                    nombre: colegio.nombre,
+                    telefono: colegio.telefono,
+                    telefonoConvivencia:
+                        colegio.telefonoConvivencia
+                })
+            )
         );
 
 
@@ -288,10 +430,11 @@ function mostrarErrorConexion() {
 
 function crearMarcador(colegio) {
 
-    const marcador = L.marker([
-        colegio.lat,
-        colegio.lng
-    ]);
+    const marcador =
+        L.marker([
+            colegio.lat,
+            colegio.lng
+        ]);
 
 
     marcador.on(
@@ -311,6 +454,7 @@ function crearMarcador(colegio) {
 
 
     return marcador;
+
 }
 
 
@@ -326,20 +470,10 @@ function cargarMarcadores(lista) {
     lista.forEach(
         colegio => {
 
-            /*
-             * Si el colegio ya tiene marcador,
-             * lo reutilizamos.
-             */
-
             const marcador =
                 marcadores[colegio.id] ||
                 crearMarcador(colegio);
 
-
-            /*
-             * Solamente agregamos colegios
-             * que tengan coordenadas válidas.
-             */
 
             if (
                 Number.isFinite(colegio.lat) &&
@@ -354,6 +488,7 @@ function cargarMarcadores(lista) {
 
         }
     );
+
 }
 
 
@@ -378,37 +513,23 @@ function crearTarjetaColegio(colegio) {
     tarjeta.innerHTML = `
 
         <div class="colegio-nombre">
-
             ${colegio.nombre}
-
         </div>
-
 
         <div class="colegio-rbd">
-
             RBD: ${colegio.rbd}
-
         </div>
 
-
         <div class="colegio-info">
-
             📍 ${colegio.localidad}
-
         </div>
 
-
         <div class="colegio-info">
-
             🏫 ${colegio.dependencia}
-
         </div>
 
-
         <div class="colegio-info">
-
             📚 ${colegio.nivel}
-
         </div>
 
     `;
@@ -427,6 +548,7 @@ function crearTarjetaColegio(colegio) {
 
 
     return tarjeta;
+
 }
 
 
@@ -437,7 +559,6 @@ function crearTarjetaColegio(colegio) {
 function mostrarColegios(lista) {
 
     listaColegios.innerHTML = "";
-
 
     contador.textContent =
         lista.length;
@@ -484,7 +605,10 @@ function mostrarColegios(lista) {
     );
 
 
-    cargarMarcadores(lista);
+    cargarMarcadores(
+        lista
+    );
+
 }
 
 
@@ -500,19 +624,10 @@ function seleccionarColegio(colegio) {
     );
 
     console.log(
-        "Latitud:",
-        colegio.lat
+        "Datos completos del colegio:",
+        colegio
     );
 
-    console.log(
-        "Longitud:",
-        colegio.lng
-    );
-
-
-    /*
-     * Verificar coordenadas
-     */
 
     if (
         Number.isFinite(colegio.lat) &&
@@ -531,10 +646,6 @@ function seleccionarColegio(colegio) {
         );
 
 
-        /*
-         * Abrir el popup del marcador
-         */
-
         if (
             marcadores[colegio.id]
         ) {
@@ -545,32 +656,45 @@ function seleccionarColegio(colegio) {
 
         }
 
-    } else {
-
-        console.warn(
-            "El establecimiento no tiene coordenadas válidas:",
-            colegio
-        );
-
     }
 
-
-    /*
-     * Mostrar ficha
-     */
 
     mostrarFichaColegio(
         colegio
     );
 
 
-    /*
-     * Destacar establecimiento
-     */
-
     seleccionarColegioVisualmente(
         colegio.id
     );
+
+}
+
+
+/* =========================================================
+   FUNCIÓN SEGURA PARA ACTUALIZAR LA FICHA
+========================================================= */
+
+function actualizarFicha(
+    id,
+    valor
+) {
+
+    const elemento =
+        document.getElementById(id);
+
+
+    /*
+     * Si el elemento existe,
+     * actualizamos su contenido.
+     */
+
+    if (elemento) {
+
+        elemento.textContent =
+            valor || "No informado";
+
+    }
 
 }
 
@@ -587,145 +711,121 @@ function mostrarFichaColegio(colegio) {
         );
 
 
-    /*
-     * Nombre
-     */
-
-    document.getElementById(
-        "fichaNombre"
-    ).textContent =
-        colegio.nombre;
+    actualizarFicha(
+        "fichaNombre",
+        colegio.nombre
+    );
 
 
-    /*
-     * RBD
-     */
-
-    document.getElementById(
-        "fichaRbd"
-    ).textContent =
-        `RBD ${colegio.rbd}`;
+    actualizarFicha(
+        "fichaRbd",
+        `RBD ${colegio.rbd}`
+    );
 
 
-    /*
-     * Dirección
-     */
-
-    document.getElementById(
-        "fichaDireccion"
-    ).textContent =
-        colegio.direccion || "No informado";
+    actualizarFicha(
+        "fichaDireccion",
+        colegio.direccion
+    );
 
 
-    /*
-     * Localidad
-     */
-
-    document.getElementById(
-        "fichaLocalidad"
-    ).textContent =
-        colegio.localidad || "No informado";
+    actualizarFicha(
+        "fichaLocalidad",
+        colegio.localidad
+    );
 
 
-    /*
-     * Comuna
-     */
-
-    document.getElementById(
-        "fichaComuna"
-    ).textContent =
-        colegio.comuna || "No informado";
+    actualizarFicha(
+        "fichaComuna",
+        colegio.comuna
+    );
 
 
-    /*
-     * Dependencia
-     */
+    actualizarFicha(
+        "fichaDependencia",
+        colegio.dependencia
+    );
 
-    document.getElementById(
-        "fichaDependencia"
-    ).textContent =
-        colegio.dependencia || "No informado";
+
+    actualizarFicha(
+        "fichaNivel",
+        colegio.nivel
+    );
+
+
+    actualizarFicha(
+        "fichaDirector",
+        colegio.director
+    );
+
+
+    actualizarFicha(
+        "fichaCorreo",
+        colegio.correo
+    );
 
 
     /*
-     * Nivel
+     * TELÉFONO PRINCIPAL
      */
 
-    document.getElementById(
-        "fichaNivel"
-    ).textContent =
-        colegio.nivel || "No informado";
+    actualizarFicha(
+        "fichaTelefono",
+        colegio.telefono
+    );
 
 
     /*
-     * Director/a
+     * CONVIVENCIA ESCOLAR
      */
 
-    document.getElementById(
-        "fichaDirector"
-    ).textContent =
-        colegio.director || "No informado";
+    actualizarFicha(
+        "fichaConvivencia",
+        colegio.convivencia
+    );
 
 
     /*
-     * Correo
+     * TELÉFONO CONVIVENCIA
      */
 
-    document.getElementById(
-        "fichaCorreo"
-    ).textContent =
-        colegio.correo || "No informado";
+    actualizarFicha(
+        "fichaTelefonoConvivencia",
+        colegio.telefonoConvivencia
+    );
 
 
     /*
-     * Teléfono
+     * GOOGLE MAPS
      */
 
-    document.getElementById(
-        "fichaTelefono"
-    ).textContent =
-        colegio.telefono || "No informado";
-
-
-    /*
-     * Convivencia Escolar
-     */
-
-    document.getElementById(
-        "fichaConvivencia"
-    ).textContent =
-        colegio.convivencia || "No informado";
-
-
-    /*
-     * Teléfono Convivencia
-     */
-
-    document.getElementById(
-        "fichaTelefonoConvivencia"
-    ).textContent =
-        colegio.telefonoConvivencia || "No informado";
-
-
-    /*
-     * Google Maps
-     */
-
-    document.getElementById(
-        "fichaGoogleMaps"
-    ).href =
-        obtenerUrlGoogleMaps(
-            colegio
+    const enlaceMaps =
+        document.getElementById(
+            "fichaGoogleMaps"
         );
 
 
+    if (enlaceMaps) {
+
+        enlaceMaps.href =
+            obtenerUrlGoogleMaps(
+                colegio
+            );
+
+    }
+
+
     /*
-     * Mostrar ficha
+     * MOSTRAR FICHA
      */
 
-    ficha.classList.add(
-        "visible"
-    );
+    if (ficha) {
+
+        ficha.classList.add(
+            "visible"
+        );
+
+    }
 
 }
 
@@ -769,6 +869,7 @@ function seleccionarColegioVisualmente(id) {
 
         }
     );
+
 }
 
 
@@ -823,6 +924,7 @@ function cargarFiltroLocalidades() {
 
             }
         );
+
 }
 
 
@@ -877,6 +979,7 @@ function cargarFiltroDependencias() {
 
             }
         );
+
 }
 
 
@@ -931,6 +1034,7 @@ function cargarFiltroNiveles() {
 
             }
         );
+
 }
 
 
@@ -961,10 +1065,6 @@ function aplicarFiltros() {
     const resultados =
         colegios.filter(
             colegio => {
-
-                /*
-                 * Buscador general
-                 */
 
                 const coincideTexto =
 
@@ -997,29 +1097,17 @@ function aplicarFiltros() {
                         .includes(texto);
 
 
-                /*
-                 * Localidad
-                 */
-
                 const coincideLocalidad =
                     !localidad ||
                     colegio.localidad ===
                     localidad;
 
 
-                /*
-                 * Dependencia
-                 */
-
                 const coincideDependencia =
                     !dependencia ||
                     colegio.dependencia ===
                     dependencia;
 
-
-                /*
-                 * Nivel
-                 */
 
                 const coincideNivel =
                     !nivel ||
@@ -1041,6 +1129,7 @@ function aplicarFiltros() {
     mostrarColegios(
         resultados
     );
+
 }
 
 
@@ -1066,9 +1155,13 @@ if (cerrarFicha) {
                 );
 
 
-            ficha.classList.remove(
-                "visible"
-            );
+            if (ficha) {
+
+                ficha.classList.remove(
+                    "visible"
+                );
+
+            }
 
 
             document
@@ -1157,6 +1250,7 @@ function iniciarSistema() {
         colegios
     );
 
+
     console.log(
         "Mapa Educacional iniciado correctamente."
     );
@@ -1165,7 +1259,7 @@ function iniciarSistema() {
 
 
 /* =========================================================
-   CARGAR INFORMACIÓN DESDE GOOGLE SHEETS
+   CARGAR INFORMACIÓN
 ========================================================= */
 
 cargarDatos();
