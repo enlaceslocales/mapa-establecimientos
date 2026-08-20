@@ -21,8 +21,7 @@
     </title>
 
 
-    <!-- ESTILOS PROPIOS -->
-
+    <!-- CSS PROPIO -->
     <link
         rel="stylesheet"
         href="estilos.css"
@@ -30,7 +29,6 @@
 
 
     <!-- LEAFLET -->
-
     <link
         rel="stylesheet"
         href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -82,6 +80,7 @@
 
                 <button
                     class="menu-item activo"
+                    type="button"
                 >
 
                     <span>
@@ -94,10 +93,27 @@
 
                 </button>
 
+
+                <button
+                    class="menu-item"
+                    type="button"
+                >
+
+                    <span>
+                        🏫
+                    </span>
+
+                    <span>
+                        Establecimientos
+                    </span>
+
+                </button>
+
+
             </nav>
 
 
-            <!-- PIE -->
+            <!-- PIE SIDEBAR -->
 
             <div class="sidebar-footer">
 
@@ -203,6 +219,7 @@
                                 Localidad
                             </label>
 
+
                             <select
                                 id="filtroLocalidad"
                             >
@@ -225,6 +242,7 @@
                                 Dependencia
                             </label>
 
+
                             <select
                                 id="filtroDependencia"
                             >
@@ -246,6 +264,7 @@
                             <label>
                                 Nivel educacional
                             </label>
+
 
                             <select
                                 id="filtroNivel"
@@ -277,6 +296,7 @@
                                 Establecimientos
                             </strong>
 
+
                             <span id="contador">
                                 0
                             </span>
@@ -286,6 +306,7 @@
 
                         <button
                             id="limpiarFiltros"
+                            type="button"
                         >
 
                             Limpiar filtros
@@ -359,6 +380,7 @@
                             id="cerrarFicha"
                             class="ficha-cerrar"
                             title="Cerrar"
+                            type="button"
                         >
 
                             ×
@@ -370,33 +392,33 @@
                         <div class="ficha-contenido">
 
 
-
                             <!-- =================================================
-                                 ENCABEZADO DE LA FICHA
+                                 ENCABEZADO DE FICHA
                             ================================================== -->
 
-                            <div class="ficha-encabezado">
+                            <div class="ficha-icono">
+
+                                🏫
+
+                            </div>
 
 
-                                <div class="ficha-icono">
-                                    🏫
-                                </div>
+
+                            <div class="ficha-titulo">
 
 
-                                <div class="ficha-titulo">
+                                <h2 id="fichaNombre">
+
+                                    Establecimiento
+
+                                </h2>
 
 
-                                    <h2 id="fichaNombre">
-                                        Establecimiento
-                                    </h2>
+                                <span id="fichaRbd">
 
+                                    RBD
 
-                                    <span id="fichaRbd">
-                                        RBD
-                                    </span>
-
-
-                                </div>
+                                </span>
 
 
                             </div>
@@ -431,6 +453,7 @@
                                             Dirección
                                         </label>
 
+
                                         <p id="fichaDireccion">
                                             —
                                         </p>
@@ -457,6 +480,7 @@
                                         <label>
                                             Localidad
                                         </label>
+
 
                                         <p id="fichaLocalidad">
                                             —
@@ -485,6 +509,7 @@
                                             Comuna
                                         </label>
 
+
                                         <p id="fichaComuna">
                                             —
                                         </p>
@@ -511,6 +536,7 @@
                                         <label>
                                             Dependencia
                                         </label>
+
 
                                         <p id="fichaDependencia">
                                             —
@@ -539,6 +565,7 @@
                                             Nivel educacional
                                         </label>
 
+
                                         <p id="fichaNivel">
                                             —
                                         </p>
@@ -565,6 +592,7 @@
                                         <label>
                                             Director/a
                                         </label>
+
 
                                         <p id="fichaDirector">
                                             —
@@ -593,6 +621,7 @@
                                             Correo electrónico
                                         </label>
 
+
                                         <p id="fichaCorreo">
                                             —
                                         </p>
@@ -620,6 +649,7 @@
                                             Teléfono
                                         </label>
 
+
                                         <p id="fichaTelefono">
                                             —
                                         </p>
@@ -631,9 +661,7 @@
 
 
 
-                                <!-- =================================================
-                                     CONVIVENCIA ESCOLAR
-                                ================================================== -->
+                                <!-- CONVIVENCIA ESCOLAR -->
 
                                 <div class="ficha-dato">
 
@@ -648,6 +676,7 @@
                                         <label>
                                             Convivencia Escolar
                                         </label>
+
 
                                         <p id="fichaConvivencia">
                                             —
@@ -676,6 +705,7 @@
                                             Teléfono Convivencia Escolar
                                         </label>
 
+
                                         <p id="fichaTelefonoConvivencia">
                                             —
                                         </p>
@@ -684,7 +714,6 @@
 
 
                                 </div>
-
 
 
                             </div>
@@ -703,17 +732,13 @@
                                 rel="noopener noreferrer"
                             >
 
-
                                 <span>
                                     📍
                                 </span>
 
-
                                 Abrir ubicación en Google Maps
 
-
                             </a>
-
 
 
                         </div>
@@ -746,10 +771,13 @@
 
 
     <!-- =================================================
-         APLICACIÓN
+         JAVASCRIPT DE LA APLICACIÓN
     ================================================== -->
 
-   <script src="app.js"></script>
+    <script
+        src="app.js"
+    ></script>
+
 
 </body>
 
