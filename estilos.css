@@ -1,0 +1,1353 @@
+/* =========================================================
+   MAPA DE ESTABLECIMIENTOS EDUCACIONALES
+   Hoja de estilos principal
+========================================================= */
+
+
+/* =========================================================
+   CONFIGURACIÓN GENERAL
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: #f4f7fb;
+    color: #1f2937;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   ESTRUCTURA PRINCIPAL
+========================================================= */
+
+.app {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   BARRA LATERAL
+========================================================= */
+
+.sidebar {
+    width: 230px;
+    height: 100vh;
+
+    background: #ffffff;
+    border-right: 1px solid #e5eaf0;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 24px 16px;
+
+    flex-shrink: 0;
+}
+
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 4px 10px 28px;
+}
+
+.logo-icon {
+    width: 42px;
+    height: 42px;
+
+    background: #eaf4ff;
+    border-radius: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 21px;
+}
+
+.logo strong {
+    display: block;
+
+    font-size: 16px;
+    font-weight: 700;
+
+    color: #1f2937;
+}
+
+.logo span {
+    display: block;
+
+    color: #7b8794;
+    font-size: 12px;
+
+    margin-top: 2px;
+}
+
+
+/* =========================================================
+   MENÚ LATERAL
+========================================================= */
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.menu-item {
+    border: none;
+    background: transparent;
+
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 14px;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    color: #667085;
+
+    cursor: pointer;
+
+    text-align: left;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.menu-item:hover {
+    background: #f5f8fc;
+}
+
+.menu-item.activo {
+    background: #eaf4ff;
+    color: #1769aa;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   PIE DEL MENÚ
+========================================================= */
+
+.sidebar-footer {
+    margin-top: auto;
+
+    color: #98a2b3;
+    font-size: 11px;
+
+    padding: 10px;
+}
+
+
+/* =========================================================
+   CONTENIDO PRINCIPAL
+========================================================= */
+
+.main {
+    flex: 1;
+
+    min-width: 0;
+    min-height: 0;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   ENCABEZADO SUPERIOR
+========================================================= */
+
+.header {
+    height: 82px;
+
+    flex-shrink: 0;
+
+    background: #ffffff;
+    border-bottom: 1px solid #e5eaf0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 28px;
+}
+
+.header h1 {
+    font-size: 21px;
+    font-weight: 650;
+
+    color: #1f2937;
+}
+
+.header p {
+    color: #8a95a3;
+    font-size: 13px;
+
+    margin-top: 4px;
+}
+
+
+/* =========================================================
+   ESTADO DE LA BASE DE DATOS
+========================================================= */
+
+.estado {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+
+    color: #667085;
+    font-size: 12px;
+
+    white-space: nowrap;
+}
+
+.estado-punto {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: #22c55e;
+
+    box-shadow: 0 0 0 3px #eaf9ef;
+}
+
+
+/* =========================================================
+   ÁREA PRINCIPAL
+========================================================= */
+
+.workspace {
+    flex: 1;
+
+    display: flex;
+
+    padding: 18px;
+
+    gap: 18px;
+
+    min-height: 0;
+}
+
+
+/* =========================================================
+   PANEL DE BÚSQUEDA Y RESULTADOS
+========================================================= */
+
+.panel {
+    width: 390px;
+
+    flex-shrink: 0;
+
+    background: #ffffff;
+
+    border: 1px solid #e5eaf0;
+
+    border-radius: 14px;
+
+    padding: 18px;
+
+    display: flex;
+    flex-direction: column;
+
+    min-height: 0;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+
+/* =========================================================
+   BUSCADOR
+========================================================= */
+
+.search-box {
+    height: 46px;
+
+    border: 1px solid #dce3eb;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+
+    padding: 0 13px;
+
+    background: #fbfcfe;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.search-box:focus-within {
+    border-color: #8dbce0;
+
+    box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.08);
+
+    background: #ffffff;
+}
+
+.search-icon {
+    margin-right: 9px;
+
+    font-size: 14px;
+}
+
+.search-box input {
+    border: none;
+    outline: none;
+
+    background: transparent;
+
+    width: 100%;
+
+    font-family: inherit;
+    font-size: 13px;
+
+    color: #344054;
+}
+
+.search-box input::placeholder {
+    color: #98a2b3;
+}
+
+
+/* =========================================================
+   FILTROS
+========================================================= */
+
+.filtros {
+    display: flex;
+    flex-direction: column;
+
+    gap: 12px;
+
+    margin-top: 18px;
+}
+
+.filtro label {
+    display: block;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #667085;
+
+    margin-bottom: 5px;
+}
+
+.filtro select {
+    width: 100%;
+
+    height: 38px;
+
+    border: 1px solid #dce3eb;
+
+    border-radius: 8px;
+
+    padding: 0 10px;
+
+    background: #ffffff;
+
+    color: #344054;
+
+    font-family: inherit;
+    font-size: 12px;
+
+    outline: none;
+
+    cursor: pointer;
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.filtro select:hover {
+    border-color: #c5d0dc;
+}
+
+.filtro select:focus {
+    border-color: #8dbce0;
+
+    box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.08);
+}
+
+
+/* =========================================================
+   ENCABEZADO DE RESULTADOS
+========================================================= */
+
+.resultados-header {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    margin-top: 22px;
+
+    padding-bottom: 11px;
+
+    border-bottom: 1px solid #edf0f4;
+}
+
+.resultados-header strong {
+    font-size: 13px;
+
+    color: #344054;
+}
+
+.resultados-header span {
+    margin-left: 7px;
+
+    background: #eef4f9;
+
+    color: #52708c;
+
+    padding: 3px 7px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+}
+
+.resultados-header button {
+    border: none;
+    background: transparent;
+
+    color: #1769aa;
+
+    font-family: inherit;
+    font-size: 11px;
+
+    cursor: pointer;
+
+    padding: 4px 5px;
+
+    border-radius: 5px;
+
+    transition: background 0.15s ease;
+}
+
+.resultados-header button:hover {
+    background: #eef6fc;
+}
+
+
+/* =========================================================
+   LISTADO DE COLEGIOS
+========================================================= */
+
+.lista-colegios {
+    margin-top: 12px;
+
+    overflow-y: auto;
+
+    flex: 1;
+
+    padding-right: 4px;
+}
+
+
+/* SCROLLBAR */
+
+.lista-colegios::-webkit-scrollbar {
+    width: 5px;
+}
+
+.lista-colegios::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.lista-colegios::-webkit-scrollbar-thumb {
+    background: #d6dde5;
+
+    border-radius: 10px;
+}
+
+.lista-colegios::-webkit-scrollbar-thumb:hover {
+    background: #bdc7d2;
+}
+
+
+/* =========================================================
+   TARJETA DE COLEGIO
+========================================================= */
+
+.colegio-card {
+    border: 1px solid #e7ecf2;
+
+    border-radius: 11px;
+
+    padding: 13px;
+
+    margin-bottom: 9px;
+
+    cursor: pointer;
+
+    background: #ffffff;
+
+    transition:
+        border-color 0.15s ease,
+        background 0.15s ease,
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.colegio-card:hover {
+    border-color: #b9d7ef;
+
+    background: #fbfdff;
+
+    box-shadow: 0 3px 10px rgba(15, 23, 42, 0.04);
+}
+
+.colegio-card.seleccionado {
+    border-color: #75add7;
+
+    background: #f5faff;
+
+    box-shadow: 0 0 0 2px rgba(23, 105, 170, 0.08);
+}
+
+
+/* NOMBRE */
+
+.colegio-nombre {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #344054;
+
+    margin-bottom: 6px;
+
+    line-height: 1.35;
+}
+
+
+/* RBD */
+
+.colegio-rbd {
+    font-size: 11px;
+
+    color: #667085;
+
+    margin-bottom: 4px;
+}
+
+
+/* INFORMACIÓN */
+
+.colegio-info {
+    font-size: 11px;
+
+    color: #7b8794;
+
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   SIN RESULTADOS
+========================================================= */
+
+.sin-resultados {
+    height: 180px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
+
+    color: #98a2b3;
+}
+
+.sin-resultados span {
+    font-size: 32px;
+
+    margin-bottom: 10px;
+
+    opacity: 0.8;
+}
+
+.sin-resultados p {
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CONTENEDOR DEL MAPA
+========================================================= */
+
+.mapa-container {
+    flex: 1;
+
+    min-width: 0;
+    min-height: 0;
+
+    background: #e9eef3;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    border: 1px solid #dfe5eb;
+
+    position: relative;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+
+/* =========================================================
+   MAPA LEAFLET
+========================================================= */
+
+#mapa {
+    width: 100%;
+    height: 100%;
+
+    min-height: 400px;
+}
+
+
+/* =========================================================
+   PERSONALIZACIÓN DE LEAFLET
+========================================================= */
+
+.leaflet-container {
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    background: #e9eef3;
+}
+
+
+/* CONTROLES DE ZOOM */
+
+.leaflet-control-zoom {
+    border: none !important;
+
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.12) !important;
+}
+
+.leaflet-control-zoom a {
+    width: 34px !important;
+    height: 34px !important;
+
+    line-height: 34px !important;
+
+    color: #344054 !important;
+
+    border: none !important;
+
+    background: #ffffff !important;
+}
+
+.leaflet-control-zoom a:hover {
+    background: #f5f8fc !important;
+
+    color: #1769aa !important;
+}
+
+
+/* ATRIBUCIÓN */
+
+.leaflet-control-attribution {
+    font-size: 9px !important;
+
+    background: rgba(255, 255, 255, 0.88) !important;
+}
+
+
+/* =========================================================
+   POPUP DEL MAPA
+========================================================= */
+
+.leaflet-popup-content-wrapper {
+    border-radius: 12px;
+
+    box-shadow: 0 5px 20px rgba(15, 23, 42, 0.15);
+}
+
+.leaflet-popup-content {
+    margin: 14px 16px;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+/* =========================================================
+   MARCADORES PERSONALIZADOS
+========================================================= */
+
+.marcador-colegio {
+    width: 34px;
+    height: 34px;
+
+    border-radius: 50% 50% 50% 0;
+
+    background: #1769aa;
+
+    border: 3px solid #ffffff;
+
+    box-shadow: 0 3px 8px rgba(15, 23, 42, 0.25);
+
+    transform: rotate(-45deg);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.marcador-colegio span {
+    transform: rotate(45deg);
+
+    color: #ffffff;
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 190px;
+    }
+
+    .panel {
+        width: 350px;
+    }
+
+    .header {
+        padding: 0 20px;
+    }
+
+    .workspace {
+        padding: 14px;
+        gap: 14px;
+    }
+}
+
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 70px;
+
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .logo div:not(.logo-icon),
+    .menu-item span:last-child,
+    .sidebar-footer {
+        display: none;
+    }
+
+    .logo {
+        justify-content: center;
+
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .menu-item {
+        justify-content: center;
+    }
+
+    .panel {
+        width: 320px;
+    }
+}
+
+
+@media (max-width: 700px) {
+
+    body {
+        overflow: auto;
+    }
+
+    .app {
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .workspace {
+        flex-direction: column;
+
+        overflow: visible;
+    }
+
+    .panel {
+        width: 100%;
+
+        min-height: 450px;
+    }
+
+    .mapa-container {
+        width: 100%;
+
+        height: 500px;
+
+        flex: none;
+    }
+
+    .header {
+        height: auto;
+
+        min-height: 82px;
+
+        padding: 16px 20px;
+    }
+
+    .estado {
+        display: none;
+    }
+}
+/* =========================================================
+   POPUP DEL ESTABLECIMIENTO
+========================================================= */
+
+.leaflet-popup-content-wrapper {
+    border-radius: 14px;
+
+    padding: 0;
+
+    box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.18);
+}
+
+.leaflet-popup-content {
+    margin: 0;
+
+    width: 310px !important;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+
+/* ENCABEZADO */
+
+.popup-colegio {
+    padding: 16px;
+}
+
+.popup-encabezado {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 9px;
+
+    margin-bottom: 4px;
+}
+
+.popup-indicador {
+    width: 10px;
+    height: 10px;
+
+    background: #22c55e;
+
+    border-radius: 50%;
+
+    margin-top: 5px;
+
+    flex-shrink: 0;
+}
+
+.popup-titulo {
+    font-size: 15px;
+
+    font-weight: 650;
+
+    line-height: 1.3;
+
+    color: #1f2937;
+}
+
+.popup-rbd {
+    color: #1769aa;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    margin-left: 19px;
+
+    margin-bottom: 14px;
+}
+
+
+/* DATOS */
+
+.popup-datos {
+    border-top: 1px solid #edf0f4;
+
+    padding-top: 11px;
+}
+
+.popup-dato {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 10px;
+
+    margin-bottom: 10px;
+}
+
+.popup-icono {
+    width: 21px;
+
+    text-align: center;
+
+    font-size: 14px;
+}
+
+.popup-dato div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+
+    min-width: 0;
+}
+
+.popup-dato strong {
+    font-size: 10px;
+
+    color: #667085;
+
+    font-weight: 600;
+}
+
+.popup-dato span {
+    font-size: 11px;
+
+    color: #344054;
+
+    line-height: 1.3;
+
+    word-break: break-word;
+}
+
+
+/* BOTÓN GOOGLE MAPS */
+
+.popup-google {
+    display: block;
+
+    margin-top: 13px;
+
+    padding: 10px 12px;
+
+    border-radius: 8px;
+
+    background: #1769aa;
+
+    color: #ffffff !important;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+.popup-google:hover {
+    background: #125886;
+
+    color: #ffffff !important;
+}
+
+
+/* FLECHA DEL POPUP */
+
+.leaflet-popup-tip {
+    box-shadow:
+        3px 3px 5px rgba(15, 23, 42, 0.04);
+}
+/* =========================================================
+   FICHA LATERAL DEL ESTABLECIMIENTO
+========================================================= */
+
+.ficha-colegio {
+
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+    bottom: 18px;
+
+    width: 340px;
+
+    background: #ffffff;
+
+    border: 1px solid #e1e7ee;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 10px 35px rgba(15, 23, 42, 0.16);
+
+    z-index: 1000;
+
+    display: none;
+
+    overflow: hidden;
+}
+
+
+/* FICHA ABIERTA */
+
+.ficha-colegio.visible {
+
+    display: block;
+
+}
+
+
+/* CONTENIDO */
+
+.ficha-contenido {
+
+    height: 100%;
+
+    overflow-y: auto;
+
+    padding: 24px 22px;
+}
+
+
+/* BOTÓN CERRAR */
+
+.ficha-cerrar {
+
+    position: absolute;
+
+    top: 12px;
+    right: 12px;
+
+    width: 30px;
+    height: 30px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f3f6f9;
+
+    color: #667085;
+
+    font-size: 22px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+}
+
+
+.ficha-cerrar:hover {
+
+    background: #e8eef4;
+
+    color: #344054;
+
+}
+
+
+/* ICONO */
+
+.ficha-icono {
+
+    width: 54px;
+    height: 54px;
+
+    border-radius: 14px;
+
+    background: #eaf4ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 25px;
+
+    margin-bottom: 14px;
+}
+
+
+/* TÍTULO */
+
+.ficha-titulo {
+
+    padding-right: 25px;
+}
+
+
+.ficha-titulo h2 {
+
+    font-size: 18px;
+
+    line-height: 1.3;
+
+    font-weight: 650;
+
+    color: #1f2937;
+
+    margin: 0 0 6px 0;
+}
+
+
+.ficha-titulo span {
+
+    display: inline-block;
+
+    background: #eef5fb;
+
+    color: #1769aa;
+
+    border-radius: 20px;
+
+    padding: 4px 9px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* SEPARADOR */
+
+.ficha-separador {
+
+    height: 1px;
+
+    background: #edf0f4;
+
+    margin: 20px 0;
+}
+
+
+/* DATOS */
+
+.ficha-datos {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 17px;
+}
+
+
+.ficha-dato {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+}
+
+
+.ficha-dato-icono {
+
+    width: 32px;
+    height: 32px;
+
+    flex-shrink: 0;
+
+    background: #f5f8fb;
+
+    border-radius: 9px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 14px;
+}
+
+
+.ficha-dato label {
+
+    display: block;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    color: #8a95a3;
+
+    margin-bottom: 3px;
+}
+
+
+.ficha-dato p {
+
+    margin: 0;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    color: #344054;
+
+    word-break: break-word;
+}
+
+
+/* GOOGLE MAPS */
+
+.ficha-maps {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    margin-top: 24px;
+
+    width: 100%;
+
+    padding: 12px 14px;
+
+    border-radius: 9px;
+
+    background: #1769aa;
+
+    color: #ffffff !important;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+}
+
+
+.ficha-maps:hover {
+
+    background: #125886;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   TARJETA SELECCIONADA
+========================================================= */
+
+.colegio-card.seleccionado {
+
+    border-color: #8fc3e8;
+
+    background: #f5faff;
+
+    box-shadow:
+        0 2px 8px rgba(23, 105, 170, 0.08);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .ficha-colegio {
+
+        width: 310px;
+
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .ficha-colegio {
+
+        top: auto;
+        left: 12px;
+        right: 12px;
+
+        bottom: 12px;
+
+        width: auto;
+
+        height: 360px;
+
+    }
+
+}

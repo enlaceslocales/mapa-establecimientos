@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Mapa de Establecimientos Educacionales
+    </title>
+
+
+    <!-- ESTILOS DEL SISTEMA -->
+
+    <link
+        rel="stylesheet"
+        href="estilos.css"
+    >
+
+
+    <!-- LEAFLET -->
+
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
+
+</head>
+
+
+<body>
+
+
+    <div class="app">
+
+
+        <!-- =================================================
+             BARRA LATERAL
+        ================================================== -->
+
+        <aside class="sidebar">
+
+
+            <!-- LOGO -->
+
+            <div class="logo">
+
+                <div class="logo-icon">
+                    🏫
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Mapa
+                    </strong>
+
+                    <span>
+                        Educacional
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MENÚ -->
+
+            <nav class="menu">
+
+
+                <button
+                    class="menu-item activo"
+                    type="button"
+                >
+
+                    <span>
+                        🗺️
+                    </span>
+
+                    <span>
+                        Mapa
+                    </span>
+
+                </button>
+
+
+
+            </nav>
+
+
+
+            <!-- PIE SIDEBAR -->
+
+            <div class="sidebar-footer">
+
+                <span>
+                    Versión 1.0
+                </span>
+
+            </div>
+
+
+        </aside>
+
+
+
+
+        <!-- =================================================
+             CONTENIDO PRINCIPAL
+        ================================================== -->
+
+        <main class="main">
+
+
+
+            <!-- =================================================
+                 ENCABEZADO
+            ================================================== -->
+
+            <header class="header">
+
+
+                <div>
+
+                    <h1>
+                        Establecimientos educacionales comuna Teodoro Schmidt
+                    </h1>
+
+
+                    <p>
+                        Mapa territorial Oficina Local de la Niñez
+                    </p>
+
+                </div>
+
+
+
+                <div class="estado">
+
+                    <span class="estado-punto"></span>
+
+                    Información actualizada
+
+                </div>
+
+
+            </header>
+
+
+
+
+            <!-- =================================================
+                 ÁREA DE TRABAJO
+            ================================================== -->
+
+            <section class="workspace">
+
+
+
+                <!-- =================================================
+                     PANEL DE BÚSQUEDA
+                ================================================== -->
+
+                <section class="panel">
+
+
+
+                    <!-- BUSCADOR -->
+
+                    <div class="search-box">
+
+
+                        <span class="search-icon">
+                            🔎
+                        </span>
+
+
+                        <input
+                            type="text"
+                            id="buscador"
+                            placeholder="Buscar establecimiento, RBD o localidad..."
+                            autocomplete="off"
+                        >
+
+
+                    </div>
+
+
+
+
+                    <!-- =================================================
+                         FILTROS
+                    ================================================== -->
+
+                    <div class="filtros">
+
+
+
+                        <!-- LOCALIDAD -->
+
+                        <div class="filtro">
+
+                            <label for="filtroLocalidad">
+                                Localidad
+                            </label>
+
+
+                            <select
+                                id="filtroLocalidad"
+                            >
+
+                                <option value="">
+                                    Todas
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+
+                        <!-- DEPENDENCIA -->
+
+                        <div class="filtro">
+
+                            <label for="filtroDependencia">
+                                Dependencia
+                            </label>
+
+
+                            <select
+                                id="filtroDependencia"
+                            >
+
+                                <option value="">
+                                    Todas
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+
+                        <!-- NIVEL -->
+
+                        <div class="filtro">
+
+                            <label for="filtroNivel">
+                                Nivel educacional
+                            </label>
+
+
+                            <select
+                                id="filtroNivel"
+                            >
+
+                                <option value="">
+                                    Todos
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+
+
+
+                    <!-- =================================================
+                         ENCABEZADO RESULTADOS
+                    ================================================== -->
+
+                    <div class="resultados-header">
+
+
+                        <div>
+
+                            <strong>
+                                Establecimientos
+                            </strong>
+
+
+                            <span id="contador">
+                                0
+                            </span>
+
+                        </div>
+
+
+
+                        <button
+                            id="limpiarFiltros"
+                            type="button"
+                        >
+
+                            Limpiar filtros
+
+                        </button>
+
+
+                    </div>
+
+
+
+
+                    <!-- =================================================
+                         LISTADO DE COLEGIOS
+                    ================================================== -->
+
+                    <div
+                        id="listaColegios"
+                        class="lista-colegios"
+                    >
+
+
+                        <div class="sin-resultados">
+
+
+                            <span>
+                                🏫
+                            </span>
+
+
+                            <p>
+                                Los establecimientos aparecerán aquí
+                            </p>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </section>
+
+
+
+
+                <!-- =================================================
+                     MAPA
+                ================================================== -->
+
+                <section class="mapa-container">
+
+
+                    <div id="mapa"></div>
+
+
+
+
+                    <!-- =================================================
+                         FICHA DEL ESTABLECIMIENTO
+                    ================================================== -->
+
+                    <aside
+                        id="fichaColegio"
+                        class="ficha-colegio"
+                    >
+
+
+                        <!-- BOTÓN CERRAR -->
+
+                        <button
+                            id="cerrarFicha"
+                            class="ficha-cerrar"
+                            title="Cerrar ficha"
+                            type="button"
+                        >
+
+                            ×
+
+                        </button>
+
+
+
+
+                        <div class="ficha-contenido">
+
+
+
+                            <!-- =================================================
+                                 CABECERA DE LA FICHA
+                            ================================================== -->
+
+                            <div class="ficha-cabecera">
+
+
+                                <div class="ficha-icono">
+
+                                    🏫
+
+                                </div>
+
+
+
+                                <div class="ficha-titulo">
+
+
+                                    <h2 id="fichaNombre">
+
+                                        Establecimiento
+
+                                    </h2>
+
+
+                                    <span id="fichaRbd">
+
+                                        RBD
+
+                                    </span>
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+                            <div class="ficha-separador"></div>
+
+
+
+
+                            <!-- =================================================
+                                 INFORMACIÓN DEL ESTABLECIMIENTO
+                            ================================================== -->
+
+                            <div class="ficha-datos">
+
+
+
+                                <!-- DIRECCIÓN -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        📍
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Dirección
+                                        </label>
+
+
+                                        <p id="fichaDireccion">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <!-- LOCALIDAD -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        🏘️
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Localidad
+                                        </label>
+
+
+                                        <p id="fichaLocalidad">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <!-- COMUNA -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        🏛️
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Comuna
+                                        </label>
+
+
+                                        <p id="fichaComuna">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <!-- DEPENDENCIA -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        🏫
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Dependencia
+                                        </label>
+
+
+                                        <p id="fichaDependencia">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <!-- NIVEL EDUCACIONAL -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        📚
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Nivel educacional
+                                        </label>
+
+
+                                        <p id="fichaNivel">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <!-- DIRECTOR/A -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        👤
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Director/a
+                                        </label>
+
+
+                                        <p id="fichaDirector">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <!-- CORREO -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        ✉️
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Correo electrónico
+                                        </label>
+
+
+                                        <p id="fichaCorreo">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <!-- TELÉFONO -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        ☎️
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Teléfono
+                                        </label>
+
+
+                                        <p id="fichaTelefono">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <!-- =================================================
+                                     CONVIVENCIA ESCOLAR
+                                ================================================== -->
+
+                                <div class="ficha-subtitulo">
+
+                                    <span>
+                                        🧑‍🏫
+                                    </span>
+
+                                    <strong>
+                                        Convivencia Escolar
+                                    </strong>
+
+                                </div>
+
+
+
+
+                                <!-- ENCARGADO/A CONVIVENCIA -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        👤
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Encargado/a
+                                        </label>
+
+
+                                        <p id="fichaConvivencia">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+
+
+                                <!-- TELÉFONO CONVIVENCIA -->
+
+                                <div class="ficha-dato">
+
+
+                                    <div class="ficha-dato-icono">
+
+                                        ☎️
+
+                                    </div>
+
+
+                                    <div>
+
+                                        <label>
+                                            Teléfono Convivencia
+                                        </label>
+
+
+                                        <p id="fichaTelefonoConvivencia">
+                                            —
+                                        </p>
+
+                                    </div>
+
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+                            <!-- =================================================
+                                 BOTÓN GOOGLE MAPS
+                            ================================================== -->
+
+                            <a
+                                id="fichaGoogleMaps"
+                                class="ficha-maps"
+                                href="#"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+
+                                <span>
+                                    📍
+                                </span>
+
+
+                                Abrir ubicación en Google Maps
+
+                            </a>
+
+
+                        </div>
+
+
+                    </aside>
+
+
+                </section>
+
+
+            </section>
+
+
+        </main>
+
+
+    </div>
+
+
+
+
+    <!-- =================================================
+         LEAFLET JAVASCRIPT
+    ================================================== -->
+
+    <script
+        src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    ></script>
+
+
+
+
+    <!-- =================================================
+         JAVASCRIPT DEL SISTEMA
+    ================================================== -->
+
+    <script src="app.js"></script>
+
+
+</body>
+
+</html>
