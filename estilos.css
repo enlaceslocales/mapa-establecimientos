@@ -1252,3 +1252,87 @@ body {
     }
 
 }
+/* =========================================================
+   ACCIONES DE RESULTADOS
+========================================================= */
+
+.acciones-resultados {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+/* =========================================================
+   BOTÓN EXPORTAR EXCEL
+========================================================= */
+
+.btn-exportar {
+    border: 1px solid #dce3eb;
+
+    background: #ffffff;
+
+    color: #1769aa;
+
+    padding: 6px 10px;
+
+    border-radius: 7px;
+
+    font-size: 11px;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease,
+        color 0.15s ease,
+        transform 0.1s ease;
+}
+
+
+/* Hover */
+
+.btn-exportar:hover {
+    background: #f0f7ff;
+
+    border-color: #b9d7ef;
+
+    color: #125b91;
+}
+
+
+/* Click */
+
+.btn-exportar:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================================================
+   BOTÓN LIMPIAR FILTROS
+========================================================= */
+
+.acciones-resultados #limpiarFiltros {
+    border: none;
+
+    background: transparent;
+
+    color: #1769aa;
+
+    font-size: 11px;
+
+    cursor: pointer;
+
+    padding: 6px 4px;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+}
+
+
+.acciones-resultados #limpiarFiltros:hover {
+    color: #125b91;
+
+    text-decoration: underline;
+}
