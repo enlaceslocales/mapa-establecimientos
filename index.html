@@ -275,32 +275,24 @@
 
                     <div class="resultados-header">
 
+    <div>
+        <strong>Establecimientos</strong>
+        <span id="contador">0</span>
+    </div>
 
-                        <div>
+    <div class="acciones-resultados">
 
-                            <strong>
-                                Establecimientos
-                            </strong>
+        <button id="limpiarFiltros">
+            Limpiar filtros
+        </button>
 
+        <button id="exportarExcel" class="btn-exportar">
+            📥 Exportar Excel
+        </button>
 
-                            <span id="contador">
-                                0
-                            </span>
+    </div>
 
-                        </div>
-
-
-                        <button
-                            id="limpiarFiltros"
-                            type="button"
-                        >
-
-                            Limpiar filtros
-
-                        </button>
-
-
-                    </div>
+</div>
 
 
 
@@ -759,7 +751,7 @@
     <!-- =================================================
          JAVASCRIPT DE LA APLICACIÓN
     ================================================== -->
-
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
     <script
         src="app.js"
     ></script>
