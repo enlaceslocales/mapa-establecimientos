@@ -18,6 +18,8 @@ const URL_DATOS =
 
 let colegios = [];
 
+let colegiosVisibles = [];
+
 
 /* =========================================================
    CONFIGURACIÓN DEL MAPA
@@ -76,6 +78,9 @@ const filtroNivel =
 
 const limpiarFiltros =
     document.getElementById("limpiarFiltros");
+
+const exportarExcel =
+    document.getElementById("exportarExcel");
 
 
 /* =========================================================
@@ -363,9 +368,7 @@ async function cargarDatos() {
 
 
         /*
-         * IMPORTANTE:
-         * Mostramos específicamente los teléfonos
-         * en consola para poder verificar que llegan.
+         * Verificación de teléfonos
          */
 
         console.log(
@@ -516,17 +519,21 @@ function crearTarjetaColegio(colegio) {
             ${colegio.nombre}
         </div>
 
+
         <div class="colegio-rbd">
             RBD: ${colegio.rbd}
         </div>
+
 
         <div class="colegio-info">
             📍 ${colegio.localidad}
         </div>
 
+
         <div class="colegio-info">
             🏫 ${colegio.dependencia}
         </div>
+
 
         <div class="colegio-info">
             📚 ${colegio.nivel}
@@ -558,7 +565,17 @@ function crearTarjetaColegio(colegio) {
 
 function mostrarColegios(lista) {
 
+    /*
+     * Guardamos la lista actualmente visible.
+     * Esta será la lista que se exportará.
+     */
+
+    colegiosVisibles =
+        lista;
+
+
     listaColegios.innerHTML = "";
+
 
     contador.textContent =
         lista.length;
@@ -582,6 +599,7 @@ function mostrarColegios(lista) {
 
 
         cargarMarcadores([]);
+
 
         return;
 
@@ -622,6 +640,7 @@ function seleccionarColegio(colegio) {
         "Colegio seleccionado:",
         colegio.nombre
     );
+
 
     console.log(
         "Datos completos del colegio:",
@@ -683,11 +702,6 @@ function actualizarFicha(
     const elemento =
         document.getElementById(id);
 
-
-    /*
-     * Si el elemento existe,
-     * actualizamos su contenido.
-     */
 
     if (elemento) {
 
@@ -1134,6 +1148,192 @@ function aplicarFiltros() {
 
 
 /* =========================================================
+   EXPORTAR ESTABLECIMIENTOS A EXCEL
+========================================================= */
+
+function exportarEstablecimientosExcel() {
+
+    /*
+     * Verificar que la biblioteca Excel
+     * esté disponible.
+     */
+
+    if (typeof XLSX === "undefined") {
+
+        alert(
+            "No fue posible cargar la función de exportación a Excel."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Verificar que existan establecimientos
+     */
+
+    if (
+        !colegiosVisibles ||
+        colegiosVisibles.length === 0
+    ) {
+
+        alert(
+            "No hay establecimientos para exportar."
+        );
+
+        return;
+
+    }
+
+
+    /*
+     * Crear datos para Excel.
+     *
+     * IMPORTANTE:
+     * No se incluyen LATITUD ni LONGITUD.
+     */
+
+    const datosExcel =
+        colegiosVisibles.map(
+            colegio => ({
+
+                "ID":
+                    colegio.id,
+
+                "NOMBRE":
+                    colegio.nombre,
+
+                "RBD":
+                    colegio.rbd,
+
+                "DIRECCIÓN":
+                    colegio.direccion,
+
+                "LOCALIDAD":
+                    colegio.localidad,
+
+                "COMUNA":
+                    colegio.comuna,
+
+                "DEPENDENCIA":
+                    colegio.dependencia,
+
+                "NIVEL":
+                    colegio.nivel,
+
+                "DIRECTOR":
+                    colegio.director,
+
+                "CORREO":
+                    colegio.correo,
+
+                "TELÉFONO":
+                    colegio.telefono,
+
+                "CONVIVENCIA ESCOLAR":
+                    colegio.convivencia,
+
+                "TELEFONO CONVIVENCIA":
+                    colegio.telefonoConvivencia
+
+            })
+        );
+
+
+    /*
+     * Crear hoja de Excel
+     */
+
+    const hoja =
+        XLSX.utils.json_to_sheet(
+            datosExcel
+        );
+
+
+    /*
+     * Ajustar ancho de columnas
+     */
+
+    hoja["!cols"] = [
+
+        { wch: 8 },    // ID
+
+        { wch: 40 },   // NOMBRE
+
+        { wch: 12 },   // RBD
+
+        { wch: 35 },   // DIRECCIÓN
+
+        { wch: 20 },   // LOCALIDAD
+
+        { wch: 20 },   // COMUNA
+
+        { wch: 25 },   // DEPENDENCIA
+
+        { wch: 25 },   // NIVEL
+
+        { wch: 30 },   // DIRECTOR
+
+        { wch: 35 },   // CORREO
+
+        { wch: 18 },   // TELÉFONO
+
+        { wch: 30 },   // CONVIVENCIA ESCOLAR
+
+        { wch: 22 }    // TELEFONO CONVIVENCIA
+
+    ];
+
+
+    /*
+     * Crear libro de Excel
+     */
+
+    const libro =
+        XLSX.utils.book_new();
+
+
+    /*
+     * Agregar hoja
+     */
+
+    XLSX.utils.book_append_sheet(
+        libro,
+        hoja,
+        "Establecimientos"
+    );
+
+
+    /*
+     * Crear nombre del archivo
+     */
+
+    const fecha =
+        new Date();
+
+
+    const año =
+        fecha.getFullYear();
+
+
+    const nombreArchivo =
+        `Establecimientos_Educacionales_${año}.xlsx`;
+
+
+    /*
+     * Descargar Excel
+     */
+
+    XLSX.writeFile(
+        libro,
+        nombreArchivo
+    );
+
+}
+
+
+/* =========================================================
    CERRAR FICHA
 ========================================================= */
 
@@ -1232,6 +1432,20 @@ limpiarFiltros.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   EVENTO EXPORTAR EXCEL
+========================================================= */
+
+if (exportarExcel) {
+
+    exportarExcel.addEventListener(
+        "click",
+        exportarEstablecimientosExcel
+    );
+
+}
 
 
 /* =========================================================
