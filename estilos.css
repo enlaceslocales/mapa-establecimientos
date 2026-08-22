@@ -66,7 +66,7 @@ body {
 
 
 /* =========================================================
-   LOGO / IDENTIFICACIÓN
+   LOGO
 ========================================================= */
 
 .logo {
@@ -226,7 +226,7 @@ body {
 
 .header {
 
-    min-height: 82px;
+    height: 82px;
 
     background: #ffffff;
 
@@ -240,8 +240,6 @@ body {
     justify-content: space-between;
 
     padding: 0 28px;
-
-    gap: 20px;
 
 }
 
@@ -282,8 +280,6 @@ body {
 
     font-size: 12px;
 
-    white-space: nowrap;
-
 }
 
 
@@ -320,7 +316,7 @@ body {
 
 
 /* =========================================================
-   PANEL LATERAL
+   PANEL
 ========================================================= */
 
 .panel {
@@ -455,110 +451,6 @@ body {
 
 
 /* =========================================================
-   UBICACIÓN DEL USUARIO
-========================================================= */
-
-.ubicacion-panel {
-
-    margin-top: 15px;
-
-    padding: 12px;
-
-    border:
-        1px solid #dce8f2;
-
-    border-radius: 10px;
-
-    background: #f8fbff;
-
-}
-
-
-.ubicacion-titulo {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    color: #344054;
-
-    margin-bottom: 9px;
-
-}
-
-
-.btn-ubicacion {
-
-    width: 100%;
-
-    min-height: 38px;
-
-    border: none;
-
-    border-radius: 8px;
-
-    background: #1769aa;
-
-    color: #ffffff;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.15s ease,
-        transform 0.15s ease;
-
-}
-
-
-.btn-ubicacion:hover {
-
-    background: #12588f;
-
-}
-
-
-.btn-ubicacion:active {
-
-    transform: scale(0.98);
-
-}
-
-
-.btn-ubicacion:disabled {
-
-    opacity: 0.65;
-
-    cursor: wait;
-
-}
-
-
-.ubicacion-mensaje {
-
-    display: block;
-
-    margin-top: 7px;
-
-    font-size: 10px;
-
-    line-height: 1.4;
-
-    color: #7b8794;
-
-}
-
-
-/* =========================================================
    RESULTADOS
 ========================================================= */
 
@@ -577,25 +469,12 @@ body {
     border-bottom:
         1px solid #edf0f4;
 
-    gap: 10px;
-
 }
 
 
 .resultados-header strong {
 
     font-size: 13px;
-
-}
-
-
-.resultados-header > div:first-child {
-
-    display: flex;
-
-    align-items: center;
-
-    min-width: 0;
 
 }
 
@@ -617,17 +496,6 @@ body {
 }
 
 
-.acciones-resultados {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 7px;
-
-}
-
-
 .resultados-header button {
 
     border: none;
@@ -643,40 +511,20 @@ body {
 }
 
 
-.resultados-header button:hover {
+.acciones-resultados {
 
-    text-decoration: underline;
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
 
 }
 
-
-/* =========================================================
-   BOTÓN EXPORTAR EXCEL
-========================================================= */
 
 .btn-exportar {
 
-    padding:
-        7px 9px;
-
-    border-radius: 7px !important;
-
-    background: #eef7f0 !important;
-
-    color: #287a3d !important;
-
     font-weight: 600;
-
-    white-space: nowrap;
-
-}
-
-
-.btn-exportar:hover {
-
-    background: #e1f1e5 !important;
-
-    text-decoration: none !important;
 
 }
 
@@ -840,16 +688,16 @@ body {
 
 
 /* =========================================================
-   CONTROLES SOBRE EL MAPA
+   CONTROLES DE UBICACIÓN
 ========================================================= */
 
-.controles-mapa {
+.controles-ubicacion {
 
     position: absolute;
 
-    top: 15px;
+    top: 14px;
 
-    left: 15px;
+    left: 14px;
 
     z-index: 900;
 
@@ -862,7 +710,7 @@ body {
 }
 
 
-.btn-control-mapa {
+.boton-mapa {
 
     border: none;
 
@@ -870,12 +718,12 @@ body {
 
     color: #344054;
 
-    padding: 9px 12px;
+    padding: 10px 13px;
 
     border-radius: 9px;
 
     box-shadow:
-        0 4px 14px rgba(15, 23, 42, 0.14);
+        0 4px 12px rgba(15, 23, 42, 0.15);
 
     font-size: 12px;
 
@@ -883,62 +731,29 @@ body {
 
     cursor: pointer;
 
-    transition:
-        background 0.15s ease,
-        transform 0.15s ease;
+    transition: 0.15s;
 
 }
 
 
-.btn-control-mapa:hover {
+.boton-mapa:hover {
 
-    background: #f7faff;
+    background: #f5f8fc;
 
-}
-
-
-.btn-control-mapa:active {
-
-    transform: scale(0.97);
+    transform: translateY(-1px);
 
 }
 
 
-.btn-control-mapa:disabled {
+.boton-mapa:active {
 
-    opacity: 0.65;
-
-    cursor: wait;
+    transform: translateY(0);
 
 }
 
 
 /* =========================================================
-   INDICADOR DE UBICACIÓN
-========================================================= */
-
-.ubicacion-usuario {
-
-    width: 18px;
-
-    height: 18px;
-
-    border-radius: 50%;
-
-    background: #1769aa;
-
-    border:
-        3px solid #ffffff;
-
-    box-shadow:
-        0 0 0 2px rgba(23, 105, 170, 0.35),
-        0 3px 10px rgba(15, 23, 42, 0.25);
-
-}
-
-
-/* =========================================================
-   FICHA DEL ESTABLECIMIENTO
+   FICHA
 ========================================================= */
 
 .ficha-colegio {
@@ -951,8 +766,7 @@ body {
 
     width: 360px;
 
-    max-height:
-        calc(100% - 36px);
+    max-height: calc(100% - 36px);
 
     background: #ffffff;
 
@@ -1185,7 +999,7 @@ body {
 
 
 /* =========================================================
-   BOTONES DE NAVEGACIÓN
+   ACCIONES FICHA
 ========================================================= */
 
 .ficha-acciones {
@@ -1201,8 +1015,11 @@ body {
 }
 
 
-.ficha-maps,
-.ficha-como-llegar {
+/* =========================================================
+   GOOGLE MAPS
+========================================================= */
+
+.ficha-maps {
 
     display: flex;
 
@@ -1216,6 +1033,10 @@ body {
 
     border-radius: 9px;
 
+    background: #1769aa;
+
+    color: #ffffff;
+
     text-decoration: none;
 
     font-size: 12px;
@@ -1227,15 +1048,6 @@ body {
 }
 
 
-.ficha-maps {
-
-    background: #1769aa;
-
-    color: #ffffff;
-
-}
-
-
 .ficha-maps:hover {
 
     background: #12588f;
@@ -1243,58 +1055,45 @@ body {
 }
 
 
-.ficha-como-llegar {
-
-    background: #eef4f9;
-
-    color: #1769aa;
-
-    border:
-        1px solid #dce8f2;
-
-}
-
-
-.ficha-como-llegar:hover {
-
-    background: #e4eff8;
-
-}
-
-
 /* =========================================================
-   MENSAJE DE UBICACIÓN
+   CÓMO LLEGAR
 ========================================================= */
 
-.mensaje-ubicacion {
+.ficha-llegar {
 
-    position: absolute;
+    display: flex;
 
-    left: 50%;
+    align-items: center;
 
-    bottom: 18px;
+    justify-content: center;
 
-    transform:
-        translateX(-50%);
+    gap: 8px;
 
-    z-index: 900;
-
-    background: rgba(255, 255, 255, 0.96);
-
-    padding: 9px 13px;
+    padding: 11px 14px;
 
     border-radius: 9px;
 
-    box-shadow:
-        0 4px 15px rgba(15, 23, 42, 0.12);
+    background: #f0f6fb;
 
-    color: #667085;
+    color: #1769aa;
 
-    font-size: 11px;
+    text-decoration: none;
 
-    text-align: center;
+    border:
+        1px solid #d5e6f3;
 
-    max-width: 90%;
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition: 0.15s;
+
+}
+
+
+.ficha-llegar:hover {
+
+    background: #e5f1fa;
 
 }
 
@@ -1330,7 +1129,7 @@ body {
 
 
 /* =========================================================
-   RESPONSIVE
+   TABLET
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -1361,14 +1160,17 @@ body {
 
 
 /* =========================================================
-   RESPONSIVE — CELULARES
+   CELULARES
 ========================================================= */
 
 @media (max-width: 700px) {
 
+
     body {
 
-        overflow: auto;
+        overflow-x: hidden;
+
+        overflow-y: auto;
 
     }
 
@@ -1385,6 +1187,10 @@ body {
 
     }
 
+
+    /* ---------------------------------------------------------
+       SIDEBAR
+    --------------------------------------------------------- */
 
     .sidebar {
 
@@ -1454,6 +1260,11 @@ body {
     }
 
 
+
+    /* ---------------------------------------------------------
+       MAIN
+    --------------------------------------------------------- */
+
     .main {
 
         width: 100%;
@@ -1461,135 +1272,315 @@ body {
     }
 
 
+
+    /* ---------------------------------------------------------
+       HEADER
+    --------------------------------------------------------- */
+
     .header {
 
-        min-height: auto;
+        height: auto;
 
-        padding: 16px;
+        padding: 15px;
 
         align-items: flex-start;
-
-    }
-
-
-    .header h1 {
-
-        font-size: 18px;
-
-        line-height: 1.3;
-
-    }
-
-
-    .header p {
-
-        font-size: 12px;
-
-    }
-
-
-    .estado {
-
-        font-size: 10px;
-
-        white-space: nowrap;
-
-    }
-
-
-    .workspace {
-
-        flex-direction: column;
-
-        padding: 10px;
 
         gap: 10px;
 
     }
 
 
-    .panel {
+    .header h1 {
 
-        width: 100%;
+        font-size: 17px;
 
-        height: auto;
-
-        min-height: 420px;
-
-        max-height: 55vh;
+        line-height: 1.25;
 
     }
 
+
+    .header p {
+
+        font-size: 11px;
+
+        line-height: 1.4;
+
+    }
+
+
+    .estado {
+
+        font-size: 9px;
+
+        white-space: nowrap;
+
+        padding-top: 2px;
+
+    }
+
+
+
+    /* ---------------------------------------------------------
+       WORKSPACE
+       
+       IMPORTANTE:
+       Aqui reorganizamos o conteúdo no celular.
+       
+       O .panel passa a comportar-se como "contents",
+       permitindo que:
+       
+       BUSCADOR
+       FILTROS
+       RESULTADOS
+       MAPA
+       LISTADO
+       
+       sejam organizados visualmente.
+    --------------------------------------------------------- */
+
+    .workspace {
+
+        display: grid;
+
+        grid-template-columns: 1fr;
+
+        grid-template-rows: auto auto auto auto auto;
+
+        padding: 10px;
+
+        gap: 10px;
+
+        min-height: 0;
+
+    }
+
+
+
+    /* ---------------------------------------------------------
+       PANEL NO CELULAR
+    --------------------------------------------------------- */
+
+    .panel {
+
+        display: contents;
+
+    }
+
+
+
+    /* ---------------------------------------------------------
+       BUSCADOR
+    --------------------------------------------------------- */
+
+    .search-box {
+
+        grid-row: 1;
+
+        width: 100%;
+
+        height: 44px;
+
+    }
+
+
+
+    /* ---------------------------------------------------------
+       FILTROS
+    --------------------------------------------------------- */
 
     .filtros {
 
-        gap: 9px;
+        grid-row: 2;
 
-        margin-top: 14px;
+        display: grid;
 
-    }
+        grid-template-columns: 1fr;
 
+        gap: 8px;
 
-    .ubicacion-panel {
-
-        margin-top: 12px;
-
-    }
-
-
-    .resultados-header {
-
-        flex-wrap: wrap;
+        margin-top: 0;
 
     }
 
 
-    .acciones-resultados {
+    .filtro select {
 
-        width: 100%;
-
-        justify-content: space-between;
+        height: 38px;
 
     }
 
+
+
+    /* ---------------------------------------------------------
+       MAPA
+       
+       O mapa vem ANTES do listado no celular.
+    --------------------------------------------------------- */
 
     .mapa-container {
 
+        grid-row: 3;
+
         width: 100%;
 
-        height: 65vh;
+        height: 58vh;
 
-        min-height: 420px;
+        min-height: 390px;
 
-        order: 2;
+        max-height: 560px;
+
+        order: initial;
+
+        border-radius: 13px;
 
     }
 
 
     #mapa {
 
-        min-height: 420px;
+        height: 100%;
 
     }
 
 
-    .controles-mapa {
+
+    /* ---------------------------------------------------------
+       CONTROLES DEL MAPA
+    --------------------------------------------------------- */
+
+    .controles-ubicacion {
 
         top: 10px;
 
         left: 10px;
 
+        gap: 6px;
+
     }
 
 
-    .btn-control-mapa {
+    .boton-mapa {
 
-        padding: 9px 10px;
+        padding: 9px 11px;
 
         font-size: 11px;
 
     }
 
+
+
+    /* ---------------------------------------------------------
+       RESULTADOS
+       
+       Ahora aparecen DESPUÉS del mapa.
+    --------------------------------------------------------- */
+
+    .resultados-header {
+
+        grid-row: 4;
+
+        margin-top: 2px;
+
+        padding: 10px 2px;
+
+        background: #ffffff;
+
+        border:
+            1px solid #e5eaf0;
+
+        border-radius: 10px;
+
+        padding-left: 10px;
+
+        padding-right: 10px;
+
+    }
+
+
+    .resultados-header strong {
+
+        font-size: 12px;
+
+    }
+
+
+    .resultados-header button {
+
+        font-size: 10px;
+
+    }
+
+
+    .acciones-resultados {
+
+        gap: 7px;
+
+    }
+
+
+
+    /* ---------------------------------------------------------
+       LISTADO
+       
+       Se le da una altura suficiente para ver varias tarjetas.
+    --------------------------------------------------------- */
+
+    .lista-colegios {
+
+        grid-row: 5;
+
+        width: 100%;
+
+        height: auto;
+
+        max-height: 430px;
+
+        min-height: 180px;
+
+        overflow-y: auto;
+
+        background: #ffffff;
+
+        border:
+            1px solid #e5eaf0;
+
+        border-radius: 12px;
+
+        padding: 10px;
+
+        margin-top: 0;
+
+    }
+
+
+    .colegio-card {
+
+        padding: 13px;
+
+        margin-bottom: 8px;
+
+    }
+
+
+    .colegio-nombre {
+
+        font-size: 13px;
+
+    }
+
+
+    .colegio-rbd,
+    .colegio-info {
+
+        font-size: 11px;
+
+    }
+
+
+
+    /* ---------------------------------------------------------
+       FICHA EN CELULAR
+    --------------------------------------------------------- */
 
     .ficha-colegio {
 
@@ -1601,17 +1592,16 @@ body {
 
         width: auto;
 
-        max-height:
-            calc(100% - 20px);
+        max-height: calc(100% - 20px);
 
-        border-radius: 12px;
+        border-radius: 13px;
 
     }
 
 
     .ficha-contenido {
 
-        padding: 18px;
+        padding: 19px;
 
     }
 
@@ -1630,18 +1620,24 @@ body {
     }
 
 
+
+    /* ---------------------------------------------------------
+       BOTONES DE LA FICHA
+    --------------------------------------------------------- */
+
     .ficha-acciones {
 
-        margin-top: 16px;
+        margin-top: 18px;
 
     }
 
 
-    .mensaje-ubicacion {
+    .ficha-maps,
+    .ficha-llegar {
 
-        bottom: 10px;
+        padding: 12px;
 
-        font-size: 10px;
+        font-size: 12px;
 
     }
 
@@ -1649,10 +1645,11 @@ body {
 
 
 /* =========================================================
-   RESPONSIVE — TELÉFONOS PEQUEÑOS
+   CELULARES PEQUEÑOS
 ========================================================= */
 
-@media (max-width: 420px) {
+@media (max-width: 400px) {
+
 
     .header {
 
@@ -1668,13 +1665,6 @@ body {
     }
 
 
-    .header p {
-
-        font-size: 11px;
-
-    }
-
-
     .estado {
 
         display: none;
@@ -1684,47 +1674,39 @@ body {
 
     .workspace {
 
-        padding: 7px;
+        padding: 8px;
 
-    }
-
-
-    .panel {
-
-        min-height: 390px;
+        gap: 8px;
 
     }
 
 
     .mapa-container {
 
-        height: 62vh;
+        height: 55vh;
 
-        min-height: 380px;
+        min-height: 350px;
+
+    }
+
+
+    .lista-colegios {
+
+        max-height: 380px;
 
     }
 
 
     .acciones-resultados {
 
-        gap: 5px;
+        gap: 4px;
 
     }
 
 
-    .btn-exportar {
+    .resultados-header button {
 
-        font-size: 10px !important;
-
-        padding:
-            7px 8px !important;
-
-    }
-
-
-    .ficha-dato p {
-
-        font-size: 11px;
+        font-size: 9px;
 
     }
 
