@@ -20,16 +20,11 @@ let colegios = [];
 
 let colegiosVisibles = [];
 
-
-/* =========================================================
-   UBICACIÓN DEL USUARIO
-========================================================= */
-
 let ubicacionUsuario = null;
 
 let marcadorUsuario = null;
 
-let circuloPrecision = null;
+let circuloUsuario = null;
 
 
 /* =========================================================
@@ -93,11 +88,6 @@ const limpiarFiltros =
 const exportarExcel =
     document.getElementById("exportarExcel");
 
-
-/* =========================================================
-   CONTROLES DE UBICACIÓN
-========================================================= */
-
 const btnMiUbicacion =
     document.getElementById("btnMiUbicacion");
 
@@ -106,47 +96,14 @@ const btnColegioCercano =
 
 
 /* =========================================================
-   MARCADORES DE COLEGIOS
+   MARCADORES
 ========================================================= */
 
 const marcadores = {};
 
 
 /* =========================================================
-   MARCADOR PERSONALIZADO DE USUARIO
-========================================================= */
-
-const iconoUsuario =
-    L.divIcon({
-
-        className:
-            "marcador-usuario",
-
-        html:
-            '<div style="' +
-            'width:18px;' +
-            'height:18px;' +
-            'background:#1769aa;' +
-            'border:3px solid white;' +
-            'border-radius:50%;' +
-            'box-shadow:0 2px 8px rgba(0,0,0,.35);' +
-            '"></div>',
-
-        iconSize: [
-            18,
-            18
-        ],
-
-        iconAnchor: [
-            9,
-            9
-        ]
-
-    });
-
-
-/* =========================================================
-   FUNCIÓN PARA NORMALIZAR NOMBRES DE COLUMNAS
+   NORMALIZAR NOMBRES DE COLUMNAS
 ========================================================= */
 
 function normalizarClave(texto) {
@@ -235,106 +192,79 @@ function convertirCoordenada(valor) {
 
 
 /* =========================================================
-   CREAR URL DE GOOGLE MAPS
+   URL GOOGLE MAPS
 ========================================================= */
 
 function obtenerUrlGoogleMaps(colegio) {
 
-    /*
-     * Si existen coordenadas válidas,
-     * las utilizamos directamente.
-     */
-
-    if (
-        Number.isFinite(colegio.lat) &&
-        Number.isFinite(colegio.lng)
-    ) {
-
-        return (
-            "https://www.google.com/maps/search/?api=1" +
-            "&query=" +
-            encodeURIComponent(
-                `${colegio.lat},${colegio.lng}`
-            )
-        );
-
-    }
-
-
-    /*
-     * Si no existen coordenadas,
-     * utilizamos la información textual.
-     */
-
     const consulta =
         `${colegio.nombre}, ${colegio.direccion}, ${colegio.localidad}, ${colegio.comuna}, Chile`;
 
-    return (
-        "https://www.google.com/maps/search/?api=1&query=" +
-        encodeURIComponent(consulta)
-    );
+    return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(consulta)}`;
 
 }
 
 
 /* =========================================================
-   CREAR URL "CÓMO LLEGAR"
+   URL CÓMO LLEGAR
 ========================================================= */
 
 function obtenerUrlComoLlegar(colegio) {
 
     /*
-     * No podemos generar una ruta si todavía
-     * no tenemos la ubicación del usuario.
+     * Si tenemos la ubicación del usuario,
+     * Google Maps utilizará esa ubicación
+     * como punto de origen.
      */
-
-    if (!ubicacionUsuario) {
-
-        return null;
-
-    }
-
-
-    /*
-     * Destino:
-     * utilizamos coordenadas cuando están disponibles.
-     */
-
-    let destino;
-
 
     if (
-        Number.isFinite(colegio.lat) &&
-        Number.isFinite(colegio.lng)
+        ubicacionUsuario &&
+        Number.isFinite(ubicacionUsuario.lat) &&
+        Number.isFinite(ubicacionUsuario.lng)
     ) {
 
-        destino =
-            `${colegio.lat},${colegio.lng}`;
+        const origen =
+            `${ubicacionUsuario.lat},${ubicacionUsuario.lng}`;
 
-    } else {
 
-        destino =
-            `${colegio.nombre}, ${colegio.direccion}, ${colegio.localidad}, ${colegio.comuna}, Chile`;
+        /*
+         * Preferimos coordenadas del establecimiento
+         * cuando están disponibles.
+         */
+
+        if (
+            Number.isFinite(colegio.lat) &&
+            Number.isFinite(colegio.lng)
+        ) {
+
+            const destino =
+                `${colegio.lat},${colegio.lng}`;
+
+
+            return (
+                "https://www.google.com/maps/dir/?api=1" +
+                `&origin=${encodeURIComponent(origen)}` +
+                `&destination=${encodeURIComponent(destino)}` +
+                "&travelmode=driving"
+            );
+
+        }
 
     }
 
 
     /*
-     * Google Maps:
-     *
-     * origin = ubicación del usuario
-     * destination = establecimiento
-     * travelmode = driving
+     * Si todavía no tenemos ubicación del usuario,
+     * dejamos que Google Maps determine el origen.
      */
+
+    const destino =
+        `${colegio.nombre}, ${colegio.direccion}, ${colegio.localidad}, ${colegio.comuna}, Chile`;
+
 
     return (
         "https://www.google.com/maps/dir/?api=1" +
-        "&origin=" +
-        encodeURIComponent(
-            `${ubicacionUsuario.lat},${ubicacionUsuario.lng}`
-        ) +
-        "&destination=" +
-        encodeURIComponent(destino) +
+        `&destination=${encodeURIComponent(destino)}` +
         "&travelmode=driving"
     );
 
@@ -342,7 +272,7 @@ function obtenerUrlComoLlegar(colegio) {
 
 
 /* =========================================================
-   CARGAR DATOS DESDE GOOGLE SHEETS
+   CARGAR DATOS
 ========================================================= */
 
 async function cargarDatos() {
@@ -515,19 +445,6 @@ async function cargarDatos() {
         );
 
 
-        console.log(
-            "TELÉFONOS:",
-            colegios.map(
-                colegio => ({
-                    nombre: colegio.nombre,
-                    telefono: colegio.telefono,
-                    telefonoConvivencia:
-                        colegio.telefonoConvivencia
-                })
-            )
-        );
-
-
         iniciarSistema();
 
 
@@ -572,7 +489,7 @@ function mostrarErrorConexion() {
 
 
 /* =========================================================
-   CREAR MARCADOR DE COLEGIO
+   CREAR MARCADOR
 ========================================================= */
 
 function crearMarcador(colegio) {
@@ -582,6 +499,14 @@ function crearMarcador(colegio) {
             colegio.lat,
             colegio.lng
         ]);
+
+
+    marcador.bindTooltip(
+        colegio.nombre,
+        {
+            direction: "top"
+        }
+    );
 
 
     marcador.on(
@@ -643,7 +568,7 @@ function cargarMarcadores(lista) {
 
 
 /* =========================================================
-   CREAR TARJETA DEL LISTADO
+   CREAR TARJETA
 ========================================================= */
 
 function crearTarjetaColegio(colegio) {
@@ -666,21 +591,17 @@ function crearTarjetaColegio(colegio) {
             ${colegio.nombre}
         </div>
 
-
         <div class="colegio-rbd">
             RBD: ${colegio.rbd}
         </div>
-
 
         <div class="colegio-info">
             📍 ${colegio.localidad}
         </div>
 
-
         <div class="colegio-info">
             🏫 ${colegio.dependencia}
         </div>
-
 
         <div class="colegio-info">
             📚 ${colegio.nivel}
@@ -716,7 +637,8 @@ function mostrarColegios(lista) {
         lista;
 
 
-    listaColegios.innerHTML = "";
+    listaColegios.innerHTML =
+        "";
 
 
     contador.textContent =
@@ -784,12 +706,6 @@ function seleccionarColegio(colegio) {
     );
 
 
-    console.log(
-        "Datos completos del colegio:",
-        colegio
-    );
-
-
     if (
         Number.isFinite(colegio.lat) &&
         Number.isFinite(colegio.lng)
@@ -813,7 +729,7 @@ function seleccionarColegio(colegio) {
 
             marcadores[
                 colegio.id
-            ].openPopup();
+            ].openTooltip();
 
         }
 
@@ -833,7 +749,7 @@ function seleccionarColegio(colegio) {
 
 
 /* =========================================================
-   FUNCIÓN SEGURA PARA ACTUALIZAR LA FICHA
+   ACTUALIZAR FICHA
 ========================================================= */
 
 function actualizarFicha(
@@ -856,7 +772,7 @@ function actualizarFicha(
 
 
 /* =========================================================
-   MOSTRAR FICHA DEL ESTABLECIMIENTO
+   MOSTRAR FICHA
 ========================================================= */
 
 function mostrarFichaColegio(colegio) {
@@ -939,9 +855,9 @@ function mostrarFichaColegio(colegio) {
     );
 
 
-    /* =====================================================
+    /* ---------------------------------------------------------
        GOOGLE MAPS
-    ===================================================== */
+    --------------------------------------------------------- */
 
     const enlaceMaps =
         document.getElementById(
@@ -959,80 +875,29 @@ function mostrarFichaColegio(colegio) {
     }
 
 
-    /* =====================================================
+    /* ---------------------------------------------------------
        CÓMO LLEGAR
-    ===================================================== */
+    --------------------------------------------------------- */
 
-    const enlaceLlegar =
+    const enlaceComoLlegar =
         document.getElementById(
             "fichaComoLlegar"
         );
 
 
-    if (enlaceLlegar) {
+    if (enlaceComoLlegar) {
 
-        const urlLlegar =
+        enlaceComoLlegar.href =
             obtenerUrlComoLlegar(
                 colegio
             );
 
-
-        if (urlLlegar) {
-
-            enlaceLlegar.href =
-                urlLlegar;
-
-            enlaceLlegar.style.display =
-                "flex";
-
-            enlaceLlegar.title =
-                "Abrir ruta desde mi ubicación";
-
-        } else {
-
-            /*
-             * No ocultamos el botón.
-             * Al hacer clic podemos solicitar
-             * la ubicación del usuario.
-             */
-
-            enlaceLlegar.href =
-                "#";
-
-            enlaceLlegar.title =
-                "Primero debes permitir el acceso a tu ubicación";
-
-            enlaceLlegar.onclick =
-                function(evento) {
-
-                    evento.preventDefault();
-
-                    obtenerUbicacion(
-                        function() {
-
-                            const nuevaUrl =
-                                obtenerUrlComoLlegar(
-                                    colegio
-                                );
-
-                            if (nuevaUrl) {
-
-                                window.open(
-                                    nuevaUrl,
-                                    "_blank"
-                                );
-
-                            }
-
-                        }
-                    );
-
-                };
-
-        }
-
     }
 
+
+    /* ---------------------------------------------------------
+       MOSTRAR FICHA
+    --------------------------------------------------------- */
 
     if (ficha) {
 
@@ -1046,7 +911,7 @@ function mostrarFichaColegio(colegio) {
 
 
 /* =========================================================
-   DESTACAR TARJETA SELECCIONADA
+   DESTACAR TARJETA
 ========================================================= */
 
 function seleccionarColegioVisualmente(id) {
@@ -1089,7 +954,7 @@ function seleccionarColegioVisualmente(id) {
 
 
 /* =========================================================
-   CARGAR FILTRO LOCALIDADES
+   FILTRO LOCALIDADES
 ========================================================= */
 
 function cargarFiltroLocalidades() {
@@ -1144,7 +1009,7 @@ function cargarFiltroLocalidades() {
 
 
 /* =========================================================
-   CARGAR FILTRO DEPENDENCIAS
+   FILTRO DEPENDENCIAS
 ========================================================= */
 
 function cargarFiltroDependencias() {
@@ -1199,7 +1064,7 @@ function cargarFiltroDependencias() {
 
 
 /* =========================================================
-   CARGAR FILTRO NIVELES
+   FILTRO NIVELES
 ========================================================= */
 
 function cargarFiltroNiveles() {
@@ -1349,13 +1214,544 @@ function aplicarFiltros() {
 
 
 /* =========================================================
-   EXPORTAR ESTABLECIMIENTOS A EXCEL
+   DISTANCIA ENTRE DOS COORDENADAS
+   FÓRMULA HAVERSINE
+========================================================= */
+
+function calcularDistancia(
+    lat1,
+    lng1,
+    lat2,
+    lng2
+) {
+
+    const radioTierra =
+        6371;
+
+
+    const dLat =
+        (lat2 - lat1) *
+        Math.PI /
+        180;
+
+
+    const dLng =
+        (lng2 - lng1) *
+        Math.PI /
+        180;
+
+
+    const a =
+
+        Math.sin(dLat / 2) *
+        Math.sin(dLat / 2)
+
+        +
+
+        Math.cos(
+            lat1 * Math.PI / 180
+        ) *
+
+        Math.cos(
+            lat2 * Math.PI / 180
+        ) *
+
+        Math.sin(dLng / 2) *
+        Math.sin(dLng / 2);
+
+
+    const c =
+        2 *
+        Math.atan2(
+            Math.sqrt(a),
+            Math.sqrt(1 - a)
+        );
+
+
+    return (
+        radioTierra *
+        c
+    );
+
+}
+
+
+/* =========================================================
+   OBTENER UBICACIÓN DEL USUARIO
+========================================================= */
+
+function obtenerMiUbicacion(
+    centrarMapa = true,
+    callback = null
+) {
+
+    if (
+        !navigator.geolocation
+    ) {
+
+        alert(
+            "Este dispositivo o navegador no permite obtener la ubicación."
+        );
+
+        return;
+
+    }
+
+
+    if (btnMiUbicacion) {
+
+        btnMiUbicacion.disabled =
+            true;
+
+        btnMiUbicacion.textContent =
+            "📍 Obteniendo ubicación...";
+
+    }
+
+
+    navigator.geolocation.getCurrentPosition(
+
+        function(position) {
+
+            const lat =
+                position.coords.latitude;
+
+
+            const lng =
+                position.coords.longitude;
+
+
+            ubicacionUsuario = {
+
+                lat: lat,
+
+                lng: lng
+
+            };
+
+
+            console.log(
+                "Ubicación del usuario:",
+                ubicacionUsuario
+            );
+
+
+            actualizarMarcadorUsuario();
+
+
+            if (centrarMapa) {
+
+                mapa.setView(
+                    [
+                        lat,
+                        lng
+                    ],
+                    14,
+                    {
+                        animate: true
+                    }
+                );
+
+            }
+
+
+            if (btnMiUbicacion) {
+
+                btnMiUbicacion.disabled =
+                    false;
+
+                btnMiUbicacion.textContent =
+                    "📍 Mi ubicación";
+
+            }
+
+
+            /*
+             * Si existe un callback,
+             * lo ejecutamos después de obtener
+             * correctamente la ubicación.
+             */
+
+            if (
+                typeof callback ===
+                "function"
+            ) {
+
+                callback();
+
+            }
+
+        },
+
+
+        function(error) {
+
+            console.error(
+                "Error de geolocalización:",
+                error
+            );
+
+
+            if (btnMiUbicacion) {
+
+                btnMiUbicacion.disabled =
+                    false;
+
+                btnMiUbicacion.textContent =
+                    "📍 Mi ubicación";
+
+            }
+
+
+            let mensaje =
+                "No fue posible obtener tu ubicación.";
+
+
+            if (
+                error.code ===
+                error.PERMISSION_DENIED
+            ) {
+
+                mensaje =
+                    "El acceso a la ubicación fue rechazado. Revisa los permisos de ubicación de tu navegador.";
+
+            }
+
+
+            else if (
+                error.code ===
+                error.POSITION_UNAVAILABLE
+            ) {
+
+                mensaje =
+                    "No fue posible determinar tu ubicación.";
+
+            }
+
+
+            else if (
+                error.code ===
+                error.TIMEOUT
+            ) {
+
+                mensaje =
+                    "La solicitud de ubicación tardó demasiado.";
+
+            }
+
+
+            alert(
+                mensaje
+            );
+
+        },
+
+        {
+
+            enableHighAccuracy:
+                true,
+
+            timeout:
+                15000,
+
+            maximumAge:
+                0
+
+        }
+
+    );
+
+}
+
+
+/* =========================================================
+   MARCADOR DE UBICACIÓN DEL USUARIO
+========================================================= */
+
+function actualizarMarcadorUsuario() {
+
+    if (
+        !ubicacionUsuario
+    ) {
+
+        return;
+
+    }
+
+
+    const posicion = [
+
+        ubicacionUsuario.lat,
+
+        ubicacionUsuario.lng
+
+    ];
+
+
+    /*
+     * Si ya existe el marcador,
+     * simplemente actualizamos su posición.
+     */
+
+    if (
+        marcadorUsuario
+    ) {
+
+        marcadorUsuario.setLatLng(
+            posicion
+        );
+
+    }
+
+    else {
+
+        marcadorUsuario =
+            L.circleMarker(
+                posicion,
+                {
+
+                    radius: 8,
+
+                    weight: 3,
+
+                    fillOpacity: 1
+
+                }
+            )
+            .addTo(mapa);
+
+
+        marcadorUsuario.bindPopup(
+            "📍 Tu ubicación"
+        );
+
+    }
+
+
+    /*
+     * Círculo de precisión aproximada.
+     */
+
+    if (
+        circuloUsuario
+    ) {
+
+        circuloUsuario.setLatLng(
+            posicion
+        );
+
+    }
+
+    else {
+
+        circuloUsuario =
+            L.circle(
+                posicion,
+                {
+
+                    radius: 50,
+
+                    weight: 1,
+
+                    fillOpacity: 0.08
+
+                }
+            )
+            .addTo(mapa);
+
+    }
+
+}
+
+
+/* =========================================================
+   COLEGIO MÁS CERCANO
+========================================================= */
+
+function buscarColegioMasCercano() {
+
+    /*
+     * Si todavía no tenemos ubicación,
+     * primero la solicitamos.
+     */
+
+    if (
+        !ubicacionUsuario
+    ) {
+
+        obtenerMiUbicacion(
+            true,
+            function() {
+
+                buscarColegioMasCercano();
+
+            }
+        );
+
+        return;
+
+    }
+
+
+    const colegiosConCoordenadas =
+        colegios.filter(
+            colegio =>
+
+                Number.isFinite(
+                    colegio.lat
+                )
+
+                &&
+
+                Number.isFinite(
+                    colegio.lng
+                )
+        );
+
+
+    if (
+        colegiosConCoordenadas.length === 0
+    ) {
+
+        alert(
+            "No existen establecimientos con coordenadas disponibles."
+        );
+
+        return;
+
+    }
+
+
+    let colegioCercano =
+        null;
+
+
+    let distanciaMinima =
+        Infinity;
+
+
+    colegiosConCoordenadas.forEach(
+        colegio => {
+
+            const distancia =
+                calcularDistancia(
+
+                    ubicacionUsuario.lat,
+
+                    ubicacionUsuario.lng,
+
+                    colegio.lat,
+
+                    colegio.lng
+
+                );
+
+
+            if (
+                distancia <
+                distanciaMinima
+            ) {
+
+                distanciaMinima =
+                    distancia;
+
+                colegioCercano =
+                    colegio;
+
+            }
+
+        }
+    );
+
+
+    if (
+        colegioCercano
+    ) {
+
+        seleccionarColegio(
+            colegioCercano
+        );
+
+
+        /*
+         * Mostramos una pequeña referencia
+         * de la distancia.
+         */
+
+        const distancia =
+            calcularDistancia(
+
+                ubicacionUsuario.lat,
+
+                ubicacionUsuario.lng,
+
+                colegioCercano.lat,
+
+                colegioCercano.lng
+
+            );
+
+
+        console.log(
+            `Colegio más cercano: ${colegioCercano.nombre} (${distancia.toFixed(2)} km)`
+        );
+
+    }
+
+}
+
+
+/* =========================================================
+   EVENTO MI UBICACIÓN
+========================================================= */
+
+if (
+    btnMiUbicacion
+) {
+
+    btnMiUbicacion.addEventListener(
+        "click",
+        function() {
+
+            obtenerMiUbicacion(
+                true
+            );
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   EVENTO COLEGIO MÁS CERCANO
+========================================================= */
+
+if (
+    btnColegioCercano
+) {
+
+    btnColegioCercano.addEventListener(
+        "click",
+        function() {
+
+            buscarColegioMasCercano();
+
+        }
+    );
+
+}
+
+
+/* =========================================================
+   EXPORTAR A EXCEL
 ========================================================= */
 
 function exportarEstablecimientosExcel() {
 
     if (
-        typeof XLSX === "undefined"
+        typeof XLSX ===
+        "undefined"
     ) {
 
         alert(
@@ -1383,7 +1779,7 @@ function exportarEstablecimientosExcel() {
 
     /*
      * IMPORTANTE:
-     * No se incluyen LATITUD ni LONGITUD.
+     * LATITUD y LONGITUD NO se exportan.
      */
 
     const datosExcel =
@@ -1502,605 +1898,6 @@ function exportarEstablecimientosExcel() {
 
 
 /* =========================================================
-   GEOLOCALIZACIÓN
-========================================================= */
-
-/*
- * Esta función solicita al navegador la ubicación
- * actual del usuario.
- */
-
-function obtenerUbicacion(
-    alObtenerUbicacion
-) {
-
-    /*
-     * Verificar compatibilidad
-     */
-
-    if (
-        !navigator.geolocation
-    ) {
-
-        alert(
-            "Tu navegador no permite obtener la ubicación."
-        );
-
-        return;
-
-    }
-
-
-    /*
-     * Mostrar estado al usuario
-     */
-
-    if (btnMiUbicacion) {
-
-        btnMiUbicacion.disabled =
-            true;
-
-        btnMiUbicacion.textContent =
-            "📍 Obteniendo ubicación...";
-
-    }
-
-
-    navigator.geolocation.getCurrentPosition(
-
-        function(posicion) {
-
-            const lat =
-                posicion.coords.latitude;
-
-
-            const lng =
-                posicion.coords.longitude;
-
-
-            const precision =
-                posicion.coords.accuracy;
-
-
-            /*
-             * Guardar ubicación
-             */
-
-            ubicacionUsuario = {
-
-                lat:
-                    lat,
-
-                lng:
-                    lng,
-
-                accuracy:
-                    precision
-
-            };
-
-
-            console.log(
-                "Ubicación obtenida:",
-                ubicacionUsuario
-            );
-
-
-            /*
-             * Crear marcador de usuario
-             */
-
-            if (
-                marcadorUsuario
-            ) {
-
-                marcadorUsuario.setLatLng([
-                    lat,
-                    lng
-                ]);
-
-            } else {
-
-                marcadorUsuario =
-                    L.marker(
-                        [
-                            lat,
-                            lng
-                        ],
-                        {
-                            icon:
-                                iconoUsuario
-                        }
-                    ).addTo(
-                        mapa
-                    );
-
-            }
-
-
-            /*
-             * Popup de ubicación
-             */
-
-            marcadorUsuario.bindPopup(
-                `
-                    <strong>📍 Tu ubicación</strong>
-                    <br>
-                    Precisión aproximada:
-                    ${Math.round(precision)} metros
-                `
-            );
-
-
-            /*
-             * Círculo de precisión
-             */
-
-            if (
-                circuloPrecision
-            ) {
-
-                circuloPrecision.setLatLng([
-                    lat,
-                    lng
-                ]);
-
-                circuloPrecision.setRadius(
-                    precision
-                );
-
-            } else {
-
-                circuloPrecision =
-                    L.circle(
-                        [
-                            lat,
-                            lng
-                        ],
-                        {
-                            radius:
-                                precision,
-
-                            fillOpacity:
-                                0.10,
-
-                            weight:
-                                1
-                        }
-                    ).addTo(
-                        mapa
-                    );
-
-            }
-
-
-            /*
-             * Centrar mapa
-             */
-
-            mapa.setView(
-                [
-                    lat,
-                    lng
-                ],
-                14,
-                {
-                    animate: true
-                }
-            );
-
-
-            /*
-             * Actualizar botón
-             */
-
-            if (btnMiUbicacion) {
-
-                btnMiUbicacion.disabled =
-                    false;
-
-                btnMiUbicacion.textContent =
-                    "📍 Mi ubicación";
-
-            }
-
-
-            /*
-             * Ejecutar función posterior,
-             * si existe.
-             */
-
-            if (
-                typeof alObtenerUbicacion ===
-                "function"
-            ) {
-
-                alObtenerUbicacion();
-
-            }
-
-        },
-
-
-        function(error) {
-
-            console.error(
-                "Error de geolocalización:",
-                error
-            );
-
-
-            if (btnMiUbicacion) {
-
-                btnMiUbicacion.disabled =
-                    false;
-
-                btnMiUbicacion.textContent =
-                    "📍 Mi ubicación";
-
-            }
-
-
-            /*
-             * Mensajes según el tipo de error.
-             */
-
-            switch (
-                error.code
-            ) {
-
-                case 1:
-
-                    alert(
-                        "No se permitió el acceso a tu ubicación. Revisa los permisos de ubicación de tu navegador."
-                    );
-
-                    break;
-
-
-                case 2:
-
-                    alert(
-                        "No fue posible determinar tu ubicación. Comprueba que la ubicación de tu dispositivo esté activada."
-                    );
-
-                    break;
-
-
-                case 3:
-
-                    alert(
-                        "La solicitud de ubicación tardó demasiado. Inténtalo nuevamente."
-                    );
-
-                    break;
-
-
-                default:
-
-                    alert(
-                        "Ocurrió un error al obtener tu ubicación."
-                    );
-
-            }
-
-        },
-
-
-        {
-            enableHighAccuracy:
-                true,
-
-            timeout:
-                15000,
-
-            maximumAge:
-                0
-
-        }
-
-    );
-
-}
-
-
-/* =========================================================
-   DISTANCIA ENTRE DOS PUNTOS
-========================================================= */
-
-/*
- * Calcula la distancia entre dos coordenadas
- * utilizando la fórmula de Haversine.
- *
- * Resultado en metros.
- */
-
-function calcularDistancia(
-    lat1,
-    lng1,
-    lat2,
-    lng2
-) {
-
-    const radioTierra =
-        6371000;
-
-
-    const diferenciaLat =
-        (lat2 - lat1) *
-        Math.PI /
-        180;
-
-
-    const diferenciaLng =
-        (lng2 - lng1) *
-        Math.PI /
-        180;
-
-
-    const a =
-
-        Math.sin(
-            diferenciaLat / 2
-        ) *
-        Math.sin(
-            diferenciaLat / 2
-        )
-
-        +
-
-        Math.cos(
-            lat1 *
-            Math.PI /
-            180
-        )
-
-        *
-
-        Math.cos(
-            lat2 *
-            Math.PI /
-            180
-        )
-
-        *
-
-        Math.sin(
-            diferenciaLng / 2
-        )
-
-        *
-
-        Math.sin(
-            diferenciaLng / 2
-        );
-
-
-    const c =
-        2 *
-        Math.atan2(
-            Math.sqrt(a),
-            Math.sqrt(1 - a)
-        );
-
-
-    return (
-        radioTierra *
-        c
-    );
-
-}
-
-
-/* =========================================================
-   FORMATEAR DISTANCIA
-========================================================= */
-
-function formatearDistancia(
-    metros
-) {
-
-    if (
-        metros < 1000
-    ) {
-
-        return (
-            Math.round(metros) +
-            " m"
-        );
-
-    }
-
-
-    return (
-        (metros / 1000)
-            .toFixed(1)
-            .replace(".", ",") +
-        " km"
-    );
-
-}
-
-
-/* =========================================================
-   BUSCAR COLEGIO MÁS CERCANO
-========================================================= */
-
-function buscarColegioMasCercano() {
-
-    /*
-     * Si no tenemos ubicación,
-     * primero la solicitamos.
-     */
-
-    if (!ubicacionUsuario) {
-
-        obtenerUbicacion(
-            buscarColegioMasCercano
-        );
-
-        return;
-
-    }
-
-
-    /*
-     * Buscar solamente establecimientos
-     * que tengan coordenadas válidas.
-     */
-
-    const colegiosConCoordenadas =
-        colegios.filter(
-            colegio =>
-
-                Number.isFinite(
-                    colegio.lat
-                )
-
-                &&
-
-                Number.isFinite(
-                    colegio.lng
-                )
-        );
-
-
-    if (
-        colegiosConCoordenadas.length === 0
-    ) {
-
-        alert(
-            "No hay establecimientos con coordenadas disponibles."
-        );
-
-        return;
-
-    }
-
-
-    let colegioMasCercano =
-        null;
-
-
-    let distanciaMinima =
-        Infinity;
-
-
-    colegiosConCoordenadas.forEach(
-        colegio => {
-
-            const distancia =
-                calcularDistancia(
-
-                    ubicacionUsuario.lat,
-
-                    ubicacionUsuario.lng,
-
-                    colegio.lat,
-
-                    colegio.lng
-
-                );
-
-
-            if (
-                distancia <
-                distanciaMinima
-            ) {
-
-                distanciaMinima =
-                    distancia;
-
-                colegioMasCercano =
-                    colegio;
-
-            }
-
-        }
-    );
-
-
-    /*
-     * Mostrar resultado en consola
-     */
-
-    console.log(
-        "Colegio más cercano:",
-        colegioMasCercano.nombre
-    );
-
-
-    console.log(
-        "Distancia:",
-        distanciaMinima,
-        "metros"
-    );
-
-
-    /*
-     * Centrar y seleccionar
-     */
-
-    seleccionarColegio(
-        colegioMasCercano
-    );
-
-
-    /*
-     * Mostrar un aviso breve.
-     */
-
-    setTimeout(
-        function() {
-
-            alert(
-                `El establecimiento más cercano es:\n\n${colegioMasCercano.nombre}\n\nDistancia aproximada: ${formatearDistancia(distanciaMinima)}`
-            );
-
-        },
-        250
-    );
-
-}
-
-
-/* =========================================================
-   BOTÓN "MI UBICACIÓN"
-========================================================= */
-
-if (btnMiUbicacion) {
-
-    btnMiUbicacion.addEventListener(
-        "click",
-        function() {
-
-            obtenerUbicacion();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
-   BOTÓN "COLEGIO MÁS CERCANO"
-========================================================= */
-
-if (btnColegioCercano) {
-
-    btnColegioCercano.addEventListener(
-        "click",
-        function() {
-
-            buscarColegioMasCercano();
-
-        }
-    );
-
-}
-
-
-/* =========================================================
    CERRAR FICHA
 ========================================================= */
 
@@ -2110,11 +1907,13 @@ const cerrarFicha =
     );
 
 
-if (cerrarFicha) {
+if (
+    cerrarFicha
+) {
 
     cerrarFicha.addEventListener(
         "click",
-        function () {
+        function() {
 
             const ficha =
                 document.getElementById(
@@ -2155,81 +1954,63 @@ if (cerrarFicha) {
    EVENTOS DEL BUSCADOR
 ========================================================= */
 
-if (buscador) {
-
-    buscador.addEventListener(
-        "input",
-        aplicarFiltros
-    );
-
-}
+buscador.addEventListener(
+    "input",
+    aplicarFiltros
+);
 
 
-if (filtroLocalidad) {
-
-    filtroLocalidad.addEventListener(
-        "change",
-        aplicarFiltros
-    );
-
-}
+filtroLocalidad.addEventListener(
+    "change",
+    aplicarFiltros
+);
 
 
-if (filtroDependencia) {
-
-    filtroDependencia.addEventListener(
-        "change",
-        aplicarFiltros
-    );
-
-}
+filtroDependencia.addEventListener(
+    "change",
+    aplicarFiltros
+);
 
 
-if (filtroNivel) {
-
-    filtroNivel.addEventListener(
-        "change",
-        aplicarFiltros
-    );
-
-}
+filtroNivel.addEventListener(
+    "change",
+    aplicarFiltros
+);
 
 
 /* =========================================================
    LIMPIAR FILTROS
 ========================================================= */
 
-if (limpiarFiltros) {
+limpiarFiltros.addEventListener(
+    "click",
+    function() {
 
-    limpiarFiltros.addEventListener(
-        "click",
-        function () {
+        buscador.value =
+            "";
 
-            buscador.value =
-                "";
+        filtroLocalidad.value =
+            "";
 
-            filtroLocalidad.value =
-                "";
+        filtroDependencia.value =
+            "";
 
-            filtroDependencia.value =
-                "";
+        filtroNivel.value =
+            "";
 
-            filtroNivel.value =
-                "";
+        aplicarFiltros();
 
-            aplicarFiltros();
-
-        }
-    );
-
-}
+    }
+);
 
 
 /* =========================================================
-   EVENTO EXPORTAR EXCEL
+   EXPORTAR EXCEL
 ========================================================= */
 
-if (exportarExcel) {
+if (
+    exportarExcel
+) {
 
     exportarExcel.addEventListener(
         "click",
