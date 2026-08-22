@@ -76,7 +76,6 @@
 
         <nav class="menu">
 
-
             <button
                 class="menu-item activo"
                 type="button"
@@ -92,8 +91,6 @@
 
             </button>
 
-
-
         </nav>
 
 
@@ -102,7 +99,7 @@
         <div class="sidebar-footer">
 
             <span>
-                Versión 1.0
+                Versión 1.0<br>
                 Año 2026
             </span>
 
@@ -274,24 +271,40 @@
 
                 <div class="resultados-header">
 
-<div>
-    <strong>Establecimientos</strong>
-    <span id="contador">0</span>
-</div>
+                    <div>
 
-<div class="acciones-resultados">
+                        <strong>
+                            Establecimientos
+                        </strong>
 
-    <button id="limpiarFiltros">
-        Limpiar filtros
-    </button>
+                        <span id="contador">
+                            0
+                        </span>
 
-    <button id="exportarExcel" class="btn-exportar">
-        📥 Exportar Excel
-    </button>
+                    </div>
 
-</div>
 
-</div>
+                    <div class="acciones-resultados">
+
+                        <button
+                            id="limpiarFiltros"
+                            type="button"
+                        >
+                            Limpiar filtros
+                        </button>
+
+
+                        <button
+                            id="exportarExcel"
+                            class="btn-exportar"
+                            type="button"
+                        >
+                            📥 Exportar Excel
+                        </button>
+
+                    </div>
+
+                </div>
 
 
 
@@ -338,6 +351,39 @@
                 <!-- MAPA LEAFLET -->
 
                 <div id="mapa"></div>
+
+
+
+                <!-- =================================================
+                     CONTROLES DE UBICACIÓN
+                ================================================== -->
+
+                <div class="controles-ubicacion">
+
+
+                    <button
+                        id="btnMiUbicacion"
+                        class="boton-mapa"
+                        type="button"
+                    >
+
+                        📍 Mi ubicación
+
+                    </button>
+
+
+                    <button
+                        id="btnColegioCercano"
+                        class="boton-mapa"
+                        type="button"
+                    >
+
+                        🏫 Colegio más cercano
+
+                    </button>
+
+
+                </div>
 
 
 
@@ -698,24 +744,52 @@
 
 
                         <!-- =================================================
-                             GOOGLE MAPS
+                             ACCIONES
                         ================================================== -->
 
-                        <a
-                            id="fichaGoogleMaps"
-                            class="ficha-maps"
-                            href="#"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                        >
+                        <div class="ficha-acciones">
 
-                            <span>
-                                📍
-                            </span>
 
-                            Abrir ubicación en Google Maps
+                            <!-- GOOGLE MAPS -->
 
-                        </a>
+                            <a
+                                id="fichaGoogleMaps"
+                                class="ficha-maps"
+                                href="#"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+
+                                <span>
+                                    📍
+                                </span>
+
+                                Abrir ubicación en Google Maps
+
+                            </a>
+
+
+
+                            <!-- CÓMO LLEGAR -->
+
+                            <a
+                                id="fichaComoLlegar"
+                                class="ficha-llegar"
+                                href="#"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+
+                                <span>
+                                    🧭
+                                </span>
+
+                                Cómo llegar
+
+                            </a>
+
+
+                        </div>
 
 
                     </div>
@@ -748,14 +822,24 @@
 
 
 <!-- =================================================
-     JAVASCRIPT DE LA APLICACIÓN
+     SHEETJS
+     EXPORTACIÓN A EXCEL
 ================================================== -->
 
-<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script
+    src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"
+></script>
+
+
+
+<!-- =================================================
+     JAVASCRIPT DE LA APLICACIÓN
+================================================== -->
 
 <script
     src="app.js"
 ></script>
+
 
 </body>
 
