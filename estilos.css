@@ -3,11 +3,6 @@
    ESTILOS PRINCIPALES
 ========================================================= */
 
-
-/* =========================================================
-   CONFIGURACIÓN GENERAL
-========================================================= */
-
 * {
     margin: 0;
     padding: 0;
@@ -15,12 +10,21 @@
 }
 
 
+/* =========================================================
+   CUERPO
+========================================================= */
+
 body {
-    font-family: "Segoe UI", Arial, sans-serif;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
 
     background: #f4f7fb;
 
     color: #1f2937;
+
 }
 
 
@@ -29,11 +33,13 @@ body {
 ========================================================= */
 
 .app {
+
     display: flex;
 
     height: 100vh;
 
     overflow: hidden;
+
 }
 
 
@@ -42,43 +48,50 @@ body {
 ========================================================= */
 
 .sidebar {
+
     width: 230px;
 
     background: #ffffff;
 
-    border-right: 1px solid #e5eaf0;
+    border-right:
+        1px solid #e5eaf0;
 
     display: flex;
 
     flex-direction: column;
 
-    padding: 20px 16px;
+    padding: 24px 16px;
+
 }
 
 
 /* =========================================================
-   LOGO INSTITUCIONAL
+   LOGO / IDENTIFICACIÓN
 ========================================================= */
 
 .logo {
-    display: flex;
 
-    flex-direction: column;
+    display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 12px;
 
-    padding: 4px 4px 28px;
+    padding:
+        4px 10px 28px;
+
 }
 
 
-/* Contenedor del logo */
+.logo-icon {
 
-.logo-institucional {
-    width: 185px;
+    width: 42px;
 
-    height: auto;
+    height: 42px;
+
+    background: #eaf4ff;
+
+    border-radius: 12px;
 
     display: flex;
 
@@ -86,49 +99,28 @@ body {
 
     justify-content: center;
 
-    overflow: hidden;
+    font-size: 21px;
+
 }
 
 
-/* Imagen */
+.logo strong {
 
-.logo-institucional img {
     display: block;
 
-    width: 100%;
+    font-size: 16px;
 
-    height: auto;
-
-    object-fit: contain;
 }
 
 
-/* Texto de la aplicación */
+.logo span {
 
-.logo-text {
-    text-align: center;
-}
-
-
-.logo-text strong {
-    display: block;
-
-    font-size: 17px;
-
-    font-weight: 650;
-
-    color: #1f2937;
-}
-
-
-.logo-text span {
     display: block;
 
     color: #7b8794;
 
     font-size: 12px;
 
-    margin-top: 2px;
 }
 
 
@@ -137,15 +129,18 @@ body {
 ========================================================= */
 
 .menu {
+
     display: flex;
 
     flex-direction: column;
 
     gap: 6px;
+
 }
 
 
 .menu-item {
+
     border: none;
 
     background: transparent;
@@ -170,23 +165,24 @@ body {
 
     text-align: left;
 
-    transition:
-        background 0.15s ease,
-        color 0.15s ease;
 }
 
 
 .menu-item:hover {
+
     background: #f5f8fc;
+
 }
 
 
 .menu-item.activo {
+
     background: #eaf4ff;
 
     color: #1769aa;
 
     font-weight: 600;
+
 }
 
 
@@ -195,6 +191,7 @@ body {
 ========================================================= */
 
 .sidebar-footer {
+
     margin-top: auto;
 
     color: #98a2b3;
@@ -202,6 +199,7 @@ body {
     font-size: 11px;
 
     padding: 10px;
+
 }
 
 
@@ -210,6 +208,7 @@ body {
 ========================================================= */
 
 .main {
+
     flex: 1;
 
     display: flex;
@@ -217,6 +216,7 @@ body {
     flex-direction: column;
 
     min-width: 0;
+
 }
 
 
@@ -225,13 +225,13 @@ body {
 ========================================================= */
 
 .header {
-    height: 82px;
 
-    flex-shrink: 0;
+    height: 82px;
 
     background: #ffffff;
 
-    border-bottom: 1px solid #e5eaf0;
+    border-bottom:
+        1px solid #e5eaf0;
 
     display: flex;
 
@@ -240,26 +240,36 @@ body {
     justify-content: space-between;
 
     padding: 0 28px;
+
 }
 
 
 .header h1 {
+
     font-size: 21px;
 
     font-weight: 650;
+
 }
 
 
 .header p {
+
     color: #8a95a3;
 
     font-size: 13px;
 
     margin-top: 4px;
+
 }
 
 
+/* =========================================================
+   ESTADO
+========================================================= */
+
 .estado {
+
     display: flex;
 
     align-items: center;
@@ -269,10 +279,12 @@ body {
     color: #667085;
 
     font-size: 12px;
+
 }
 
 
 .estado-punto {
+
     width: 8px;
 
     height: 8px;
@@ -280,6 +292,7 @@ body {
     border-radius: 50%;
 
     background: #22c55e;
+
 }
 
 
@@ -288,6 +301,7 @@ body {
 ========================================================= */
 
 .workspace {
+
     flex: 1;
 
     display: flex;
@@ -297,21 +311,22 @@ body {
     gap: 18px;
 
     min-height: 0;
+
 }
 
 
 /* =========================================================
-   PANEL
+   PANEL LATERAL
 ========================================================= */
 
 .panel {
-    width: 390px;
 
-    flex-shrink: 0;
+    width: 390px;
 
     background: #ffffff;
 
-    border: 1px solid #e5eaf0;
+    border:
+        1px solid #e5eaf0;
 
     border-radius: 14px;
 
@@ -322,6 +337,7 @@ body {
     flex-direction: column;
 
     min-height: 0;
+
 }
 
 
@@ -330,9 +346,11 @@ body {
 ========================================================= */
 
 .search-box {
+
     height: 46px;
 
-    border: 1px solid #dce3eb;
+    border:
+        1px solid #dce3eb;
 
     border-radius: 10px;
 
@@ -344,18 +362,18 @@ body {
 
     background: #fbfcfe;
 
-    flex-shrink: 0;
 }
 
 
 .search-icon {
+
     margin-right: 9px;
 
-    font-size: 14px;
 }
 
 
 .search-box input {
+
     border: none;
 
     outline: none;
@@ -366,12 +384,13 @@ body {
 
     font-size: 13px;
 
-    color: #344054;
 }
 
 
 .search-box input::placeholder {
+
     color: #98a2b3;
+
 }
 
 
@@ -380,6 +399,7 @@ body {
 ========================================================= */
 
 .filtros {
+
     display: flex;
 
     flex-direction: column;
@@ -388,11 +408,11 @@ body {
 
     margin-top: 18px;
 
-    flex-shrink: 0;
 }
 
 
 .filtro label {
+
     display: block;
 
     font-size: 11px;
@@ -402,15 +422,18 @@ body {
     color: #667085;
 
     margin-bottom: 5px;
+
 }
 
 
 .filtro select {
+
     width: 100%;
 
     height: 38px;
 
-    border: 1px solid #dce3eb;
+    border:
+        1px solid #dce3eb;
 
     border-radius: 8px;
 
@@ -424,14 +447,6 @@ body {
 
     cursor: pointer;
 
-    font-family: inherit;
-
-    font-size: 12px;
-}
-
-
-.filtro select:focus {
-    border-color: #9fc9e9;
 }
 
 
@@ -440,39 +455,32 @@ body {
 ========================================================= */
 
 .resultados-header {
+
     display: flex;
 
     align-items: center;
 
     justify-content: space-between;
 
-    gap: 10px;
-
     margin-top: 22px;
 
     padding-bottom: 11px;
 
-    border-bottom: 1px solid #edf0f4;
+    border-bottom:
+        1px solid #edf0f4;
 
-    flex-shrink: 0;
-}
-
-
-.resultados-header > div:first-child {
-    display: flex;
-
-    align-items: center;
-
-    min-width: 0;
 }
 
 
 .resultados-header strong {
+
     font-size: 13px;
+
 }
 
 
 .resultados-header span {
+
     margin-left: 7px;
 
     background: #eef4f9;
@@ -484,29 +492,12 @@ body {
     border-radius: 20px;
 
     font-size: 11px;
+
 }
 
 
-/* =========================================================
-   ACCIONES DE RESULTADOS
-========================================================= */
+.resultados-header button {
 
-.acciones-resultados {
-    display: flex;
-
-    align-items: center;
-
-    gap: 6px;
-
-    flex-shrink: 0;
-}
-
-
-/* =========================================================
-   LIMPIAR FILTROS
-========================================================= */
-
-.acciones-resultados #limpiarFiltros {
     border: none;
 
     background: transparent;
@@ -517,63 +508,6 @@ body {
 
     cursor: pointer;
 
-    padding: 6px 4px;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    white-space: nowrap;
-}
-
-
-.acciones-resultados #limpiarFiltros:hover {
-    color: #125b91;
-
-    text-decoration: underline;
-}
-
-
-/* =========================================================
-   BOTÓN EXPORTAR EXCEL
-========================================================= */
-
-.btn-exportar {
-    border: 1px solid #dce3eb;
-
-    background: #ffffff;
-
-    color: #1769aa;
-
-    padding: 6px 10px;
-
-    border-radius: 7px;
-
-    font-size: 11px;
-
-    font-family: "Segoe UI", Arial, sans-serif;
-
-    cursor: pointer;
-
-    white-space: nowrap;
-
-    transition:
-        background 0.15s ease,
-        border-color 0.15s ease,
-        color 0.15s ease,
-        transform 0.1s ease;
-}
-
-
-.btn-exportar:hover {
-    background: #f0f7ff;
-
-    border-color: #b9d7ef;
-
-    color: #125b91;
-}
-
-
-.btn-exportar:active {
-    transform: translateY(1px);
 }
 
 
@@ -582,6 +516,7 @@ body {
 ========================================================= */
 
 .lista-colegios {
+
     margin-top: 12px;
 
     overflow-y: auto;
@@ -590,35 +525,13 @@ body {
 
     padding-right: 4px;
 
-    min-height: 0;
 }
 
-
-/* Scroll */
-
-.lista-colegios::-webkit-scrollbar {
-    width: 6px;
-}
-
-
-.lista-colegios::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-
-.lista-colegios::-webkit-scrollbar-thumb {
-    background: #d8e0e8;
-
-    border-radius: 10px;
-}
-
-
-/* =========================================================
-   TARJETA COLEGIO
-========================================================= */
 
 .colegio-card {
-    border: 1px solid #e7ecf2;
+
+    border:
+        1px solid #e7ecf2;
 
     border-radius: 11px;
 
@@ -628,32 +541,31 @@ body {
 
     cursor: pointer;
 
-    background: #ffffff;
+    transition: 0.15s;
 
-    transition:
-        border-color 0.15s ease,
-        background 0.15s ease,
-        box-shadow 0.15s ease;
 }
 
 
 .colegio-card:hover {
+
     border-color: #b9d7ef;
 
     background: #fbfdff;
+
 }
 
 
 .colegio-card.seleccionado {
-    border-color: #7eb7df;
 
-    background: #f3f9ff;
+    border-color: #1769aa;
 
-    box-shadow: 0 0 0 2px rgba(23, 105, 170, 0.08);
+    background: #f2f8ff;
+
 }
 
 
 .colegio-nombre {
+
     font-size: 13px;
 
     font-weight: 600;
@@ -662,27 +574,26 @@ body {
 
     margin-bottom: 6px;
 
-    line-height: 1.35;
 }
 
 
 .colegio-rbd {
+
     font-size: 11px;
 
     color: #667085;
 
     margin-bottom: 4px;
+
 }
 
 
 .colegio-info {
+
     font-size: 11px;
 
     color: #7b8794;
 
-    margin-top: 3px;
-
-    line-height: 1.35;
 }
 
 
@@ -691,6 +602,7 @@ body {
 ========================================================= */
 
 .sin-resultados {
+
     height: 180px;
 
     display: flex;
@@ -704,18 +616,23 @@ body {
     text-align: center;
 
     color: #98a2b3;
+
 }
 
 
 .sin-resultados span {
+
     font-size: 32px;
 
     margin-bottom: 10px;
+
 }
 
 
 .sin-resultados p {
+
     font-size: 12px;
+
 }
 
 
@@ -724,6 +641,7 @@ body {
 ========================================================= */
 
 .mapa-container {
+
     flex: 1;
 
     min-width: 0;
@@ -734,16 +652,20 @@ body {
 
     overflow: hidden;
 
-    border: 1px solid #dfe5eb;
+    border:
+        1px solid #dfe5eb;
 
     position: relative;
+
 }
 
 
 #mapa {
+
     width: 100%;
 
     height: 100%;
+
 }
 
 
@@ -752,25 +674,23 @@ body {
 ========================================================= */
 
 .ficha-colegio {
+
     position: absolute;
 
     top: 18px;
 
     right: 18px;
 
-    width: 350px;
-
-    max-width: calc(100% - 36px);
+    width: 360px;
 
     max-height: calc(100% - 36px);
 
     background: #ffffff;
 
-    border-radius: 16px;
+    border-radius: 14px;
 
-    box-shadow: 0 10px 35px rgba(31, 41, 55, 0.18);
-
-    border: 1px solid #e5eaf0;
+    box-shadow:
+        0 12px 35px rgba(15, 23, 42, 0.18);
 
     z-index: 1000;
 
@@ -780,34 +700,40 @@ body {
 
     visibility: hidden;
 
-    transform: translateX(20px);
+    transform:
+        translateX(20px);
 
     transition:
         opacity 0.2s ease,
         transform 0.2s ease,
         visibility 0.2s ease;
+
 }
 
 
 .ficha-colegio.visible {
+
     opacity: 1;
 
     visibility: visible;
 
-    transform: translateX(0);
+    transform:
+        translateX(0);
+
 }
 
 
 /* =========================================================
-   BOTÓN CERRAR FICHA
+   CERRAR FICHA
 ========================================================= */
 
 .ficha-cerrar {
+
     position: absolute;
 
-    top: 10px;
+    top: 12px;
 
-    right: 10px;
+    right: 12px;
 
     width: 30px;
 
@@ -817,24 +743,23 @@ body {
 
     border-radius: 50%;
 
-    background: #f4f7fb;
+    background: #f3f5f8;
 
     color: #667085;
 
-    font-size: 21px;
-
-    line-height: 1;
+    font-size: 20px;
 
     cursor: pointer;
 
     z-index: 2;
+
 }
 
 
 .ficha-cerrar:hover {
-    background: #eaf4ff;
 
-    color: #1769aa;
+    background: #e7ecf2;
+
 }
 
 
@@ -843,18 +768,17 @@ body {
 ========================================================= */
 
 .ficha-contenido {
+
     padding: 22px;
+
 }
 
 
-/* =========================================================
-   ICONO FICHA
-========================================================= */
-
 .ficha-icono {
-    width: 42px;
 
-    height: 42px;
+    width: 48px;
+
+    height: 48px;
 
     border-radius: 12px;
 
@@ -866,59 +790,53 @@ body {
 
     justify-content: center;
 
-    font-size: 20px;
+    font-size: 24px;
 
-    margin-bottom: 12px;
-}
+    margin-bottom: 13px;
 
-
-/* =========================================================
-   TÍTULO FICHA
-========================================================= */
-
-.ficha-titulo {
-    padding-right: 25px;
 }
 
 
 .ficha-titulo h2 {
-    font-size: 17px;
+
+    font-size: 18px;
 
     line-height: 1.3;
 
     color: #1f2937;
 
-    margin-bottom: 5px;
+    padding-right: 30px;
+
 }
 
 
 .ficha-titulo span {
+
     display: inline-block;
+
+    margin-top: 5px;
+
+    font-size: 11px;
 
     color: #52708c;
 
     background: #eef4f9;
 
-    border-radius: 20px;
-
     padding: 4px 8px;
 
-    font-size: 11px;
+    border-radius: 20px;
 
-    font-weight: 600;
 }
 
 
-/* =========================================================
-   SEPARADOR
-========================================================= */
-
 .ficha-separador {
+
     height: 1px;
 
     background: #edf0f4;
 
-    margin: 17px 0;
+    margin: 18px 0;
+
 }
 
 
@@ -927,24 +845,27 @@ body {
 ========================================================= */
 
 .ficha-datos {
+
     display: flex;
 
     flex-direction: column;
 
     gap: 15px;
+
 }
 
 
 .ficha-dato {
+
     display: flex;
 
-    align-items: flex-start;
-
     gap: 11px;
+
 }
 
 
 .ficha-dato-icono {
+
     width: 30px;
 
     min-width: 30px;
@@ -962,30 +883,35 @@ body {
     justify-content: center;
 
     font-size: 14px;
+
 }
 
 
 .ficha-dato label {
-    display: block;
 
-    color: #8a95a3;
+    display: block;
 
     font-size: 10px;
 
-    font-weight: 600;
+    color: #98a2b3;
 
     margin-bottom: 3px;
+
+    font-weight: 600;
+
 }
 
 
 .ficha-dato p {
-    color: #344054;
 
     font-size: 12px;
+
+    color: #344054;
 
     line-height: 1.4;
 
     word-break: break-word;
+
 }
 
 
@@ -994,7 +920,6 @@ body {
 ========================================================= */
 
 .ficha-maps {
-    margin-top: 20px;
 
     display: flex;
 
@@ -1004,9 +929,9 @@ body {
 
     gap: 8px;
 
-    width: 100%;
+    margin-top: 20px;
 
-    min-height: 40px;
+    padding: 11px 14px;
 
     border-radius: 9px;
 
@@ -1020,35 +945,45 @@ body {
 
     font-weight: 600;
 
-    transition:
-        background 0.15s ease,
-        transform 0.1s ease;
+    transition: 0.15s;
+
 }
 
 
 .ficha-maps:hover {
-    background: #125b91;
-}
 
+    background: #12588f;
 
-.ficha-maps:active {
-    transform: translateY(1px);
 }
 
 
 /* =========================================================
-   LEAFLET
+   SCROLLBAR
 ========================================================= */
 
-.leaflet-container {
-    font-family: "Segoe UI", Arial, sans-serif;
+.lista-colegios::-webkit-scrollbar,
+.ficha-colegio::-webkit-scrollbar {
+
+    width: 6px;
+
 }
 
 
-.leaflet-popup-content {
-    font-size: 12px;
+.lista-colegios::-webkit-scrollbar-thumb,
+.ficha-colegio::-webkit-scrollbar-thumb {
 
-    line-height: 1.4;
+    background: #d5dce5;
+
+    border-radius: 10px;
+
+}
+
+
+.lista-colegios::-webkit-scrollbar-track,
+.ficha-colegio::-webkit-scrollbar-track {
+
+    background: transparent;
+
 }
 
 
@@ -1056,45 +991,48 @@ body {
    RESPONSIVE
 ========================================================= */
 
-
-/* TABLET */
-
-@media (max-width: 1100px) {
+@media (max-width: 900px) {
 
     .sidebar {
-        width: 205px;
+
+        width: 70px;
+
     }
 
 
-    .logo-institucional {
-        width: 165px;
+    .logo div:not(.logo-icon),
+    .menu-item span:last-child,
+    .sidebar-footer {
+
+        display: none;
+
     }
 
 
     .panel {
-        width: 350px;
-    }
 
-
-    .ficha-colegio {
         width: 320px;
+
     }
 
 }
 
 
 /* =========================================================
-   CELULAR
+   RESPONSIVE — CELULARES
 ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 700px) {
 
     body {
+
         overflow: auto;
+
     }
 
 
     .app {
+
         height: auto;
 
         min-height: 100vh;
@@ -1102,278 +1040,168 @@ body {
         flex-direction: column;
 
         overflow: visible;
+
     }
 
 
-    /* SIDEBAR */
-
     .sidebar {
+
         width: 100%;
 
         height: auto;
 
-        min-height: 0;
+        padding: 10px 14px;
 
         border-right: none;
 
-        border-bottom: 1px solid #e5eaf0;
-
-        padding: 12px 15px;
+        border-bottom:
+            1px solid #e5eaf0;
 
         flex-direction: row;
 
         align-items: center;
 
         justify-content: space-between;
+
     }
 
 
     .logo {
-        flex-direction: row;
-
-        align-items: center;
-
-        gap: 10px;
 
         padding: 0;
+
     }
 
 
-    .logo-institucional {
-        width: 105px;
-    }
+    .logo div:not(.logo-icon) {
 
+        display: block;
 
-    .logo-text {
-        text-align: left;
-    }
-
-
-    .logo-text strong {
-        font-size: 15px;
-    }
-
-
-    .logo-text span {
-        font-size: 11px;
-    }
-
-
-    .menu {
-        flex-direction: row;
-
-        gap: 4px;
-    }
-
-
-    .menu-item {
-        width: auto;
-
-        padding: 9px 10px;
-    }
-
-
-    .menu-item span:last-child {
-        display: none;
     }
 
 
     .sidebar-footer {
+
         display: none;
+
     }
 
 
-    /* HEADER */
+    .menu {
 
-    .header {
-        height: auto;
+        flex-direction: row;
 
-        min-height: 76px;
+        gap: 4px;
 
-        padding: 15px 18px;
-    }
-
-
-    .header h1 {
-        font-size: 18px;
-    }
-
-
-    .header p {
-        font-size: 12px;
-    }
-
-
-    .estado {
-        font-size: 10px;
-
-        white-space: nowrap;
-    }
-
-
-    /* WORKSPACE */
-
-    .workspace {
-        flex-direction: column;
-
-        padding: 12px;
-
-        gap: 12px;
-
-        min-height: 0;
-    }
-
-
-    /* PANEL */
-
-    .panel {
-        width: 100%;
-
-        min-height: 420px;
-
-        max-height: none;
-    }
-
-
-    /* MAPA */
-
-    .mapa-container {
-        width: 100%;
-
-        height: 500px;
-
-        min-height: 500px;
-
-        flex: none;
-
-        overflow: hidden;
-    }
-
-
-    /* FICHA */
-
-    .ficha-colegio {
-        top: auto;
-
-        right: 10px;
-
-        bottom: 10px;
-
-        left: 10px;
-
-        width: auto;
-
-        max-width: none;
-
-        max-height: 70%;
-
-        transform: translateY(20px);
-    }
-
-
-    .ficha-colegio.visible {
-        transform: translateY(0);
-    }
-
-}
-
-
-/* =========================================================
-   CELULAR PEQUEÑO
-========================================================= */
-
-@media (max-width: 600px) {
-
-    .sidebar {
-        padding: 10px 12px;
-    }
-
-
-    .logo-institucional {
-        width: 90px;
-    }
-
-
-    .logo-text strong {
-        font-size: 14px;
-    }
-
-
-    .logo-text span {
-        font-size: 10px;
     }
 
 
     .menu-item {
-        padding: 8px;
+
+        width: auto;
+
+        padding: 9px 10px;
+
+    }
+
+
+    .menu-item span:last-child {
+
+        display: none;
+
+    }
+
+
+    .main {
+
+        width: 100%;
+
     }
 
 
     .header {
-        padding: 13px 15px;
+
+        height: auto;
+
+        padding: 16px;
+
+        align-items: flex-start;
+
     }
 
 
     .header h1 {
-        font-size: 16px;
+
+        font-size: 18px;
+
     }
 
 
     .header p {
-        font-size: 11px;
+
+        font-size: 12px;
+
     }
 
 
     .estado {
-        display: none;
+
+        font-size: 10px;
+
+        white-space: nowrap;
+
     }
 
 
     .workspace {
+
+        flex-direction: column;
+
         padding: 10px;
+
+        gap: 10px;
+
     }
 
 
     .panel {
-        padding: 14px;
 
-        min-height: 400px;
-    }
+        width: 100%;
 
+        height: auto;
 
-    .resultados-header {
-        align-items: flex-start;
-    }
+        min-height: 420px;
 
+        max-height: 55vh;
 
-    .acciones-resultados {
-        flex-direction: column;
-
-        align-items: flex-end;
-
-        gap: 3px;
-    }
-
-
-    .btn-exportar {
-        padding: 6px 8px;
     }
 
 
     .mapa-container {
-        height: 450px;
 
-        min-height: 450px;
+        width: 100%;
+
+        height: 65vh;
+
+        min-height: 420px;
+
+        order: 2;
+
     }
 
 
-    .ficha-contenido {
-        padding: 18px;
-    }
+    .ficha-colegio {
 
+        top: 10px;
 
-    .ficha-titulo h2 {
-        font-size: 16px;
+        left: 10px;
+
+        right: 10px;
+
+        width: auto;
+
+        max-height: calc(100% - 20px);
+
     }
 
 }
