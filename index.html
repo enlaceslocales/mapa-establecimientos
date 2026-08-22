@@ -1,92 +1,78 @@
 <!DOCTYPE html>
+
 <html lang="es">
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <title>Mapa de Establecimientos Educacionales</title>
+<!-- Evitar indexación en buscadores -->
+<meta
+    name="robots"
+    content="noindex, nofollow"
+>
 
-
-    <!-- =====================================================
-         FAVICON
-    ====================================================== -->
-
-    <link
-        rel="icon"
-        type="image/png"
-        href="logo.png"
-    >
+<title>
+    Mapa de Establecimientos Educacionales
+</title>
 
 
-    <!-- =====================================================
-         ESTILOS PRINCIPALES
-    ====================================================== -->
-
-    <link
-        rel="stylesheet"
-        href="estilos.css"
-    >
+<!-- CSS PROPIO -->
+<link
+    rel="stylesheet"
+    href="estilos.css"
+>
 
 
-    <!-- =====================================================
-         LEAFLET
-    ====================================================== -->
-
-    <link
-        rel="stylesheet"
-        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-    >
+<!-- LEAFLET -->
+<link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+>
 
 </head>
 
-
 <body>
-
 
 <div class="app">
 
 
-    <!-- =====================================================
+    <!-- =================================================
          BARRA LATERAL
-    ====================================================== -->
+    ================================================== -->
 
     <aside class="sidebar">
 
 
-        <!-- LOGO INSTITUCIONAL -->
+        <!-- LOGO -->
 
         <div class="logo">
 
-            <div class="logo-institucional">
-
-                <img
-                    src="logo.png"
-                    alt="Chile Crece Más - Oficina Local de la Niñez"
-                >
-
+            <div class="logo-icon">
+                🏫
             </div>
 
+            <div>
 
-            <div class="logo-text">
+                <strong>
+                    Mapa
+                </strong>
 
-                <strong>Mapa</strong>
-
-                <span>Educacional</span>
+                <span>
+                    Educacional
+                </span>
 
             </div>
 
         </div>
 
 
-        <!-- =================================================
-             MENÚ
-        ================================================== -->
+        <!-- MENÚ -->
 
         <nav class="menu">
 
@@ -96,35 +82,29 @@
                 type="button"
             >
 
-                <span>🗺️</span>
+                <span>
+                    🗺️
+                </span>
 
-                <span>Mapa</span>
-
-            </button>
-
-
-            <button
-                class="menu-item"
-                type="button"
-            >
-
-                <span>🏫</span>
-
-                <span>Establecimientos</span>
+                <span>
+                    Mapa
+                </span>
 
             </button>
+
 
 
         </nav>
 
 
-        <!-- =================================================
-             PIE SIDEBAR
-        ================================================== -->
+        <!-- PIE SIDEBAR -->
 
         <div class="sidebar-footer">
 
-            <span>Versión 1.0</span>
+            <span>
+                Versión 1.0
+                Año 2026
+            </span>
 
         </div>
 
@@ -133,15 +113,15 @@
 
 
 
-    <!-- =====================================================
+    <!-- =================================================
          CONTENIDO PRINCIPAL
-    ====================================================== -->
+    ================================================== -->
 
     <main class="main">
 
 
         <!-- =================================================
-             HEADER
+             ENCABEZADO
         ================================================== -->
 
         <header class="header">
@@ -150,11 +130,11 @@
             <div>
 
                 <h1>
-                    Establecimientos educacionales
+                    Establecimientos educacionales comuna de Teodoro Schmidt
                 </h1>
 
                 <p>
-                    Mapa territorial de establecimientos
+                    Catastro Gestión Territorial Oficina Local de la Niñez
                 </p>
 
             </div>
@@ -180,6 +160,7 @@
         <section class="workspace">
 
 
+
             <!-- =================================================
                  PANEL DE BÚSQUEDA
             ================================================== -->
@@ -190,6 +171,7 @@
                 <!-- BUSCADOR -->
 
                 <div class="search-box">
+
 
                     <span class="search-icon">
                         🔎
@@ -202,6 +184,7 @@
                         placeholder="Buscar establecimiento, RBD o localidad..."
                     >
 
+
                 </div>
 
 
@@ -213,6 +196,8 @@
                 <div class="filtros">
 
 
+                    <!-- LOCALIDAD -->
+
                     <div class="filtro">
 
                         <label>
@@ -220,7 +205,9 @@
                         </label>
 
 
-                        <select id="filtroLocalidad">
+                        <select
+                            id="filtroLocalidad"
+                        >
 
                             <option value="">
                                 Todas
@@ -231,6 +218,8 @@
                     </div>
 
 
+
+                    <!-- DEPENDENCIA -->
 
                     <div class="filtro">
 
@@ -239,7 +228,9 @@
                         </label>
 
 
-                        <select id="filtroDependencia">
+                        <select
+                            id="filtroDependencia"
+                        >
 
                             <option value="">
                                 Todas
@@ -251,6 +242,8 @@
 
 
 
+                    <!-- NIVEL -->
+
                     <div class="filtro">
 
                         <label>
@@ -258,7 +251,9 @@
                         </label>
 
 
-                        <select id="filtroNivel">
+                        <select
+                            id="filtroNivel"
+                        >
 
                             <option value="">
                                 Todos
@@ -274,55 +269,29 @@
 
 
                 <!-- =================================================
-                     ENCABEZADO RESULTADOS
+                     RESULTADOS
                 ================================================== -->
 
                 <div class="resultados-header">
 
+<div>
+    <strong>Establecimientos</strong>
+    <span id="contador">0</span>
+</div>
 
-                    <div>
+<div class="acciones-resultados">
 
-                        <strong>
-                            Establecimientos
-                        </strong>
+    <button id="limpiarFiltros">
+        Limpiar filtros
+    </button>
 
+    <button id="exportarExcel" class="btn-exportar">
+        📥 Exportar Excel
+    </button>
 
-                        <span id="contador">
-                            0
-                        </span>
+</div>
 
-                    </div>
-
-
-
-                    <div class="acciones-resultados">
-
-
-                        <button
-                            id="limpiarFiltros"
-                            type="button"
-                        >
-
-                            Limpiar filtros
-
-                        </button>
-
-
-                        <button
-                            id="exportarExcel"
-                            class="btn-exportar"
-                            type="button"
-                        >
-
-                            📥 Exportar Excel
-
-                        </button>
-
-
-                    </div>
-
-
-                </div>
+</div>
 
 
 
@@ -338,6 +307,7 @@
 
                     <div class="sin-resultados">
 
+
                         <span>
                             🏫
                         </span>
@@ -346,6 +316,7 @@
                         <p>
                             Los establecimientos aparecerán aquí
                         </p>
+
 
                     </div>
 
@@ -363,6 +334,8 @@
 
             <section class="mapa-container">
 
+
+                <!-- MAPA LEAFLET -->
 
                 <div id="mapa"></div>
 
@@ -396,7 +369,9 @@
                     <div class="ficha-contenido">
 
 
-                        <!-- ICONO -->
+                        <!-- =================================================
+                             ENCABEZADO DE FICHA
+                        ================================================== -->
 
                         <div class="ficha-icono">
 
@@ -406,18 +381,20 @@
 
 
 
-                        <!-- TÍTULO -->
-
                         <div class="ficha-titulo">
 
 
                             <h2 id="fichaNombre">
+
                                 Establecimiento
+
                             </h2>
 
 
                             <span id="fichaRbd">
+
                                 RBD
+
                             </span>
 
 
@@ -430,15 +407,17 @@
 
 
                         <!-- =================================================
-                             INFORMACIÓN
+                             INFORMACIÓN DEL ESTABLECIMIENTO
                         ================================================== -->
 
                         <div class="ficha-datos">
 
 
+
                             <!-- DIRECCIÓN -->
 
                             <div class="ficha-dato">
+
 
                                 <div class="ficha-dato-icono">
                                     📍
@@ -458,6 +437,7 @@
 
                                 </div>
 
+
                             </div>
 
 
@@ -465,6 +445,7 @@
                             <!-- LOCALIDAD -->
 
                             <div class="ficha-dato">
+
 
                                 <div class="ficha-dato-icono">
                                     🏘️
@@ -484,6 +465,7 @@
 
                                 </div>
 
+
                             </div>
 
 
@@ -492,8 +474,9 @@
 
                             <div class="ficha-dato">
 
+
                                 <div class="ficha-dato-icono">
-                                    📌
+                                    🏛️
                                 </div>
 
 
@@ -510,6 +493,7 @@
 
                                 </div>
 
+
                             </div>
 
 
@@ -517,6 +501,7 @@
                             <!-- DEPENDENCIA -->
 
                             <div class="ficha-dato">
+
 
                                 <div class="ficha-dato-icono">
                                     🏫
@@ -536,13 +521,15 @@
 
                                 </div>
 
+
                             </div>
 
 
 
-                            <!-- NIVEL -->
+                            <!-- NIVEL EDUCACIONAL -->
 
                             <div class="ficha-dato">
+
 
                                 <div class="ficha-dato-icono">
                                     📚
@@ -562,13 +549,15 @@
 
                                 </div>
 
+
                             </div>
 
 
 
-                            <!-- DIRECTOR -->
+                            <!-- DIRECTOR/A -->
 
                             <div class="ficha-dato">
+
 
                                 <div class="ficha-dato-icono">
                                     👤
@@ -588,6 +577,7 @@
 
                                 </div>
 
+
                             </div>
 
 
@@ -595,6 +585,7 @@
                             <!-- CORREO -->
 
                             <div class="ficha-dato">
+
 
                                 <div class="ficha-dato-icono">
                                     ✉️
@@ -614,6 +605,7 @@
 
                                 </div>
 
+
                             </div>
 
 
@@ -621,6 +613,7 @@
                             <!-- TELÉFONO -->
 
                             <div class="ficha-dato">
+
 
                                 <div class="ficha-dato-icono">
                                     ☎️
@@ -640,6 +633,7 @@
 
                                 </div>
 
+
                             </div>
 
 
@@ -648,15 +642,16 @@
 
                             <div class="ficha-dato">
 
+
                                 <div class="ficha-dato-icono">
-                                    🤝
+                                    🧑‍🏫
                                 </div>
 
 
                                 <div>
 
                                     <label>
-                                        Convivencia escolar
+                                        Convivencia Escolar
                                     </label>
 
 
@@ -666,6 +661,7 @@
 
                                 </div>
 
+
                             </div>
 
 
@@ -673,6 +669,7 @@
                             <!-- TELÉFONO CONVIVENCIA -->
 
                             <div class="ficha-dato">
+
 
                                 <div class="ficha-dato-icono">
                                     ☎️
@@ -682,7 +679,7 @@
                                 <div>
 
                                     <label>
-                                        Teléfono convivencia
+                                        Teléfono Convivencia Escolar
                                     </label>
 
 
@@ -691,6 +688,7 @@
                                     </p>
 
                                 </div>
+
 
                             </div>
 
@@ -739,9 +737,9 @@
 
 
 
-<!-- =========================================================
+<!-- =================================================
      LEAFLET
-========================================================= -->
+================================================== -->
 
 <script
     src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
@@ -749,22 +747,15 @@
 
 
 
-<!-- =========================================================
-     SHEETJS - EXPORTACIÓN EXCEL
-========================================================= -->
+<!-- =================================================
+     JAVASCRIPT DE LA APLICACIÓN
+================================================== -->
+
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 
 <script
-    src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"
+    src="app.js"
 ></script>
-
-
-
-<!-- =========================================================
-     JAVASCRIPT DE LA APLICACIÓN
-========================================================= -->
-
-<script src="app.js"></script>
-
 
 </body>
 
