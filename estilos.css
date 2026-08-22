@@ -1,6 +1,11 @@
 /* =========================================================
    MAPA EDUCACIONAL
-   ESTILOS GENERALES
+   ESTILOS PRINCIPALES
+========================================================= */
+
+
+/* =========================================================
+   CONFIGURACIÓN GENERAL
 ========================================================= */
 
 * {
@@ -9,9 +14,12 @@
     box-sizing: border-box;
 }
 
+
 body {
     font-family: "Segoe UI", Arial, sans-serif;
+
     background: #f4f7fb;
+
     color: #1f2937;
 }
 
@@ -22,7 +30,9 @@ body {
 
 .app {
     display: flex;
+
     height: 100vh;
+
     overflow: hidden;
 }
 
@@ -39,56 +49,86 @@ body {
     border-right: 1px solid #e5eaf0;
 
     display: flex;
+
     flex-direction: column;
 
-    padding: 24px 16px;
-
-    flex-shrink: 0;
+    padding: 20px 16px;
 }
 
 
 /* =========================================================
-   LOGO
+   LOGO INSTITUCIONAL
 ========================================================= */
 
 .logo {
     display: flex;
+
+    flex-direction: column;
+
     align-items: center;
 
-    gap: 12px;
+    gap: 10px;
 
-    padding: 4px 10px 28px;
+    padding: 4px 4px 28px;
 }
 
-.logo-icon {
-    width: 42px;
-    height: 42px;
 
-    background: #eaf4ff;
+/* Contenedor del logo */
 
-    border-radius: 12px;
+.logo-institucional {
+    width: 185px;
+
+    height: auto;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    font-size: 21px;
-
-    flex-shrink: 0;
+    overflow: hidden;
 }
 
-.logo strong {
+
+/* Imagen */
+
+.logo-institucional img {
     display: block;
 
-    font-size: 16px;
+    width: 100%;
+
+    height: auto;
+
+    object-fit: contain;
 }
 
-.logo span {
+
+/* Texto de la aplicación */
+
+.logo-text {
+    text-align: center;
+}
+
+
+.logo-text strong {
+    display: block;
+
+    font-size: 17px;
+
+    font-weight: 650;
+
+    color: #1f2937;
+}
+
+
+.logo-text span {
     display: block;
 
     color: #7b8794;
 
     font-size: 12px;
+
+    margin-top: 2px;
 }
 
 
@@ -98,10 +138,12 @@ body {
 
 .menu {
     display: flex;
+
     flex-direction: column;
 
     gap: 6px;
 }
+
 
 .menu-item {
     border: none;
@@ -111,6 +153,7 @@ body {
     width: 100%;
 
     display: flex;
+
     align-items: center;
 
     gap: 12px;
@@ -126,11 +169,17 @@ body {
     cursor: pointer;
 
     text-align: left;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
 }
+
 
 .menu-item:hover {
     background: #f5f8fc;
 }
+
 
 .menu-item.activo {
     background: #eaf4ff;
@@ -164,11 +213,10 @@ body {
     flex: 1;
 
     display: flex;
+
     flex-direction: column;
 
     min-width: 0;
-
-    min-height: 0;
 }
 
 
@@ -179,24 +227,28 @@ body {
 .header {
     height: 82px;
 
+    flex-shrink: 0;
+
     background: #ffffff;
 
     border-bottom: 1px solid #e5eaf0;
 
     display: flex;
+
     align-items: center;
+
     justify-content: space-between;
 
     padding: 0 28px;
-
-    flex-shrink: 0;
 }
+
 
 .header h1 {
     font-size: 21px;
 
     font-weight: 650;
 }
+
 
 .header p {
     color: #8a95a3;
@@ -206,8 +258,10 @@ body {
     margin-top: 4px;
 }
 
+
 .estado {
     display: flex;
+
     align-items: center;
 
     gap: 7px;
@@ -217,8 +271,10 @@ body {
     font-size: 12px;
 }
 
+
 .estado-punto {
     width: 8px;
+
     height: 8px;
 
     border-radius: 50%;
@@ -251,6 +307,8 @@ body {
 .panel {
     width: 390px;
 
+    flex-shrink: 0;
+
     background: #ffffff;
 
     border: 1px solid #e5eaf0;
@@ -260,11 +318,10 @@ body {
     padding: 18px;
 
     display: flex;
+
     flex-direction: column;
 
     min-height: 0;
-
-    flex-shrink: 0;
 }
 
 
@@ -280,6 +337,7 @@ body {
     border-radius: 10px;
 
     display: flex;
+
     align-items: center;
 
     padding: 0 13px;
@@ -289,9 +347,13 @@ body {
     flex-shrink: 0;
 }
 
+
 .search-icon {
     margin-right: 9px;
+
+    font-size: 14px;
 }
+
 
 .search-box input {
     border: none;
@@ -303,7 +365,10 @@ body {
     width: 100%;
 
     font-size: 13px;
+
+    color: #344054;
 }
+
 
 .search-box input::placeholder {
     color: #98a2b3;
@@ -316,6 +381,7 @@ body {
 
 .filtros {
     display: flex;
+
     flex-direction: column;
 
     gap: 12px;
@@ -324,6 +390,7 @@ body {
 
     flex-shrink: 0;
 }
+
 
 .filtro label {
     display: block;
@@ -336,6 +403,7 @@ body {
 
     margin-bottom: 5px;
 }
+
 
 .filtro select {
     width: 100%;
@@ -355,6 +423,15 @@ body {
     outline: none;
 
     cursor: pointer;
+
+    font-family: inherit;
+
+    font-size: 12px;
+}
+
+
+.filtro select:focus {
+    border-color: #9fc9e9;
 }
 
 
@@ -366,7 +443,10 @@ body {
     display: flex;
 
     align-items: center;
+
     justify-content: space-between;
+
+    gap: 10px;
 
     margin-top: 22px;
 
@@ -377,9 +457,20 @@ body {
     flex-shrink: 0;
 }
 
+
+.resultados-header > div:first-child {
+    display: flex;
+
+    align-items: center;
+
+    min-width: 0;
+}
+
+
 .resultados-header strong {
     font-size: 13px;
 }
+
 
 .resultados-header span {
     margin-left: 7px;
@@ -395,7 +486,27 @@ body {
     font-size: 11px;
 }
 
-.resultados-header button {
+
+/* =========================================================
+   ACCIONES DE RESULTADOS
+========================================================= */
+
+.acciones-resultados {
+    display: flex;
+
+    align-items: center;
+
+    gap: 6px;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   LIMPIAR FILTROS
+========================================================= */
+
+.acciones-resultados #limpiarFiltros {
     border: none;
 
     background: transparent;
@@ -405,861 +516,19 @@ body {
     font-size: 11px;
 
     cursor: pointer;
+
+    padding: 6px 4px;
+
+    font-family: "Segoe UI", Arial, sans-serif;
+
+    white-space: nowrap;
 }
 
 
-/* =========================================================
-   LISTADO
-========================================================= */
+.acciones-resultados #limpiarFiltros:hover {
+    color: #125b91;
 
-.lista-colegios {
-    margin-top: 12px;
-
-    overflow-y: auto;
-
-    flex: 1;
-
-    padding-right: 4px;
-
-    min-height: 0;
-}
-
-.colegio-card {
-    border: 1px solid #e7ecf2;
-
-    border-radius: 11px;
-
-    padding: 13px;
-
-    margin-bottom: 9px;
-
-    cursor: pointer;
-
-    transition: 0.15s;
-
-    background: #ffffff;
-}
-
-.colegio-card:hover {
-    border-color: #b9d7ef;
-
-    background: #fbfdff;
-}
-
-.colegio-card.seleccionado {
-    border-color: #6faed8;
-
-    background: #f4faff;
-
-    box-shadow: 0 0 0 2px rgba(23, 105, 170, 0.08);
-}
-
-.colegio-nombre {
-    font-size: 13px;
-
-    font-weight: 600;
-
-    color: #344054;
-
-    margin-bottom: 6px;
-}
-
-.colegio-rbd {
-    font-size: 11px;
-
-    color: #667085;
-
-    margin-bottom: 4px;
-}
-
-.colegio-info {
-    font-size: 11px;
-
-    color: #7b8794;
-}
-
-
-/* =========================================================
-   SIN RESULTADOS
-========================================================= */
-
-.sin-resultados {
-    height: 180px;
-
-    display: flex;
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    color: #98a2b3;
-}
-
-.sin-resultados span {
-    font-size: 32px;
-
-    margin-bottom: 10px;
-}
-
-.sin-resultados p {
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   MAPA
-========================================================= */
-
-.mapa-container {
-    flex: 1;
-
-    min-width: 0;
-
-    min-height: 0;
-
-    background: #e9eef3;
-
-    border-radius: 14px;
-
-    overflow: hidden;
-
-    border: 1px solid #dfe5eb;
-
-    position: relative;
-}
-
-#mapa {
-    width: 100%;
-
-    height: 100%;
-}
-
-
-/* =========================================================
-   FICHA DEL ESTABLECIMIENTO
-========================================================= */
-
-.ficha-colegio {
-    position: absolute;
-
-    top: 18px;
-
-    right: 18px;
-
-    width: 360px;
-
-    max-height: calc(100% - 36px);
-
-    background: #ffffff;
-
-    border: 1px solid #e2e8f0;
-
-    border-radius: 16px;
-
-    box-shadow: 0 12px 35px rgba(15, 23, 42, 0.18);
-
-    z-index: 1000;
-
-    overflow-y: auto;
-
-    transform: translateX(120%);
-
-    opacity: 0;
-
-    transition:
-        transform 0.25s ease,
-        opacity 0.25s ease;
-
-    pointer-events: none;
-}
-
-.ficha-colegio.visible {
-    transform: translateX(0);
-
-    opacity: 1;
-
-    pointer-events: auto;
-}
-
-.ficha-cerrar {
-    position: absolute;
-
-    top: 12px;
-
-    right: 12px;
-
-    width: 30px;
-
-    height: 30px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #f3f6f9;
-
-    color: #667085;
-
-    font-size: 21px;
-
-    line-height: 1;
-
-    cursor: pointer;
-
-    z-index: 2;
-}
-
-.ficha-cerrar:hover {
-    background: #e8eef5;
-
-    color: #344054;
-}
-
-.ficha-contenido {
-    padding: 22px;
-}
-
-.ficha-icono {
-    width: 48px;
-
-    height: 48px;
-
-    border-radius: 14px;
-
-    background: #eaf4ff;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 23px;
-
-    margin-bottom: 12px;
-}
-
-.ficha-titulo h2 {
-    font-size: 18px;
-
-    line-height: 1.3;
-
-    color: #1f2937;
-
-    padding-right: 30px;
-}
-
-.ficha-titulo span {
-    display: inline-block;
-
-    margin-top: 5px;
-
-    color: #1769aa;
-
-    font-size: 12px;
-
-    font-weight: 600;
-}
-
-.ficha-separador {
-    height: 1px;
-
-    background: #edf0f4;
-
-    margin: 18px 0;
-}
-
-.ficha-datos {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 15px;
-}
-
-.ficha-dato {
-    display: flex;
-
-    align-items: flex-start;
-
-    gap: 11px;
-}
-
-.ficha-dato-icono {
-    width: 30px;
-
-    height: 30px;
-
-    border-radius: 8px;
-
-    background: #f3f7fb;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    font-size: 14px;
-}
-
-.ficha-dato label {
-    display: block;
-
-    font-size: 10px;
-
-    color: #98a2b3;
-
-    font-weight: 600;
-
-    margin-bottom: 2px;
-}
-
-.ficha-dato p {
-    font-size: 12px;
-
-    color: #344054;
-
-    line-height: 1.45;
-
-    word-break: break-word;
-}
-
-.ficha-maps {
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 8px;
-
-    width: 100%;
-
-    margin-top: 20px;
-
-    padding: 11px 14px;
-
-    border-radius: 9px;
-
-    background: #1769aa;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    transition: 0.15s;
-}
-
-.ficha-maps:hover {
-    background: #12598f;
-}
-
-
-/* =========================================================
-   RESPONSIVE - TABLETS
-========================================================= */
-
-@media (max-width: 1100px) {
-
-    .sidebar {
-        width: 190px;
-    }
-
-    .panel {
-        width: 330px;
-    }
-
-    .ficha-colegio {
-        width: 320px;
-    }
-}
-
-
-/* =========================================================
-   RESPONSIVE - CELULAR
-========================================================= */
-
-@media (max-width: 700px) {
-
-    body {
-        overflow: hidden;
-    }
-
-
-    /* ---------------------------------------------
-       ESTRUCTURA
-    --------------------------------------------- */
-
-    .app {
-        height: 100vh;
-
-        display: flex;
-        flex-direction: column;
-
-        overflow: hidden;
-    }
-
-
-    /* ---------------------------------------------
-       SIDEBAR COMO BARRA SUPERIOR
-    --------------------------------------------- */
-
-    .sidebar {
-        width: 100%;
-
-        height: 58px;
-
-        min-height: 58px;
-
-        padding: 0 14px;
-
-        border-right: none;
-
-        border-bottom: 1px solid #e5eaf0;
-
-        flex-direction: row;
-
-        align-items: center;
-
-        justify-content: space-between;
-    }
-
-
-    .logo {
-        padding: 0;
-
-        gap: 9px;
-    }
-
-
-    .logo-icon {
-        width: 36px;
-        height: 36px;
-
-        border-radius: 10px;
-
-        font-size: 18px;
-    }
-
-
-    .logo strong {
-        font-size: 14px;
-    }
-
-
-    .logo span {
-        font-size: 10px;
-    }
-
-
-    .menu {
-        flex-direction: row;
-
-        gap: 4px;
-    }
-
-
-    .menu-item {
-        width: auto;
-
-        padding: 8px 9px;
-
-        border-radius: 8px;
-    }
-
-
-    .menu-item span:last-child {
-        display: none;
-    }
-
-
-    .sidebar-footer {
-        display: none;
-    }
-
-
-    /* ---------------------------------------------
-       CONTENIDO PRINCIPAL
-    --------------------------------------------- */
-
-    .main {
-        height: calc(100vh - 58px);
-
-        min-height: 0;
-    }
-
-
-    /* ---------------------------------------------
-       HEADER
-    --------------------------------------------- */
-
-    .header {
-        height: 68px;
-
-        min-height: 68px;
-
-        padding: 0 14px;
-    }
-
-
-    .header h1 {
-        font-size: 16px;
-    }
-
-
-    .header p {
-        font-size: 11px;
-
-        margin-top: 2px;
-    }
-
-
-    .estado {
-        font-size: 10px;
-
-        white-space: nowrap;
-    }
-
-
-    .estado-punto {
-        width: 7px;
-        height: 7px;
-    }
-
-
-    /* ---------------------------------------------
-       WORKSPACE
-       En móvil: panel arriba + mapa abajo
-    --------------------------------------------- */
-
-    .workspace {
-        flex: 1;
-
-        display: flex;
-
-        flex-direction: column;
-
-        padding: 10px;
-
-        gap: 10px;
-
-        min-height: 0;
-
-        overflow: hidden;
-    }
-
-
-    /* ---------------------------------------------
-       PANEL DE BÚSQUEDA
-    --------------------------------------------- */
-
-    .panel {
-        width: 100%;
-
-        height: auto;
-
-        min-height: 0;
-
-        flex: 0 0 auto;
-
-        padding: 12px;
-
-        border-radius: 12px;
-    }
-
-
-    .search-box {
-        height: 42px;
-    }
-
-
-    .filtros {
-        display: grid;
-
-        grid-template-columns: 1fr 1fr;
-
-        gap: 8px;
-
-        margin-top: 10px;
-    }
-
-
-    .filtro:last-child {
-        grid-column: 1 / -1;
-    }
-
-
-    .filtro label {
-        font-size: 10px;
-
-        margin-bottom: 3px;
-    }
-
-
-    .filtro select {
-        height: 35px;
-
-        font-size: 11px;
-    }
-
-
-    /* ---------------------------------------------
-       RESULTADOS
-    --------------------------------------------- */
-
-    .resultados-header {
-        margin-top: 10px;
-
-        padding-bottom: 8px;
-    }
-
-
-    .resultados-header strong {
-        font-size: 12px;
-    }
-
-
-    .resultados-header button {
-        font-size: 10px;
-    }
-
-
-    /*
-     * En celular el listado se mantiene compacto.
-     */
-
-    .lista-colegios {
-        display: none;
-    }
-
-
-    /* ---------------------------------------------
-       MAPA
-       AHORA ES EL ELEMENTO PRINCIPAL
-    --------------------------------------------- */
-
-    .mapa-container {
-        width: 100%;
-
-        flex: 1;
-
-        min-height: 0;
-
-        border-radius: 12px;
-    }
-
-
-    #mapa {
-        width: 100%;
-
-        height: 100%;
-    }
-
-
-    /* ---------------------------------------------
-       FICHA EN CELULAR
-       Aparece SOBRE EL MAPA
-    --------------------------------------------- */
-
-    .ficha-colegio {
-        top: auto;
-
-        left: 8px;
-
-        right: 8px;
-
-        bottom: 8px;
-
-        width: auto;
-
-        max-height: 62%;
-
-        border-radius: 16px;
-
-        transform: translateY(120%);
-
-        opacity: 0;
-
-        box-shadow:
-            0 10px 35px rgba(15, 23, 42, 0.25);
-    }
-
-
-    .ficha-colegio.visible {
-        transform: translateY(0);
-
-        opacity: 1;
-    }
-
-
-    .ficha-contenido {
-        padding: 16px;
-    }
-
-
-    .ficha-icono {
-        width: 40px;
-
-        height: 40px;
-
-        border-radius: 11px;
-
-        font-size: 19px;
-
-        margin-bottom: 8px;
-    }
-
-
-    .ficha-titulo h2 {
-        font-size: 15px;
-
-        padding-right: 28px;
-    }
-
-
-    .ficha-titulo span {
-        font-size: 10px;
-
-        margin-top: 3px;
-    }
-
-
-    .ficha-separador {
-        margin: 12px 0;
-    }
-
-
-    .ficha-datos {
-        gap: 10px;
-    }
-
-
-    .ficha-dato {
-        gap: 8px;
-    }
-
-
-    .ficha-dato-icono {
-        width: 27px;
-
-        height: 27px;
-
-        font-size: 12px;
-    }
-
-
-    .ficha-dato label {
-        font-size: 9px;
-    }
-
-
-    .ficha-dato p {
-        font-size: 11px;
-    }
-
-
-    .ficha-maps {
-        margin-top: 14px;
-
-        padding: 10px;
-
-        font-size: 11px;
-    }
-
-
-    /* ---------------------------------------------
-       CONTROL DE ZOOM LEAFLET
-    --------------------------------------------- */
-
-    .leaflet-control-zoom {
-        margin-top: 10px !important;
-
-        margin-right: 10px !important;
-    }
-
-}
-
-
-/* =========================================================
-   CELULARES MUY PEQUEÑOS
-========================================================= */
-
-@media (max-width: 380px) {
-
-    .header {
-        height: 62px;
-
-        min-height: 62px;
-    }
-
-
-    .header h1 {
-        font-size: 14px;
-    }
-
-
-    .header p {
-        display: none;
-    }
-
-
-    .estado {
-        font-size: 9px;
-    }
-
-
-    .workspace {
-        padding: 7px;
-
-        gap: 7px;
-    }
-
-
-    .panel {
-        padding: 9px;
-    }
-
-
-    .filtros {
-        gap: 6px;
-    }
-
-
-    .filtro select {
-        height: 33px;
-
-        font-size: 10px;
-    }
-
-
-    .ficha-colegio {
-        left: 6px;
-
-        right: 6px;
-
-        bottom: 6px;
-
-        max-height: 68%;
-    }
-
-}
-/* =========================================================
-   ACCIONES DE RESULTADOS
-========================================================= */
-
-.acciones-resultados {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+    text-decoration: underline;
 }
 
 
@@ -1284,6 +553,8 @@ body {
 
     cursor: pointer;
 
+    white-space: nowrap;
+
     transition:
         background 0.15s ease,
         border-color 0.15s ease,
@@ -1291,8 +562,6 @@ body {
         transform 0.1s ease;
 }
 
-
-/* Hover */
 
 .btn-exportar:hover {
     background: #f0f7ff;
@@ -1303,36 +572,808 @@ body {
 }
 
 
-/* Click */
-
 .btn-exportar:active {
     transform: translateY(1px);
 }
 
 
 /* =========================================================
-   BOTÓN LIMPIAR FILTROS
+   LISTADO
 ========================================================= */
 
-.acciones-resultados #limpiarFiltros {
-    border: none;
+.lista-colegios {
+    margin-top: 12px;
 
+    overflow-y: auto;
+
+    flex: 1;
+
+    padding-right: 4px;
+
+    min-height: 0;
+}
+
+
+/* Scroll */
+
+.lista-colegios::-webkit-scrollbar {
+    width: 6px;
+}
+
+
+.lista-colegios::-webkit-scrollbar-track {
     background: transparent;
+}
 
-    color: #1769aa;
 
-    font-size: 11px;
+.lista-colegios::-webkit-scrollbar-thumb {
+    background: #d8e0e8;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   TARJETA COLEGIO
+========================================================= */
+
+.colegio-card {
+    border: 1px solid #e7ecf2;
+
+    border-radius: 11px;
+
+    padding: 13px;
+
+    margin-bottom: 9px;
 
     cursor: pointer;
 
-    padding: 6px 4px;
+    background: #ffffff;
 
+    transition:
+        border-color 0.15s ease,
+        background 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+.colegio-card:hover {
+    border-color: #b9d7ef;
+
+    background: #fbfdff;
+}
+
+
+.colegio-card.seleccionado {
+    border-color: #7eb7df;
+
+    background: #f3f9ff;
+
+    box-shadow: 0 0 0 2px rgba(23, 105, 170, 0.08);
+}
+
+
+.colegio-nombre {
+    font-size: 13px;
+
+    font-weight: 600;
+
+    color: #344054;
+
+    margin-bottom: 6px;
+
+    line-height: 1.35;
+}
+
+
+.colegio-rbd {
+    font-size: 11px;
+
+    color: #667085;
+
+    margin-bottom: 4px;
+}
+
+
+.colegio-info {
+    font-size: 11px;
+
+    color: #7b8794;
+
+    margin-top: 3px;
+
+    line-height: 1.35;
+}
+
+
+/* =========================================================
+   SIN RESULTADOS
+========================================================= */
+
+.sin-resultados {
+    height: 180px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    text-align: center;
+
+    color: #98a2b3;
+}
+
+
+.sin-resultados span {
+    font-size: 32px;
+
+    margin-bottom: 10px;
+}
+
+
+.sin-resultados p {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   MAPA
+========================================================= */
+
+.mapa-container {
+    flex: 1;
+
+    min-width: 0;
+
+    background: #e9eef3;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    border: 1px solid #dfe5eb;
+
+    position: relative;
+}
+
+
+#mapa {
+    width: 100%;
+
+    height: 100%;
+}
+
+
+/* =========================================================
+   FICHA DEL ESTABLECIMIENTO
+========================================================= */
+
+.ficha-colegio {
+    position: absolute;
+
+    top: 18px;
+
+    right: 18px;
+
+    width: 350px;
+
+    max-width: calc(100% - 36px);
+
+    max-height: calc(100% - 36px);
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    box-shadow: 0 10px 35px rgba(31, 41, 55, 0.18);
+
+    border: 1px solid #e5eaf0;
+
+    z-index: 1000;
+
+    overflow-y: auto;
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transform: translateX(20px);
+
+    transition:
+        opacity 0.2s ease,
+        transform 0.2s ease,
+        visibility 0.2s ease;
+}
+
+
+.ficha-colegio.visible {
+    opacity: 1;
+
+    visibility: visible;
+
+    transform: translateX(0);
+}
+
+
+/* =========================================================
+   BOTÓN CERRAR FICHA
+========================================================= */
+
+.ficha-cerrar {
+    position: absolute;
+
+    top: 10px;
+
+    right: 10px;
+
+    width: 30px;
+
+    height: 30px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #f4f7fb;
+
+    color: #667085;
+
+    font-size: 21px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 2;
+}
+
+
+.ficha-cerrar:hover {
+    background: #eaf4ff;
+
+    color: #1769aa;
+}
+
+
+/* =========================================================
+   CONTENIDO FICHA
+========================================================= */
+
+.ficha-contenido {
+    padding: 22px;
+}
+
+
+/* =========================================================
+   ICONO FICHA
+========================================================= */
+
+.ficha-icono {
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 12px;
+
+    background: #eaf4ff;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 20px;
+
+    margin-bottom: 12px;
+}
+
+
+/* =========================================================
+   TÍTULO FICHA
+========================================================= */
+
+.ficha-titulo {
+    padding-right: 25px;
+}
+
+
+.ficha-titulo h2 {
+    font-size: 17px;
+
+    line-height: 1.3;
+
+    color: #1f2937;
+
+    margin-bottom: 5px;
+}
+
+
+.ficha-titulo span {
+    display: inline-block;
+
+    color: #52708c;
+
+    background: #eef4f9;
+
+    border-radius: 20px;
+
+    padding: 4px 8px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   SEPARADOR
+========================================================= */
+
+.ficha-separador {
+    height: 1px;
+
+    background: #edf0f4;
+
+    margin: 17px 0;
+}
+
+
+/* =========================================================
+   DATOS FICHA
+========================================================= */
+
+.ficha-datos {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+.ficha-dato {
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 11px;
+}
+
+
+.ficha-dato-icono {
+    width: 30px;
+
+    min-width: 30px;
+
+    height: 30px;
+
+    border-radius: 8px;
+
+    background: #f5f8fc;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 14px;
+}
+
+
+.ficha-dato label {
+    display: block;
+
+    color: #8a95a3;
+
+    font-size: 10px;
+
+    font-weight: 600;
+
+    margin-bottom: 3px;
+}
+
+
+.ficha-dato p {
+    color: #344054;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   BOTÓN GOOGLE MAPS
+========================================================= */
+
+.ficha-maps {
+    margin-top: 20px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    width: 100%;
+
+    min-height: 40px;
+
+    border-radius: 9px;
+
+    background: #1769aa;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition:
+        background 0.15s ease,
+        transform 0.1s ease;
+}
+
+
+.ficha-maps:hover {
+    background: #125b91;
+}
+
+
+.ficha-maps:active {
+    transform: translateY(1px);
+}
+
+
+/* =========================================================
+   LEAFLET
+========================================================= */
+
+.leaflet-container {
     font-family: "Segoe UI", Arial, sans-serif;
 }
 
 
-.acciones-resultados #limpiarFiltros:hover {
-    color: #125b91;
+.leaflet-popup-content {
+    font-size: 12px;
 
-    text-decoration: underline;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+
+/* TABLET */
+
+@media (max-width: 1100px) {
+
+    .sidebar {
+        width: 205px;
+    }
+
+
+    .logo-institucional {
+        width: 165px;
+    }
+
+
+    .panel {
+        width: 350px;
+    }
+
+
+    .ficha-colegio {
+        width: 320px;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+========================================================= */
+
+@media (max-width: 900px) {
+
+    body {
+        overflow: auto;
+    }
+
+
+    .app {
+        height: auto;
+
+        min-height: 100vh;
+
+        flex-direction: column;
+
+        overflow: visible;
+    }
+
+
+    /* SIDEBAR */
+
+    .sidebar {
+        width: 100%;
+
+        height: auto;
+
+        min-height: 0;
+
+        border-right: none;
+
+        border-bottom: 1px solid #e5eaf0;
+
+        padding: 12px 15px;
+
+        flex-direction: row;
+
+        align-items: center;
+
+        justify-content: space-between;
+    }
+
+
+    .logo {
+        flex-direction: row;
+
+        align-items: center;
+
+        gap: 10px;
+
+        padding: 0;
+    }
+
+
+    .logo-institucional {
+        width: 105px;
+    }
+
+
+    .logo-text {
+        text-align: left;
+    }
+
+
+    .logo-text strong {
+        font-size: 15px;
+    }
+
+
+    .logo-text span {
+        font-size: 11px;
+    }
+
+
+    .menu {
+        flex-direction: row;
+
+        gap: 4px;
+    }
+
+
+    .menu-item {
+        width: auto;
+
+        padding: 9px 10px;
+    }
+
+
+    .menu-item span:last-child {
+        display: none;
+    }
+
+
+    .sidebar-footer {
+        display: none;
+    }
+
+
+    /* HEADER */
+
+    .header {
+        height: auto;
+
+        min-height: 76px;
+
+        padding: 15px 18px;
+    }
+
+
+    .header h1 {
+        font-size: 18px;
+    }
+
+
+    .header p {
+        font-size: 12px;
+    }
+
+
+    .estado {
+        font-size: 10px;
+
+        white-space: nowrap;
+    }
+
+
+    /* WORKSPACE */
+
+    .workspace {
+        flex-direction: column;
+
+        padding: 12px;
+
+        gap: 12px;
+
+        min-height: 0;
+    }
+
+
+    /* PANEL */
+
+    .panel {
+        width: 100%;
+
+        min-height: 420px;
+
+        max-height: none;
+    }
+
+
+    /* MAPA */
+
+    .mapa-container {
+        width: 100%;
+
+        height: 500px;
+
+        min-height: 500px;
+
+        flex: none;
+
+        overflow: hidden;
+    }
+
+
+    /* FICHA */
+
+    .ficha-colegio {
+        top: auto;
+
+        right: 10px;
+
+        bottom: 10px;
+
+        left: 10px;
+
+        width: auto;
+
+        max-width: none;
+
+        max-height: 70%;
+
+        transform: translateY(20px);
+    }
+
+
+    .ficha-colegio.visible {
+        transform: translateY(0);
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR PEQUEÑO
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        padding: 10px 12px;
+    }
+
+
+    .logo-institucional {
+        width: 90px;
+    }
+
+
+    .logo-text strong {
+        font-size: 14px;
+    }
+
+
+    .logo-text span {
+        font-size: 10px;
+    }
+
+
+    .menu-item {
+        padding: 8px;
+    }
+
+
+    .header {
+        padding: 13px 15px;
+    }
+
+
+    .header h1 {
+        font-size: 16px;
+    }
+
+
+    .header p {
+        font-size: 11px;
+    }
+
+
+    .estado {
+        display: none;
+    }
+
+
+    .workspace {
+        padding: 10px;
+    }
+
+
+    .panel {
+        padding: 14px;
+
+        min-height: 400px;
+    }
+
+
+    .resultados-header {
+        align-items: flex-start;
+    }
+
+
+    .acciones-resultados {
+        flex-direction: column;
+
+        align-items: flex-end;
+
+        gap: 3px;
+    }
+
+
+    .btn-exportar {
+        padding: 6px 8px;
+    }
+
+
+    .mapa-container {
+        height: 450px;
+
+        min-height: 450px;
+    }
+
+
+    .ficha-contenido {
+        padding: 18px;
+    }
+
+
+    .ficha-titulo h2 {
+        font-size: 16px;
+    }
+
 }
