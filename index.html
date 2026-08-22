@@ -23,6 +23,7 @@
 
 
 <!-- CSS PROPIO -->
+
 <link
     rel="stylesheet"
     href="estilos.css"
@@ -30,6 +31,7 @@
 
 
 <!-- LEAFLET -->
+
 <link
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -37,7 +39,9 @@
 
 </head>
 
+
 <body>
+
 
 <div class="app">
 
@@ -157,7 +161,6 @@
         <section class="workspace">
 
 
-
             <!-- =================================================
                  PANEL DE BÚSQUEDA
             ================================================== -->
@@ -169,18 +172,15 @@
 
                 <div class="search-box">
 
-
                     <span class="search-icon">
                         🔎
                     </span>
-
 
                     <input
                         type="text"
                         id="buscador"
                         placeholder="Buscar establecimiento, RBD o localidad..."
                     >
-
 
                 </div>
 
@@ -200,7 +200,6 @@
                         <label>
                             Localidad
                         </label>
-
 
                         <select
                             id="filtroLocalidad"
@@ -224,7 +223,6 @@
                             Dependencia
                         </label>
 
-
                         <select
                             id="filtroDependencia"
                         >
@@ -246,7 +244,6 @@
                         <label>
                             Nivel educacional
                         </label>
-
 
                         <select
                             id="filtroNivel"
@@ -317,22 +314,17 @@
                     class="lista-colegios"
                 >
 
-
                     <div class="sin-resultados">
-
 
                         <span>
                             🏫
                         </span>
 
-
                         <p>
                             Los establecimientos aparecerán aquí
                         </p>
 
-
                     </div>
-
 
                 </div>
 
@@ -348,7 +340,7 @@
             <section class="mapa-container">
 
 
-                <!-- MAPA LEAFLET -->
+                <!-- MAPA -->
 
                 <div id="mapa"></div>
 
@@ -397,7 +389,7 @@
                 >
 
 
-                    <!-- BOTÓN CERRAR -->
+                    <!-- CERRAR -->
 
                     <button
                         id="cerrarFicha"
@@ -415,9 +407,7 @@
                     <div class="ficha-contenido">
 
 
-                        <!-- =================================================
-                             ENCABEZADO DE FICHA
-                        ================================================== -->
+                        <!-- ENCABEZADO -->
 
                         <div class="ficha-icono">
 
@@ -426,49 +416,35 @@
                         </div>
 
 
-
                         <div class="ficha-titulo">
 
-
                             <h2 id="fichaNombre">
-
                                 Establecimiento
-
                             </h2>
 
-
                             <span id="fichaRbd">
-
                                 RBD
-
                             </span>
 
-
                         </div>
-
 
 
                         <div class="ficha-separador"></div>
 
 
 
-                        <!-- =================================================
-                             INFORMACIÓN DEL ESTABLECIMIENTO
-                        ================================================== -->
+                        <!-- INFORMACIÓN -->
 
                         <div class="ficha-datos">
-
 
 
                             <!-- DIRECCIÓN -->
 
                             <div class="ficha-dato">
 
-
                                 <div class="ficha-dato-icono">
                                     📍
                                 </div>
-
 
                                 <div>
 
@@ -476,13 +452,11 @@
                                         Dirección
                                     </label>
 
-
                                     <p id="fichaDireccion">
                                         —
                                     </p>
 
                                 </div>
-
 
                             </div>
 
@@ -492,11 +466,9 @@
 
                             <div class="ficha-dato">
 
-
                                 <div class="ficha-dato-icono">
                                     🏘️
                                 </div>
-
 
                                 <div>
 
@@ -504,13 +476,11 @@
                                         Localidad
                                     </label>
 
-
                                     <p id="fichaLocalidad">
                                         —
                                     </p>
 
                                 </div>
-
 
                             </div>
 
@@ -520,11 +490,9 @@
 
                             <div class="ficha-dato">
 
-
                                 <div class="ficha-dato-icono">
                                     🏛️
                                 </div>
-
 
                                 <div>
 
@@ -532,13 +500,11 @@
                                         Comuna
                                     </label>
 
-
                                     <p id="fichaComuna">
                                         —
                                     </p>
 
                                 </div>
-
 
                             </div>
 
@@ -548,11 +514,9 @@
 
                             <div class="ficha-dato">
 
-
                                 <div class="ficha-dato-icono">
                                     🏫
                                 </div>
-
 
                                 <div>
 
@@ -560,27 +524,23 @@
                                         Dependencia
                                     </label>
 
-
                                     <p id="fichaDependencia">
                                         —
                                     </p>
 
                                 </div>
 
-
                             </div>
 
 
 
-                            <!-- NIVEL EDUCACIONAL -->
+                            <!-- NIVEL -->
 
                             <div class="ficha-dato">
-
 
                                 <div class="ficha-dato-icono">
                                     📚
                                 </div>
-
 
                                 <div>
 
@@ -588,13 +548,11 @@
                                         Nivel educacional
                                     </label>
 
-
                                     <p id="fichaNivel">
                                         —
                                     </p>
 
                                 </div>
-
 
                             </div>
 
@@ -604,11 +562,9 @@
 
                             <div class="ficha-dato">
 
-
                                 <div class="ficha-dato-icono">
                                     👤
                                 </div>
-
 
                                 <div>
 
@@ -616,13 +572,11 @@
                                         Director/a
                                     </label>
 
-
                                     <p id="fichaDirector">
                                         —
                                     </p>
 
                                 </div>
-
 
                             </div>
 
@@ -632,11 +586,9 @@
 
                             <div class="ficha-dato">
 
-
                                 <div class="ficha-dato-icono">
                                     ✉️
                                 </div>
-
 
                                 <div>
 
@@ -644,13 +596,11 @@
                                         Correo electrónico
                                     </label>
 
-
                                     <p id="fichaCorreo">
                                         —
                                     </p>
 
                                 </div>
-
 
                             </div>
 
@@ -660,11 +610,9 @@
 
                             <div class="ficha-dato">
 
-
                                 <div class="ficha-dato-icono">
                                     ☎️
                                 </div>
-
 
                                 <div>
 
@@ -672,27 +620,23 @@
                                         Teléfono
                                     </label>
 
-
                                     <p id="fichaTelefono">
                                         —
                                     </p>
 
                                 </div>
 
-
                             </div>
 
 
 
-                            <!-- CONVIVENCIA ESCOLAR -->
+                            <!-- CONVIVENCIA -->
 
                             <div class="ficha-dato">
-
 
                                 <div class="ficha-dato-icono">
                                     🧑‍🏫
                                 </div>
-
 
                                 <div>
 
@@ -700,13 +644,11 @@
                                         Convivencia Escolar
                                     </label>
 
-
                                     <p id="fichaConvivencia">
                                         —
                                     </p>
 
                                 </div>
-
 
                             </div>
 
@@ -716,11 +658,9 @@
 
                             <div class="ficha-dato">
 
-
                                 <div class="ficha-dato-icono">
                                     ☎️
                                 </div>
-
 
                                 <div>
 
@@ -728,13 +668,11 @@
                                         Teléfono Convivencia Escolar
                                     </label>
 
-
                                     <p id="fichaTelefonoConvivencia">
                                         —
                                     </p>
 
                                 </div>
-
 
                             </div>
 
@@ -823,7 +761,6 @@
 
 <!-- =================================================
      SHEETJS
-     EXPORTACIÓN A EXCEL
 ================================================== -->
 
 <script
@@ -833,7 +770,7 @@
 
 
 <!-- =================================================
-     JAVASCRIPT DE LA APLICACIÓN
+     JAVASCRIPT
 ================================================== -->
 
 <script
