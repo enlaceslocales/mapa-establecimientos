@@ -226,7 +226,7 @@ body {
 
 .header {
 
-    height: 82px;
+    min-height: 82px;
 
     background: #ffffff;
 
@@ -240,6 +240,8 @@ body {
     justify-content: space-between;
 
     padding: 0 28px;
+
+    gap: 20px;
 
 }
 
@@ -279,6 +281,8 @@ body {
     color: #667085;
 
     font-size: 12px;
+
+    white-space: nowrap;
 
 }
 
@@ -451,6 +455,110 @@ body {
 
 
 /* =========================================================
+   UBICACIÓN DEL USUARIO
+========================================================= */
+
+.ubicacion-panel {
+
+    margin-top: 15px;
+
+    padding: 12px;
+
+    border:
+        1px solid #dce8f2;
+
+    border-radius: 10px;
+
+    background: #f8fbff;
+
+}
+
+
+.ubicacion-titulo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    color: #344054;
+
+    margin-bottom: 9px;
+
+}
+
+
+.btn-ubicacion {
+
+    width: 100%;
+
+    min-height: 38px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: #1769aa;
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+
+}
+
+
+.btn-ubicacion:hover {
+
+    background: #12588f;
+
+}
+
+
+.btn-ubicacion:active {
+
+    transform: scale(0.98);
+
+}
+
+
+.btn-ubicacion:disabled {
+
+    opacity: 0.65;
+
+    cursor: wait;
+
+}
+
+
+.ubicacion-mensaje {
+
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 10px;
+
+    line-height: 1.4;
+
+    color: #7b8794;
+
+}
+
+
+/* =========================================================
    RESULTADOS
 ========================================================= */
 
@@ -469,12 +577,25 @@ body {
     border-bottom:
         1px solid #edf0f4;
 
+    gap: 10px;
+
 }
 
 
 .resultados-header strong {
 
     font-size: 13px;
+
+}
+
+
+.resultados-header > div:first-child {
+
+    display: flex;
+
+    align-items: center;
+
+    min-width: 0;
 
 }
 
@@ -496,17 +617,13 @@ body {
 }
 
 
-/* =========================================================
-   ACCIONES DE RESULTADOS
-========================================================= */
-
 .acciones-resultados {
 
     display: flex;
 
     align-items: center;
 
-    gap: 8px;
+    gap: 7px;
 
 }
 
@@ -522,8 +639,6 @@ body {
     font-size: 11px;
 
     cursor: pointer;
-
-    white-space: nowrap;
 
 }
 
@@ -541,112 +656,27 @@ body {
 
 .btn-exportar {
 
-    display: flex;
-
-    align-items: center;
-
-    gap: 5px;
-
     padding:
         7px 9px;
 
     border-radius: 7px !important;
 
-    background: #f0fdf4 !important;
+    background: #eef7f0 !important;
 
-    color: #15803d !important;
+    color: #287a3d !important;
 
     font-weight: 600;
+
+    white-space: nowrap;
 
 }
 
 
 .btn-exportar:hover {
 
-    background: #dcfce7 !important;
+    background: #e1f1e5 !important;
 
     text-decoration: none !important;
-
-}
-
-
-/* =========================================================
-   BOTÓN MI UBICACIÓN
-========================================================= */
-
-.ubicacion-container {
-
-    margin-top: 12px;
-
-}
-
-
-.btn-ubicacion {
-
-    width: 100%;
-
-    height: 40px;
-
-    border: 1px solid #d7e4ef;
-
-    border-radius: 9px;
-
-    background: #f5faff;
-
-    color: #1769aa;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    transition: 0.15s;
-
-}
-
-
-.btn-ubicacion:hover {
-
-    background: #eaf4ff;
-
-    border-color: #b9d7ef;
-
-}
-
-
-.btn-ubicacion:disabled {
-
-    opacity: 0.65;
-
-    cursor: wait;
-
-}
-
-
-/* =========================================================
-   MENSAJE DE UBICACIÓN
-========================================================= */
-
-.mensaje-ubicacion {
-
-    margin-top: 7px;
-
-    font-size: 10px;
-
-    color: #7b8794;
-
-    text-align: center;
-
-    min-height: 14px;
 
 }
 
@@ -810,24 +840,99 @@ body {
 
 
 /* =========================================================
-   MARCADOR DE UBICACIÓN DEL USUARIO
+   CONTROLES SOBRE EL MAPA
 ========================================================= */
 
-.marcador-usuario {
+.controles-mapa {
+
+    position: absolute;
+
+    top: 15px;
+
+    left: 15px;
+
+    z-index: 900;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+}
+
+
+.btn-control-mapa {
+
+    border: none;
+
+    background: #ffffff;
+
+    color: #344054;
+
+    padding: 9px 12px;
+
+    border-radius: 9px;
+
+    box-shadow:
+        0 4px 14px rgba(15, 23, 42, 0.14);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        transform 0.15s ease;
+
+}
+
+
+.btn-control-mapa:hover {
+
+    background: #f7faff;
+
+}
+
+
+.btn-control-mapa:active {
+
+    transform: scale(0.97);
+
+}
+
+
+.btn-control-mapa:disabled {
+
+    opacity: 0.65;
+
+    cursor: wait;
+
+}
+
+
+/* =========================================================
+   INDICADOR DE UBICACIÓN
+========================================================= */
+
+.ubicacion-usuario {
 
     width: 18px;
 
     height: 18px;
 
-    background: #1769aa;
-
-    border: 3px solid #ffffff;
-
     border-radius: 50%;
 
+    background: #1769aa;
+
+    border:
+        3px solid #ffffff;
+
     box-shadow:
-        0 0 0 5px rgba(23, 105, 170, 0.20),
-        0 2px 8px rgba(15, 23, 42, 0.25);
+        0 0 0 2px rgba(23, 105, 170, 0.35),
+        0 3px 10px rgba(15, 23, 42, 0.25);
 
 }
 
@@ -846,7 +951,8 @@ body {
 
     width: 360px;
 
-    max-height: calc(100% - 36px);
+    max-height:
+        calc(100% - 36px);
 
     background: #ffffff;
 
@@ -1079,10 +1185,24 @@ body {
 
 
 /* =========================================================
-   BOTÓN GOOGLE MAPS
+   BOTONES DE NAVEGACIÓN
 ========================================================= */
 
-.ficha-maps {
+.ficha-acciones {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 20px;
+
+}
+
+
+.ficha-maps,
+.ficha-como-llegar {
 
     display: flex;
 
@@ -1092,15 +1212,9 @@ body {
 
     gap: 8px;
 
-    margin-top: 20px;
-
     padding: 11px 14px;
 
     border-radius: 9px;
-
-    background: #1769aa;
-
-    color: #ffffff;
 
     text-decoration: none;
 
@@ -1109,6 +1223,15 @@ body {
     font-weight: 600;
 
     transition: 0.15s;
+
+}
+
+
+.ficha-maps {
+
+    background: #1769aa;
+
+    color: #ffffff;
 
 }
 
@@ -1120,67 +1243,58 @@ body {
 }
 
 
+.ficha-como-llegar {
+
+    background: #eef4f9;
+
+    color: #1769aa;
+
+    border:
+        1px solid #dce8f2;
+
+}
+
+
+.ficha-como-llegar:hover {
+
+    background: #e4eff8;
+
+}
+
+
 /* =========================================================
-   BOTÓN "CÓMO LLEGAR"
+   MENSAJE DE UBICACIÓN
 ========================================================= */
 
-.ficha-ruta {
+.mensaje-ubicacion {
 
-    display: flex;
+    position: absolute;
 
-    align-items: center;
+    left: 50%;
 
-    justify-content: center;
+    bottom: 18px;
 
-    gap: 8px;
+    transform:
+        translateX(-50%);
 
-    margin-top: 9px;
+    z-index: 900;
 
-    padding: 11px 14px;
+    background: rgba(255, 255, 255, 0.96);
+
+    padding: 9px 13px;
 
     border-radius: 9px;
 
-    background: #f0fdf4;
-
-    border: 1px solid #bbf7d0;
-
-    color: #15803d;
-
-    text-decoration: none;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    transition: 0.15s;
-
-}
-
-
-.ficha-ruta:hover {
-
-    background: #dcfce7;
-
-}
-
-
-/* =========================================================
-   CONTROLES LEAFLET
-========================================================= */
-
-.leaflet-control-zoom {
-
-    border: none !important;
-
     box-shadow:
-        0 2px 10px rgba(15, 23, 42, 0.12) !important;
+        0 4px 15px rgba(15, 23, 42, 0.12);
 
-}
+    color: #667085;
 
+    font-size: 11px;
 
-.leaflet-control-zoom a {
+    text-align: center;
 
-    color: #344054 !important;
+    max-width: 90%;
 
 }
 
@@ -1216,7 +1330,7 @@ body {
 
 
 /* =========================================================
-   RESPONSIVE — TABLET
+   RESPONSIVE
 ========================================================= */
 
 @media (max-width: 900px) {
@@ -1349,13 +1463,11 @@ body {
 
     .header {
 
-        height: auto;
+        min-height: auto;
 
         padding: 16px;
 
         align-items: flex-start;
-
-        gap: 12px;
 
     }
 
@@ -1363,6 +1475,8 @@ body {
     .header h1 {
 
         font-size: 18px;
+
+        line-height: 1.3;
 
     }
 
@@ -1407,29 +1521,34 @@ body {
     }
 
 
+    .filtros {
+
+        gap: 9px;
+
+        margin-top: 14px;
+
+    }
+
+
+    .ubicacion-panel {
+
+        margin-top: 12px;
+
+    }
+
+
     .resultados-header {
 
-        align-items: flex-start;
-
-        gap: 8px;
+        flex-wrap: wrap;
 
     }
 
 
     .acciones-resultados {
 
-        flex-wrap: wrap;
+        width: 100%;
 
-        justify-content: flex-end;
-
-    }
-
-
-    .btn-exportar {
-
-        font-size: 10px;
-
-        padding: 6px 8px;
+        justify-content: space-between;
 
     }
 
@@ -1447,6 +1566,31 @@ body {
     }
 
 
+    #mapa {
+
+        min-height: 420px;
+
+    }
+
+
+    .controles-mapa {
+
+        top: 10px;
+
+        left: 10px;
+
+    }
+
+
+    .btn-control-mapa {
+
+        padding: 9px 10px;
+
+        font-size: 11px;
+
+    }
+
+
     .ficha-colegio {
 
         top: 10px;
@@ -1457,7 +1601,10 @@ body {
 
         width: auto;
 
-        max-height: calc(100% - 20px);
+        max-height:
+            calc(100% - 20px);
+
+        border-radius: 12px;
 
     }
 
@@ -1471,7 +1618,7 @@ body {
 
     .ficha-titulo h2 {
 
-        font-size: 16px;
+        font-size: 17px;
 
     }
 
@@ -1483,19 +1630,18 @@ body {
     }
 
 
-    .ficha-dato p {
+    .ficha-acciones {
 
-        font-size: 11px;
+        margin-top: 16px;
 
     }
 
 
-    .ficha-maps,
-    .ficha-ruta {
+    .mensaje-ubicacion {
 
-        font-size: 11px;
+        bottom: 10px;
 
-        padding: 10px;
+        font-size: 10px;
 
     }
 
@@ -1503,10 +1649,10 @@ body {
 
 
 /* =========================================================
-   RESPONSIVE — CELULARES PEQUEÑOS
+   RESPONSIVE — TELÉFONOS PEQUEÑOS
 ========================================================= */
 
-@media (max-width: 430px) {
+@media (max-width: 420px) {
 
     .header {
 
@@ -1545,72 +1691,40 @@ body {
 
     .panel {
 
-        padding: 13px;
-
-        min-height: 400px;
-
-    }
-
-
-    .resultados-header {
-
-        flex-direction: column;
-
-    }
-
-
-    .acciones-resultados {
-
-        width: 100%;
-
-        justify-content: space-between;
-
-    }
-
-
-    .resultados-header button {
-
-        font-size: 10px;
+        min-height: 390px;
 
     }
 
 
     .mapa-container {
 
-        height: 60vh;
+        height: 62vh;
 
-        min-height: 360px;
-
-    }
-
-
-    .ficha-colegio {
-
-        top: 7px;
-
-        left: 7px;
-
-        right: 7px;
-
-        max-height: calc(100% - 14px);
+        min-height: 380px;
 
     }
 
 
-    .ficha-contenido {
+    .acciones-resultados {
 
-        padding: 16px;
+        gap: 5px;
 
     }
 
 
-    .ficha-icono {
+    .btn-exportar {
 
-        width: 42px;
+        font-size: 10px !important;
 
-        height: 42px;
+        padding:
+            7px 8px !important;
 
-        font-size: 21px;
+    }
+
+
+    .ficha-dato p {
+
+        font-size: 11px;
 
     }
 
