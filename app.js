@@ -16,28 +16,8 @@ const URL_DATOS =
    CONFIGURACIÓN DE RUTAS
 ========================================================= */
 
-/*
- * OSRM permite calcular rutas utilizando la red vial.
- *
- * Esto permite que "Colegio más cercano" considere
- * la distancia por carretera/camino y no solamente
- * la distancia en línea recta.
- */
-
 const URL_OSRM =
     "https://router.project-osrm.org";
-
-
-/*
- * Cantidad de candidatos que serán evaluados
- * mediante la red vial.
- *
- * Mientras mayor sea este número:
- * - mayor precisión
- * - más consultas
- *
- * 8 es un buen equilibrio para esta aplicación.
- */
 
 const CANTIDAD_CANDIDATOS_RUTA = 8;
 
@@ -131,6 +111,23 @@ const btnColegioCercano =
 
 
 /* =========================================================
+   ELEMENTOS ESTADO DE ACTUALIZACIÓN
+========================================================= */
+
+const estadoDatos =
+    document.getElementById("estadoDatos");
+
+const estadoPunto =
+    document.getElementById("estadoPunto");
+
+const estadoTexto =
+    document.getElementById("estadoTexto");
+
+const estadoDetalle =
+    document.getElementById("estadoDetalle");
+
+
+/* =========================================================
    MARCADORES
 ========================================================= */
 
@@ -184,6 +181,140 @@ function obtenerDato(colegio, nombreCampo) {
 
 
 /* =========================================================
+   ACTUALIZAR ESTADO DE DATOS
+========================================================= */
+
+function actualizarEstadoDatos(
+    estado,
+    cantidad = 0
+) {
+
+    if (!estadoTexto || !estadoDetalle) {
+
+        return;
+
+    }
+
+
+    if (estado === "actualizado") {
+
+        if (estadoPunto) {
+
+            estadoPunto.style.background =
+                "#2e7d32";
+
+        }
+
+
+        estadoTexto.textContent =
+            "Datos actualizados";
+
+
+        const fecha =
+            new Date();
+
+
+        const fechaTexto =
+            fecha.toLocaleDateString(
+                "es-CL",
+                {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric"
+                }
+            );
+
+
+        const horaTexto =
+            fecha.toLocaleTimeString(
+                "es-CL",
+                {
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    second: "2-digit"
+                }
+            );
+
+
+        estadoDetalle.textContent =
+            `${cantidad} establecimientos · Última consulta: ${fechaTexto} ${horaTexto}`;
+
+
+        if (estadoDatos) {
+
+            estadoDatos.title =
+                `Google Sheets conectado correctamente. ${cantidad} establecimientos cargados.`;
+
+        }
+
+
+        return;
+
+    }
+
+
+    if (estado === "error") {
+
+        if (estadoPunto) {
+
+            estadoPunto.style.background =
+                "#c62828";
+
+        }
+
+
+        estadoTexto.textContent =
+            "No se pudo actualizar";
+
+
+        estadoDetalle.textContent =
+            "No fue posible obtener los datos desde Google Sheets";
+
+
+        if (estadoDatos) {
+
+            estadoDatos.title =
+                "Error de conexión con Google Sheets.";
+
+        }
+
+
+        return;
+
+    }
+
+
+    if (estado === "cargando") {
+
+        if (estadoPunto) {
+
+            estadoPunto.style.background =
+                "#f9a825";
+
+        }
+
+
+        estadoTexto.textContent =
+            "Actualizando datos";
+
+
+        estadoDetalle.textContent =
+            "Consultando Google Sheets...";
+
+
+        if (estadoDatos) {
+
+            estadoDatos.title =
+                "Consultando Google Sheets.";
+
+        }
+
+    }
+
+}
+
+
+/* =========================================================
    CONVERTIR COORDENADAS
 ========================================================= */
 
@@ -228,7 +359,6 @@ function convertirCoordenada(valor) {
 
 /* =========================================================
    DISTANCIA EN LÍNEA RECTA
-   HAVERSINE
 ========================================================= */
 
 function calcularDistanciaLineaRecta(
@@ -324,6 +454,11 @@ function obtenerUrlComoLlegar(colegio) {
 ========================================================= */
 
 async function cargarDatos() {
+
+    actualizarEstadoDatos(
+        "cargando"
+    );
+
 
     try {
 
@@ -498,6 +633,12 @@ async function cargarDatos() {
         );
 
 
+        actualizarEstadoDatos(
+            "actualizado",
+            colegios.length
+        );
+
+
         iniciarSistema();
 
 
@@ -506,6 +647,11 @@ async function cargarDatos() {
         console.error(
             "Error cargando los datos:",
             error
+        );
+
+
+        actualizarEstadoDatos(
+            "error"
         );
 
 
@@ -537,7 +683,8 @@ function mostrarErrorConexion() {
     `;
 
 
-    contador.textContent = "0";
+    contador.textContent =
+        "0";
 
 }
 
@@ -901,10 +1048,6 @@ function mostrarFichaColegio(colegio) {
     );
 
 
-    /* =====================================================
-       GOOGLE MAPS
-    ===================================================== */
-
     const enlaceMaps =
         document.getElementById(
             "fichaGoogleMaps"
@@ -921,10 +1064,6 @@ function mostrarFichaColegio(colegio) {
     }
 
 
-    /* =====================================================
-       CÓMO LLEGAR
-    ===================================================== */
-
     const enlaceComoLlegar =
         document.getElementById(
             "fichaComoLlegar"
@@ -940,10 +1079,6 @@ function mostrarFichaColegio(colegio) {
 
     }
 
-
-    /* =====================================================
-       MOSTRAR FICHA
-    ===================================================== */
 
     if (ficha) {
 
@@ -1261,6 +1396,367 @@ function aplicarFiltros() {
 
 
 /* =========================================================
+   FORMATEAR TELÉFONO COMO TEXTO EN EXCEL
+========================================================= */
+
+function prepararTelefonoExcel(valor) {
+
+    if (
+        valor === null ||
+        valor === undefined ||
+        valor === ""
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(valor);
+
+}
+
+
+/* =========================================================
+   CREAR ESTADÍSTICAS
+========================================================= */
+
+function crearEstadisticasExcel(lista) {
+
+    const estadisticas = [];
+
+
+    const fecha =
+        new Date();
+
+
+    const fechaTexto =
+        fecha.toLocaleDateString(
+            "es-CL",
+            {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            }
+        );
+
+
+    const horaTexto =
+        fecha.toLocaleTimeString(
+            "es-CL",
+            {
+                hour: "2-digit",
+                minute: "2-digit",
+                second: "2-digit"
+            }
+        );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "Fecha de exportación",
+
+            "Valor":
+                `${fechaTexto} ${horaTexto}`
+        }
+    );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "Total de establecimientos",
+
+            "Valor":
+                lista.length
+        }
+    );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "Con encargado/a de Convivencia Escolar informado",
+
+            "Valor":
+                lista.filter(
+                    colegio =>
+                        colegio.convivencia
+                            .trim() !== ""
+                ).length
+        }
+    );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "Con teléfono de Convivencia Escolar informado",
+
+            "Valor":
+                lista.filter(
+                    colegio =>
+                        colegio.telefonoConvivencia
+                            .trim() !== ""
+                ).length
+        }
+    );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "Con correo electrónico informado",
+
+            "Valor":
+                lista.filter(
+                    colegio =>
+                        colegio.correo
+                            .trim() !== ""
+                ).length
+        }
+    );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "Con teléfono informado",
+
+            "Valor":
+                lista.filter(
+                    colegio =>
+                        colegio.telefono
+                            .trim() !== ""
+                ).length
+        }
+    );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "Con coordenadas válidas",
+
+            "Valor":
+                lista.filter(
+                    colegio =>
+                        Number.isFinite(
+                            colegio.lat
+                        ) &&
+                        Number.isFinite(
+                            colegio.lng
+                        )
+                ).length
+        }
+    );
+
+
+    /* =====================================================
+       LOCALIDADES
+    ===================================================== */
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "",
+
+            "Valor":
+                ""
+        }
+    );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "ESTABLECIMIENTOS POR LOCALIDAD",
+
+            "Valor":
+                ""
+        }
+    );
+
+
+    const porLocalidad = {};
+
+
+    lista.forEach(
+        colegio => {
+
+            const clave =
+                colegio.localidad ||
+                "Sin información";
+
+
+            porLocalidad[clave] =
+                (porLocalidad[clave] || 0) +
+                1;
+
+        }
+    );
+
+
+    Object.keys(
+        porLocalidad
+    )
+        .sort()
+        .forEach(
+            localidad => {
+
+                estadisticas.push(
+                    {
+                        "Indicador":
+                            localidad,
+
+                        "Valor":
+                            porLocalidad[localidad]
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       DEPENDENCIAS
+    ===================================================== */
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "",
+
+            "Valor":
+                ""
+        }
+    );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "ESTABLECIMIENTOS POR DEPENDENCIA",
+
+            "Valor":
+                ""
+        }
+    );
+
+
+    const porDependencia = {};
+
+
+    lista.forEach(
+        colegio => {
+
+            const clave =
+                colegio.dependencia ||
+                "Sin información";
+
+
+            porDependencia[clave] =
+                (porDependencia[clave] || 0) +
+                1;
+
+        }
+    );
+
+
+    Object.keys(
+        porDependencia
+    )
+        .sort()
+        .forEach(
+            dependencia => {
+
+                estadisticas.push(
+                    {
+                        "Indicador":
+                            dependencia,
+
+                        "Valor":
+                            porDependencia[dependencia]
+                    }
+                );
+
+            }
+        );
+
+
+    /* =====================================================
+       NIVELES
+    ===================================================== */
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "",
+
+            "Valor":
+                ""
+        }
+    );
+
+
+    estadisticas.push(
+        {
+            "Indicador":
+                "ESTABLECIMIENTOS POR NIVEL",
+
+            "Valor":
+                ""
+        }
+    );
+
+
+    const porNivel = {};
+
+
+    lista.forEach(
+        colegio => {
+
+            const clave =
+                colegio.nivel ||
+                "Sin información";
+
+
+            porNivel[clave] =
+                (porNivel[clave] || 0) +
+                1;
+
+        }
+    );
+
+
+    Object.keys(
+        porNivel
+    )
+        .sort()
+        .forEach(
+            nivel => {
+
+                estadisticas.push(
+                    {
+                        "Indicador":
+                            nivel,
+
+                        "Valor":
+                            porNivel[nivel]
+                    }
+                );
+
+            }
+        );
+
+
+    return estadisticas;
+
+}
+
+
+/* =========================================================
    EXPORTAR A EXCEL
 ========================================================= */
 
@@ -1292,6 +1788,10 @@ function exportarEstablecimientosExcel() {
         return;
 
     }
+
+
+    const fechaExportacion =
+        new Date();
 
 
     const datosExcel =
@@ -1329,13 +1829,37 @@ function exportarEstablecimientosExcel() {
                     colegio.correo,
 
                 "TELÉFONO":
-                    colegio.telefono,
+                    prepararTelefonoExcel(
+                        colegio.telefono
+                    ),
 
                 "CONVIVENCIA ESCOLAR":
                     colegio.convivencia,
 
                 "TELEFONO CONVIVENCIA":
-                    colegio.telefonoConvivencia
+                    prepararTelefonoExcel(
+                        colegio.telefonoConvivencia
+                    ),
+
+                "LATITUD":
+                    colegio.lat !== null
+                        ? colegio.lat
+                        : "",
+
+                "LONGITUD":
+                    colegio.lng !== null
+                        ? colegio.lng
+                        : "",
+
+                "FECHA EXPORTACIÓN":
+                    fechaExportacion.toLocaleDateString(
+                        "es-CL"
+                    ),
+
+                "HORA EXPORTACIÓN":
+                    fechaExportacion.toLocaleTimeString(
+                        "es-CL"
+                    )
 
             })
         );
@@ -1346,6 +1870,62 @@ function exportarEstablecimientosExcel() {
             datosExcel
         );
 
+
+    /* =====================================================
+       FORZAR TELÉFONOS COMO TEXTO
+    ===================================================== */
+
+    const rango =
+        XLSX.utils.decode_range(
+            hoja["!ref"]
+        );
+
+
+    const columnasTelefono = [
+
+        "K",
+
+        "M"
+
+    ];
+
+
+    columnasTelefono.forEach(
+        columna => {
+
+            for (
+                let fila = 2;
+                fila <= rango.e.r + 1;
+                fila++
+            ) {
+
+                const celda =
+                    hoja[
+                        `${columna}${fila}`
+                    ];
+
+
+                if (celda) {
+
+                    celda.t =
+                        "s";
+
+                    celda.v =
+                        String(
+                            celda.v
+                        );
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =====================================================
+       ANCHO DE COLUMNAS
+    ===================================================== */
 
     hoja["!cols"] = [
 
@@ -1373,10 +1953,81 @@ function exportarEstablecimientosExcel() {
 
         { wch: 30 },
 
-        { wch: 22 }
+        { wch: 22 },
+
+        { wch: 14 },
+
+        { wch: 14 },
+
+        { wch: 18 },
+
+        { wch: 15 }
 
     ];
 
+
+    /* =====================================================
+       FILTRO AUTOMÁTICO
+    ===================================================== */
+
+    hoja["!autofilter"] = {
+
+        ref:
+            hoja["!ref"]
+
+    };
+
+
+    /* =====================================================
+       CONGELAR ENCABEZADO
+    ===================================================== */
+
+    hoja["!freeze"] = {
+
+        xSplit: 0,
+
+        ySplit: 1
+
+    };
+
+
+    /* =====================================================
+       ESTADÍSTICAS
+    ===================================================== */
+
+    const datosEstadisticas =
+        crearEstadisticasExcel(
+            colegiosVisibles
+        );
+
+
+    const hojaEstadisticas =
+        XLSX.utils.json_to_sheet(
+            datosEstadisticas
+        );
+
+
+    hojaEstadisticas["!cols"] = [
+
+        { wch: 55 },
+
+        { wch: 30 }
+
+    ];
+
+
+    hojaEstadisticas["!freeze"] = {
+
+        xSplit: 0,
+
+        ySplit: 1
+
+    };
+
+
+    /* =====================================================
+       CREAR LIBRO
+    ===================================================== */
 
     const libro =
         XLSX.utils.book_new();
@@ -1389,16 +2040,41 @@ function exportarEstablecimientosExcel() {
     );
 
 
-    const fecha =
-        new Date();
+    XLSX.utils.book_append_sheet(
+        libro,
+        hojaEstadisticas,
+        "Estadísticas"
+    );
 
+
+    /* =====================================================
+       NOMBRE DEL ARCHIVO
+    ===================================================== */
 
     const año =
-        fecha.getFullYear();
+        fechaExportacion.getFullYear();
+
+
+    const mes =
+        String(
+            fechaExportacion.getMonth() + 1
+        ).padStart(
+            2,
+            "0"
+        );
+
+
+    const dia =
+        String(
+            fechaExportacion.getDate()
+        ).padStart(
+            2,
+            "0"
+        );
 
 
     const nombreArchivo =
-        `Establecimientos_Educacionales_${año}.xlsx`;
+        `Establecimientos_Educacionales_${año}-${mes}-${dia}.xlsx`;
 
 
     XLSX.writeFile(
@@ -1681,16 +2357,6 @@ function mostrarMiUbicacion() {
    CALCULAR DISTANCIAS POR CARRETERA
 ========================================================= */
 
-/*
- * Utiliza el servicio Table de OSRM.
- *
- * La distancia devuelta corresponde a la red vial,
- * no a la distancia "en línea recta".
- *
- * OSRM documenta que Table calcula las distancias
- * y tiempos de las rutas más rápidas entre los puntos.
- */
-
 async function calcularDistanciasPorCarretera(
     origen,
     candidatos
@@ -1706,15 +2372,6 @@ async function calcularDistanciasPorCarretera(
     }
 
 
-    /*
-     * Construimos la lista de coordenadas.
-     *
-     * IMPORTANTE:
-     * OSRM utiliza:
-     *
-     * longitud,latitud
-     */
-
     const coordenadas = [
 
         `${origen.lng},${origen.lat}`,
@@ -1726,12 +2383,6 @@ async function calcularDistanciasPorCarretera(
 
     ].join(";");
 
-
-    /*
-     * La primera coordenada es nuestro origen.
-     *
-     * Los destinos corresponden a los colegios.
-     */
 
     const url =
         `${URL_OSRM}/table/v1/driving/${coordenadas}` +
@@ -1905,11 +2556,6 @@ function formatearDuracion(
 
 async function buscarColegioMasCercano() {
 
-    /*
-     * Si todavía no tenemos ubicación,
-     * primero la solicitamos.
-     */
-
     if (!miUbicacion) {
 
         if (btnColegioCercano) {
@@ -1946,10 +2592,6 @@ async function buscarColegioMasCercano() {
     }
 
 
-    /*
-     * Evitar múltiples consultas simultáneas.
-     */
-
     if (btnColegioCercano) {
 
         btnColegioCercano.disabled =
@@ -1962,13 +2604,6 @@ async function buscarColegioMasCercano() {
 
 
     try {
-
-        /*
-         * Primero calculamos una distancia aproximada
-         * en línea recta para obtener candidatos.
-         *
-         * Esto NO decide cuál es el ganador.
-         */
 
         const candidatosOrdenados =
             colegios
@@ -2009,11 +2644,6 @@ async function buscarColegioMasCercano() {
                 );
 
 
-        /*
-         * Tomamos solamente los candidatos
-         * más razonablemente cercanos.
-         */
-
         const candidatos =
             candidatosOrdenados
 
@@ -2041,21 +2671,12 @@ async function buscarColegioMasCercano() {
         }
 
 
-        /*
-         * Ahora sí calculamos la distancia real
-         * siguiendo caminos/carreteras.
-         */
-
         const resultadosRuta =
             await calcularDistanciasPorCarretera(
                 miUbicacion,
                 candidatos
             );
 
-
-        /*
-         * Eliminamos rutas que no pudieron calcularse.
-         */
 
         const rutasValidas =
             resultadosRuta.filter(
@@ -2077,12 +2698,6 @@ async function buscarColegioMasCercano() {
         }
 
 
-        /*
-         * ORDENAMOS POR DISTANCIA DE CARRETERA.
-         *
-         * AQUÍ está el cambio fundamental.
-         */
-
         rutasValidas.sort(
             (a, b) =>
                 a.distanciaRuta -
@@ -2098,11 +2713,6 @@ async function buscarColegioMasCercano() {
             resultadoGanador.colegio;
 
 
-        /*
-         * Guardamos temporalmente la información
-         * de ruta para utilizarla en la ficha.
-         */
-
         colegioMasCercano.distanciaRuta =
             resultadoGanador.distanciaRuta;
 
@@ -2110,10 +2720,6 @@ async function buscarColegioMasCercano() {
         colegioMasCercano.duracionRuta =
             resultadoGanador.duracionRuta;
 
-
-        /*
-         * Mostrar resultado en consola.
-         */
 
         console.log(
             "Colegio más cercano por carretera:",
@@ -2136,10 +2742,6 @@ async function buscarColegioMasCercano() {
             )
         );
 
-
-        /*
-         * Centrar mapa en el colegio.
-         */
 
         if (
             Number.isFinite(
@@ -2176,27 +2778,15 @@ async function buscarColegioMasCercano() {
         }
 
 
-        /*
-         * Mostrar ficha.
-         */
-
         mostrarFichaColegio(
             colegioMasCercano
         );
 
 
-        /*
-         * Destacar tarjeta.
-         */
-
         seleccionarColegioVisualmente(
             colegioMasCercano.id
         );
 
-
-        /*
-         * Mostrar popup.
-         */
 
         if (
             marcadores[
@@ -2210,10 +2800,6 @@ async function buscarColegioMasCercano() {
 
         }
 
-
-        /*
-         * Aviso informativo.
-         */
 
         const distanciaTexto =
             formatearDistancia(
@@ -2593,3 +3179,4 @@ function iniciarSistema() {
 ========================================================= */
 
 cargarDatos();
+
