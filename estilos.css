@@ -1,1794 +1,1437 @@
 /* =========================================================
-   MAPA EDUCACIONAL
-   ESTILOS PRINCIPALES
-   VERSIÓN ACTUALIZADA
+MAPA EDUCACIONAL
+ESTILOS PRINCIPALES
+VERSIÓN ACTUALIZADA
 ========================================================= */
 
-
 /* =========================================================
-   RESET
+RESET
 ========================================================= */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
 
 /* =========================================================
-   CUERPO
+CUERPO
 ========================================================= */
-
 body {
-    font-family:
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    background: #f4f7fb;
-    color: #1f2937;
+font-family:
+"Segoe UI",
+Arial,
+sans-serif;
+background: #f4f7fb;
+color: #1f2937;
 }
 
-
 /* =========================================================
-   ESTRUCTURA PRINCIPAL
+ESTRUCTURA PRINCIPAL
 ========================================================= */
-
 .app {
-    display: flex;
-    height: 100vh;
-    overflow: hidden;
+display: flex;
+height: 100vh;
+overflow: hidden;
 }
 
-
 /* =========================================================
-   BARRA LATERAL
+BARRA LATERAL
 ========================================================= */
-
 .sidebar {
-    width: 250px;
-    flex-shrink: 0;
-
-    background: #ffffff;
-
-    border-right:
-        1px solid #e5eaf0;
-
-    display: flex;
-    flex-direction: column;
-
-    padding: 24px 16px;
+width: 250px;
+flex-shrink: 0;
+background: #ffffff;
+border-right: 1px solid #e5eaf0;
+display: flex;
+flex-direction: column;
+padding: 24px 16px;
 }
 
-
 /* =========================================================
-   LOGO
+LOGO
 ========================================================= */
-
 .logo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    padding:
-        4px 10px 28px;
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 4px 10px 28px;
 }
 
 .logo-icon {
-    width: 42px;
-    height: 42px;
-
-    background: #eaf4ff;
-
-    border-radius: 12px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 21px;
+width: 42px;
+height: 42px;
+background: #eaf4ff;
+border-radius: 12px;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 21px;
 }
 
 .logo strong {
-    display: block;
-    font-size: 16px;
+display: block;
+font-size: 16px;
 }
 
 .logo span {
-    display: block;
-
-    color: #7b8794;
-
-    font-size: 12px;
+display: block;
+color: #7b8794;
+font-size: 12px;
 }
 
-
 /* =========================================================
-   MENÚ
+MENÚ
 ========================================================= */
-
 .menu {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+display: flex;
+flex-direction: column;
+gap: 6px;
 }
 
 .menu-item {
-    border: none;
-    background: transparent;
-
-    width: 100%;
-
-    display: flex;
-    align-items: center;
-
-    gap: 12px;
-
-    padding: 12px 14px;
-
-    border-radius: 10px;
-
-    font-size: 14px;
-
-    color: #667085;
-
-    cursor: pointer;
-
-    text-align: left;
-
-    transition:
-        background 0.15s ease,
-        color 0.15s ease;
+border: none;
+background: transparent;
+width: 100%;
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 12px 14px;
+border-radius: 10px;
+font-size: 14px;
+color: #667085;
+cursor: pointer;
+text-align: left;
+transition:
+background 0.15s ease,
+color 0.15s ease;
 }
 
 .menu-item:hover {
-    background: #f5f8fc;
+background: #f5f8fc;
 }
 
 .menu-item.activo {
-    background: #eaf4ff;
-
-    color: #1769aa;
-
-    font-weight: 600;
+background: #eaf4ff;
+color: #1769aa;
+font-weight: 600;
 }
 
-
 /* =========================================================
-   PIE SIDEBAR
+PIE SIDEBAR
 ========================================================= */
-
 .sidebar-footer {
-    margin-top: auto;
-
-    color: #98a2b3;
-
-    font-size: 11px;
-
-    padding: 10px;
+margin-top: auto;
+color: #98a2b3;
+font-size: 11px;
+padding: 10px;
 }
 
-
 /* =========================================================
-   CONTENIDO PRINCIPAL
+CONTENIDO PRINCIPAL
 ========================================================= */
-
 .main {
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-
-    min-width: 0;
+flex: 1;
+display: flex;
+flex-direction: column;
+min-width: 0;
 }
 
-
 /* =========================================================
-   HEADER
+HEADER
 ========================================================= */
-
 .header {
-    height: 82px;
-
-    flex-shrink: 0;
-
-    background: #ffffff;
-
-    border-bottom:
-        1px solid #e5eaf0;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    padding: 0 28px;
+height: 82px;
+flex-shrink: 0;
+background: #ffffff;
+border-bottom: 1px solid #e5eaf0;
+display: flex;
+align-items: center;
+justify-content: space-between;
+padding: 0 28px;
 }
 
 .header h1 {
-    font-size: 21px;
-    font-weight: 650;
+font-size: 21px;
+font-weight: 650;
 }
 
 .header p {
-    color: #8a95a3;
-
-    font-size: 13px;
-
-    margin-top: 4px;
+color: #8a95a3;
+font-size: 13px;
+margin-top: 4px;
 }
 
-
 /* =========================================================
-   ESTADO
+ESTADO
 ========================================================= */
-
 .estado {
-    display: flex;
-    align-items: center;
-
-    gap: 7px;
-
-    color: #667085;
-
-    font-size: 12px;
+display: flex;
+align-items: center;
+gap: 7px;
+color: #667085;
+font-size: 12px;
 }
 
 .estado-punto {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: #22c55e;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background: #22c55e;
 }
 
-
 /* =========================================================
-   ÁREA DE TRABAJO
+ÁREA DE TRABAJO
 ========================================================= */
-
 .workspace {
-    flex: 1;
-
-    display: flex;
-    flex-direction: column;
-
-    padding:
-        18px 22px 22px;
-
-    gap: 14px;
-
-    min-height: 0;
-
-    overflow: hidden;
+flex: 1;
+display: flex;
+flex-direction: column;
+padding: 18px 22px 22px;
+gap: 14px;
+min-height: 0;
+overflow: hidden;
 }
 
-
 /* =========================================================
-   PANEL PRINCIPAL
+PANEL PRINCIPAL
 ========================================================= */
-
 .panel {
-    width: 100%;
-
-    background: transparent;
-
-    border: none;
-
-    border-radius: 0;
-
-    padding: 0;
-
-    display: flex;
-    flex-direction: column;
-
-    min-height: 0;
+width: 100%;
+background: transparent;
+border: none;
+border-radius: 0;
+padding: 0;
+display: flex;
+flex-direction: column;
+min-height: 0;
 }
 
-
 /* =========================================================
-   BUSCADOR
+BUSCADOR
 ========================================================= */
-
 .search-box {
-    width: 100%;
-    height: 46px;
-
-    flex-shrink: 0;
-
-    border:
-        1px solid #dce3eb;
-
-    border-radius: 10px;
-
-    display: flex;
-    align-items: center;
-
-    padding: 0 13px;
-
-    background: #ffffff;
-
-    box-shadow:
-        0 1px 2px rgba(15, 23, 42, 0.03);
+width: 100%;
+height: 46px;
+flex-shrink: 0;
+border: 1px solid #dce3eb;
+border-radius: 10px;
+display: flex;
+align-items: center;
+padding: 0 13px;
+background: #ffffff;
+box-shadow: 0 1px 2px rgba(15, 23, 42, 0.03);
 }
 
 .search-icon {
-    margin-right: 9px;
+margin-right: 9px;
 }
 
 .search-box input {
-    border: none;
-
-    outline: none;
-
-    background: transparent;
-
-    width: 100%;
-
-    font-size: 13px;
+border: none;
+outline: none;
+background: transparent;
+width: 100%;
+font-size: 13px;
 }
 
 .search-box input::placeholder {
-    color: #98a2b3;
+color: #98a2b3;
 }
 
-
 /* =========================================================
-   FILTROS
+FILTROS
 ========================================================= */
-
 .filtros {
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 12px;
-
-    margin-top: 12px;
-
-    flex-shrink: 0;
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 12px;
+margin-top: 12px;
+flex-shrink: 0;
 }
 
 .filtro label {
-    display: block;
-
-    font-size: 11px;
-
-    font-weight: 600;
-
-    color: #667085;
-
-    margin-bottom: 5px;
+display: block;
+font-size: 11px;
+font-weight: 600;
+color: #667085;
+margin-bottom: 5px;
 }
 
 .filtro select {
-    width: 100%;
-
-    height: 38px;
-
-    border:
-        1px solid #dce3eb;
-
-    border-radius: 8px;
-
-    padding: 0 10px;
-
-    background: #ffffff;
-
-    color: #344054;
-
-    outline: none;
-
-    cursor: pointer;
-
-    transition:
-        border-color 0.15s ease,
-        box-shadow 0.15s ease;
+width: 100%;
+height: 38px;
+border: 1px solid #dce3eb;
+border-radius: 8px;
+padding: 0 10px;
+background: #ffffff;
+color: #344054;
+outline: none;
+cursor: pointer;
+transition:
+border-color 0.15s ease,
+box-shadow 0.15s ease;
 }
 
 .filtro select:focus {
-    border-color: #9fc8e8;
-
-    box-shadow:
-        0 0 0 3px rgba(23, 105, 170, 0.08);
+border-color: #9fc8e8;
+box-shadow: 0 0 0 3px rgba(23, 105, 170, 0.08);
 }
 
-
 /* =========================================================
-   MAPA
+MAPA
 ========================================================= */
-
 .mapa-container {
-    width: 100%;
-
-    height: 31vh;
-
-    min-height: 240px;
-
-    max-height: 320px;
-
-    flex-shrink: 0;
-
-    background: #e9eef3;
-
-    border-radius: 14px;
-
-    overflow: hidden;
-
-    border:
-        1px solid #dfe5eb;
-
-    position: relative;
-
-    box-shadow:
-        0 2px 8px rgba(15, 23, 42, 0.04);
+width: 100%;
+height: 31vh;
+min-height: 240px;
+max-height: 320px;
+flex-shrink: 0;
+background: #e9eef3;
+border-radius: 14px;
+overflow: hidden;
+border: 1px solid #dfe5eb;
+position: relative;
+box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
 #mapa {
-    width: 100%;
-    height: 100%;
+width: 100%;
+height: 100%;
 }
 
-
 /* =========================================================
-   CONTROLES DE UBICACIÓN
+CONTROLES DE UBICACIÓN
 ========================================================= */
-
 .controles-ubicacion {
-    position: absolute;
-
-    top: 12px;
-    left: 12px;
-
-    z-index: 900;
-
-    display: flex;
-    flex-direction: column;
-
-    gap: 8px;
+position: absolute;
+top: 12px;
+left: 12px;
+z-index: 900;
+display: flex;
+flex-direction: column;
+gap: 8px;
 }
 
 .boton-mapa {
-    border: none;
-
-    background: #ffffff;
-
-    color: #344054;
-
-    padding: 9px 12px;
-
-    border-radius: 9px;
-
-    box-shadow:
-        0 4px 12px rgba(15, 23, 42, 0.15);
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition:
-        background 0.15s ease,
-        transform 0.15s ease;
+border: none;
+background: #ffffff;
+color: #344054;
+padding: 9px 12px;
+border-radius: 9px;
+box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+font-size: 12px;
+font-weight: 600;
+cursor: pointer;
+transition:
+background 0.15s ease,
+transform 0.15s ease;
 }
 
 .boton-mapa:hover {
-    background: #f5f8fc;
-
-    transform:
-        translateY(-1px);
+background: #f5f8fc;
+transform: translateY(-1px);
 }
 
 .boton-mapa:active {
-    transform:
-        translateY(0);
+transform: translateY(0);
 }
 
 .boton-mapa:disabled {
-    opacity: 0.65;
+opacity: 0.65;
+cursor: wait;
+transform: none;
+}
 
-    cursor: wait;
+/* =========================================================
+FICHA / VENTANA DE INFORMACIÓN
+========================================================= */
+.ficha-colegio {
+position: fixed;
+top: 50%;
+left: 50%;
+width: min(820px, calc(100vw - 60px));
+max-width: 820px;
 
-    transform: none;
+
+/* La ficha se adapta a su contenido.
+   No se genera scroll interno. */
+max-height: none;
+
+background: #ffffff;
+border: 1px solid #e4eaf0;
+border-radius: 16px;
+box-shadow: 0 20px 60px rgba(15, 23, 42, 0.25);
+z-index: 5000;
+
+overflow: visible;
+
+opacity: 0;
+visibility: hidden;
+
+transform:
+    translate(-50%, -46%)
+    scale(0.96);
+
+transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+
+
+}
+
+/* =========================================================
+FICHA VISIBLE
+========================================================= */
+.ficha-colegio.visible {
+opacity: 1;
+visibility: visible;
+transform:
+translate(-50%, -50%)
+scale(1);
+}
+
+/* =========================================================
+FONDO EXTERIOR DE LA FICHA
+========================================================= */
+.ficha-colegio::before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100vw;
+height: 100vh;
+background: rgba(15, 23, 42, 0.28);
+z-index: -1;
+pointer-events: none;
+}
+
+/* =========================================================
+CERRAR FICHA
+========================================================= */
+.ficha-cerrar {
+position: absolute;
+top: 14px;
+right: 14px;
+width: 32px;
+height: 32px;
+border: none;
+border-radius: 50%;
+background: #f1f5f9;
+color: #475467;
+font-size: 20px;
+cursor: pointer;
+z-index: 20;
+display: flex;
+align-items: center;
+justify-content: center;
+transition:
+background 0.15s ease,
+color 0.15s ease,
+transform 0.15s ease;
+}
+
+.ficha-cerrar:hover {
+background: #e2e8f0;
+color: #1f2937;
+transform: scale(1.04);
+}
+
+/* =========================================================
+CONTENIDO FICHA
+========================================================= */
+.ficha-contenido {
+padding: 26px 28px;
+}
+
+/* =========================================================
+CABECERA FICHA
+========================================================= */
+.ficha-icono {
+width: 48px;
+height: 48px;
+border-radius: 12px;
+background: #eaf4ff;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 24px;
+margin-bottom: 13px;
+}
+
+.ficha-titulo h2 {
+font-size: 20px;
+line-height: 1.3;
+color: #17202a;
+padding-right: 40px;
+}
+
+.ficha-titulo span {
+display: inline-block;
+margin-top: 5px;
+font-size: 11px;
+color: #1769aa;
+background: #eef6fc;
+padding: 4px 9px;
+border-radius: 20px;
+font-weight: 600;
+}
+
+/* =========================================================
+SEPARADOR
+========================================================= */
+.ficha-separador {
+height: 1px;
+background: #e8edf2;
+margin: 18px 0;
+}
+
+/* =========================================================
+DATOS FICHA
+========================================================= */
+.ficha-datos {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+column-gap: 20px;
+row-gap: 10px;
+}
+
+/* =========================================================
+TARJETA INDIVIDUAL DE DATO
+========================================================= */
+.ficha-dato {
+display: flex;
+gap: 10px;
+min-width: 0;
+padding: 9px 10px;
+border: 1px solid #edf1f5;
+border-radius: 10px;
+background: #fbfcfd;
+transition:
+background 0.15s ease,
+border-color 0.15s ease;
+}
+
+.ficha-dato:hover {
+background: #f7fbfe;
+border-color: #dceaf4;
+}
+
+/* =========================================================
+ICONO DE CADA DATO
+========================================================= */
+.ficha-dato-icono {
+width: 30px;
+min-width: 30px;
+height: 30px;
+border-radius: 8px;
+background: #eef6fc;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 14px;
+}
+
+/* =========================================================
+ETIQUETA
+========================================================= */
+.ficha-dato label {
+display: block;
+font-size: 9px;
+color: #667085;
+margin-bottom: 2px;
+font-weight: 700;
+text-transform: uppercase;
+letter-spacing: 0.02em;
+}
+
+/* =========================================================
+INFORMACIÓN
+========================================================= */
+.ficha-dato p {
+font-size: 12px;
+color: #1f2937;
+line-height: 1.4;
+word-break: break-word;
+font-weight: 500;
+}
+
+/* =========================================================
+ACCIONES FICHA
+========================================================= */
+.ficha-acciones {
+display: grid;
+grid-template-columns: repeat(2, minmax(0, 1fr));
+gap: 10px;
+margin-top: 18px;
+}
+
+/* =========================================================
+GOOGLE MAPS
+========================================================= */
+.ficha-maps {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+padding: 11px 14px;
+border-radius: 9px;
+background: #1769aa;
+color: #ffffff;
+text-decoration: none;
+font-size: 12px;
+font-weight: 600;
+transition:
+background 0.15s ease,
+transform 0.15s ease;
+}
+
+.ficha-maps:hover {
+background: #12588f;
+transform: translateY(-1px);
+}
+
+/* =========================================================
+CÓMO LLEGAR
+========================================================= */
+.ficha-llegar {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 8px;
+padding: 11px 14px;
+border-radius: 9px;
+background: #f0f6fb;
+color: #1769aa;
+text-decoration: none;
+border: 1px solid #d5e6f3;
+font-size: 12px;
+font-weight: 600;
+transition:
+background 0.15s ease,
+transform 0.15s ease;
+}
+
+.ficha-llegar:hover {
+background: #e5f1fa;
+transform: translateY(-1px);
+}
+
+/* =========================================================
+CABECERA DE RESULTADOS
+========================================================= */
+.resultados-header {
+display: flex;
+align-items: center;
+justify-content: space-between;
+margin-top: 12px;
+padding: 10px 4px;
+flex-shrink: 0;
+border-bottom: 1px solid #e5eaf0;
+}
+
+.resultados-header strong {
+font-size: 14px;
+color: #1f2937;
+}
+
+.resultados-header span {
+margin-left: 7px;
+background: #eef4f9;
+color: #52708c;
+padding: 4px 8px;
+border-radius: 20px;
+font-size: 11px;
+}
+
+.resultados-header button {
+border: none;
+background: transparent;
+color: #1769aa;
+font-size: 11px;
+cursor: pointer;
+}
+
+.acciones-resultados {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.btn-exportar {
+font-weight: 600;
+}
+
+/* =========================================================
+LISTADO DE ESTABLECIMIENTOS
+========================================================= */
+.lista-colegios {
+margin-top: 10px;
+overflow-y: auto;
+flex: 1;
+min-height: 0;
+padding: 2px 4px 10px;
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 12px;
+align-content: start;
+}
+
+/* =========================================================
+TARJETA DE ESTABLECIMIENTO
+========================================================= */
+.colegio-card {
+border: 1px solid #e7ecf2;
+border-radius: 11px;
+padding: 15px;
+background: #ffffff;
+cursor: pointer;
+min-height: 145px;
+transition:
+border-color 0.15s ease,
+background 0.15s ease,
+box-shadow 0.15s ease,
+transform 0.15s ease;
+}
+
+.colegio-card:hover {
+border-color: #b9d7ef;
+background: #fbfdff;
+box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+transform: translateY(-1px);
+}
+
+.colegio-card.seleccionado {
+border-color: #1769aa;
+background: #f2f8ff;
+box-shadow: 0 3px 10px rgba(23, 105, 170, 0.10);
+}
+
+/* =========================================================
+NOMBRE DEL ESTABLECIMIENTO
+========================================================= */
+.colegio-nombre {
+font-size: 13px;
+font-weight: 600;
+color: #344054;
+margin-bottom: 8px;
+line-height: 1.35;
+}
+
+/* =========================================================
+INFORMACIÓN TARJETA
+========================================================= */
+.colegio-rbd {
+font-size: 11px;
+color: #667085;
+margin-bottom: 5px;
+}
+
+.colegio-info {
+font-size: 11px;
+color: #7b8794;
+line-height: 1.5;
+}
+
+/* =========================================================
+SIN RESULTADOS
+========================================================= */
+.sin-resultados {
+min-height: 180px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+color: #98a2b3;
+grid-column: 1 / -1;
+}
+
+.sin-resultados span {
+font-size: 32px;
+margin-bottom: 10px;
+}
+
+.sin-resultados p {
+font-size: 12px;
+}
+
+/* =========================================================
+SCROLLBAR
+Solo para el listado de establecimientos.
+La ficha ya NO tiene scroll interno.
+========================================================= */
+.lista-colegios::-webkit-scrollbar {
+width: 6px;
+}
+
+.lista-colegios::-webkit-scrollbar-thumb {
+background: #d5dce5;
+border-radius: 10px;
+}
+
+.lista-colegios::-webkit-scrollbar-track {
+background: transparent;
+}
+
+/* =========================================================
+TABLET / PANTALLAS MEDIANAS
+========================================================= */
+@media (max-width: 1100px) {
+
+
+.sidebar {
+    width: 220px;
+}
+
+.workspace {
+    padding: 16px 18px 18px;
+}
+
+.mapa-container {
+    height: 29vh;
+    min-height: 230px;
+    max-height: 290px;
+}
+
+.lista-colegios {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ficha-colegio {
+    width: min(760px, calc(100vw - 50px));
 }
 
 
+}
+
 /* =========================================================
-   FICHA / VENTANA DE INFORMACIÓN
+TABLET PEQUEÑA
 ========================================================= */
+@media (max-width: 900px) {
+
+
+.sidebar {
+    width: 70px;
+}
+
+.logo div:not(.logo-icon),
+.menu-item span:last-child,
+.sidebar-footer {
+    display: none;
+}
+
+.logo {
+    justify-content: center;
+    padding: 4px 0 28px;
+}
+
+.menu-item {
+    justify-content: center;
+    padding: 12px 8px;
+}
+
+.filtros {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mapa-container {
+    height: 27vh;
+    min-height: 220px;
+    max-height: 280px;
+}
+
+.ficha-colegio {
+    width: min(700px, calc(100vw - 40px));
+}
+
+
+}
+
+/* =========================================================
+CELULARES
+========================================================= */
+@media (max-width: 700px) {
+
+
+body {
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+/* ---------------------------------------------------------
+   ESTRUCTURA GENERAL
+--------------------------------------------------------- */
+
+.app {
+    height: auto;
+    min-height: 100vh;
+    flex-direction: column;
+    overflow: visible;
+}
+
+/* ---------------------------------------------------------
+   SIDEBAR
+--------------------------------------------------------- */
+
+.sidebar {
+    width: 100%;
+    height: auto;
+    padding: 10px 14px;
+    border-right: none;
+    border-bottom: 1px solid #e5eaf0;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    padding: 0;
+    justify-content: flex-start;
+}
+
+.logo div:not(.logo-icon) {
+    display: block;
+}
+
+.sidebar-footer {
+    display: none;
+}
+
+.menu {
+    flex-direction: row;
+    gap: 4px;
+}
+
+.menu-item {
+    width: auto;
+    padding: 9px 10px;
+    justify-content: center;
+}
+
+.menu-item span:last-child {
+    display: none;
+}
+
+/* ---------------------------------------------------------
+   MAIN
+--------------------------------------------------------- */
+
+.main {
+    width: 100%;
+}
+
+/* ---------------------------------------------------------
+   HEADER
+--------------------------------------------------------- */
+
+.header {
+    height: auto;
+    padding: 15px;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.header h1 {
+    font-size: 17px;
+    line-height: 1.25;
+}
+
+.header p {
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.estado {
+    font-size: 9px;
+    white-space: nowrap;
+    padding-top: 2px;
+}
+
+/* ---------------------------------------------------------
+   WORKSPACE
+--------------------------------------------------------- */
+
+.workspace {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    gap: 10px;
+    min-height: 0;
+    overflow: visible;
+}
+
+/* ---------------------------------------------------------
+   PANEL
+--------------------------------------------------------- */
+
+.panel {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-height: 0;
+}
+
+/* ---------------------------------------------------------
+   BUSCADOR
+--------------------------------------------------------- */
+
+.search-box {
+    width: 100%;
+    height: 44px;
+}
+
+/* ---------------------------------------------------------
+   FILTROS
+--------------------------------------------------------- */
+
+.filtros {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.filtro select {
+    height: 38px;
+}
+
+/* ---------------------------------------------------------
+   MAPA MÓVIL
+--------------------------------------------------------- */
+
+.mapa-container {
+    width: 100%;
+    height: 25vh;
+    min-height: 180px;
+    max-height: 230px;
+    border-radius: 12px;
+    order: 0;
+    margin-top: 2px;
+}
+
+#mapa {
+    height: 100%;
+}
+
+/* ---------------------------------------------------------
+   CONTROLES MAPA
+--------------------------------------------------------- */
+
+.controles-ubicacion {
+    top: 8px;
+    left: 8px;
+    gap: 5px;
+}
+
+.boton-mapa {
+    padding: 8px 10px;
+    font-size: 10px;
+    border-radius: 8px;
+}
+
+/* ---------------------------------------------------------
+   RESULTADOS
+--------------------------------------------------------- */
+
+.resultados-header {
+    margin-top: 0;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid #e5eaf0;
+    border-radius: 10px;
+}
+
+.resultados-header strong {
+    font-size: 12px;
+}
+
+.resultados-header button {
+    font-size: 10px;
+}
+
+.acciones-resultados {
+    gap: 7px;
+}
+
+/* ---------------------------------------------------------
+   LISTADO
+--------------------------------------------------------- */
+
+.lista-colegios {
+    width: 100%;
+    height: auto;
+    max-height: none;
+    min-height: 180px;
+    overflow-y: visible;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    margin-top: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    order: 0;
+}
+
+.colegio-card {
+    padding: 13px;
+    margin-bottom: 0;
+    min-height: auto;
+    background: #ffffff;
+}
+
+.colegio-nombre {
+    font-size: 13px;
+}
+
+.colegio-rbd,
+.colegio-info {
+    font-size: 11px;
+}
+
+/* =====================================================
+   FICHA MÓVIL
+   TARJETA PROFESIONAL COMPACTA
+===================================================== */
 
 .ficha-colegio {
     position: fixed;
-
     top: 50%;
     left: 50%;
 
-    width:
-        min(820px, calc(100vw - 60px));
+    width: calc(100vw - 24px);
+    max-width: 470px;
 
-    max-width: 820px;
-
-    max-height:
-        calc(100vh - 60px);
+    /* IMPORTANTE:
+       No se establece max-height y no existe
+       overflow-y:auto. La ficha queda completa. */
+    max-height: none;
 
     background: #ffffff;
-
+    border: 1px solid #dfe7ee;
     border-radius: 16px;
+    box-shadow: 0 18px 50px rgba(15, 23, 42, 0.22);
 
-    box-shadow:
-        0 20px 60px rgba(15, 23, 42, 0.25);
-
-    z-index: 5000;
-
-    overflow-y: auto;
-
-    opacity: 0;
-
-    visibility: hidden;
+    overflow: visible;
 
     transform:
         translate(-50%, -46%)
         scale(0.96);
-
-    transition:
-        opacity 0.2s ease,
-        transform 0.2s ease,
-        visibility 0.2s ease;
 }
 
-
-/* =========================================================
-   FICHA VISIBLE
-========================================================= */
-
 .ficha-colegio.visible {
-    opacity: 1;
-
-    visibility: visible;
-
     transform:
         translate(-50%, -50%)
         scale(1);
 }
 
-
-/* =========================================================
-   FONDO DE LA FICHA
-========================================================= */
+/* ---------------------------------------------------------
+   FONDO EXTERIOR
+   Solo oscurece lo que está detrás.
+--------------------------------------------------------- */
 
 .ficha-colegio::before {
-    content: "";
-
     position: fixed;
-
     top: 0;
     left: 0;
-
     width: 100vw;
     height: 100vh;
-
-    background:
-        rgba(15, 23, 42, 0.28);
-
-    z-index: -1;
-
-    pointer-events: none;
+    background: rgba(15, 23, 42, 0.30);
 }
 
-
-/* =========================================================
-   CERRAR FICHA
-========================================================= */
+/* ---------------------------------------------------------
+   BOTÓN CERRAR
+--------------------------------------------------------- */
 
 .ficha-cerrar {
-    position: absolute;
-
-    top: 14px;
-    right: 14px;
-
-    width: 32px;
-    height: 32px;
-
-    border: none;
-
-    border-radius: 50%;
-
-    background: #f3f5f8;
-
-    color: #667085;
-
-    font-size: 20px;
-
-    cursor: pointer;
-
-    z-index: 2;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    transition: 0.15s;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    background: #eef2f6;
+    color: #475467;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.08);
 }
 
-.ficha-cerrar:hover {
-    background: #e7ecf2;
-
-    color: #344054;
-}
-
-
-/* =========================================================
+/* ---------------------------------------------------------
    CONTENIDO FICHA
-========================================================= */
+--------------------------------------------------------- */
 
 .ficha-contenido {
-    padding:
-        26px 28px;
+    padding: 17px;
 }
 
-
-/* =========================================================
+/* ---------------------------------------------------------
    CABECERA FICHA
-========================================================= */
+--------------------------------------------------------- */
 
 .ficha-icono {
-    width: 48px;
-    height: 48px;
-
-    border-radius: 12px;
-
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
     background: #eaf4ff;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 24px;
-
-    margin-bottom: 13px;
+    font-size: 20px;
+    margin-bottom: 8px;
 }
 
 .ficha-titulo h2 {
-    font-size: 20px;
-
-    line-height: 1.3;
-
-    color: #1f2937;
-
-    padding-right: 40px;
+    font-size: 16px;
+    line-height: 1.25;
+    color: #17202a;
+    padding-right: 35px;
 }
 
 .ficha-titulo span {
-    display: inline-block;
-
-    margin-top: 5px;
-
-    font-size: 11px;
-
-    color: #52708c;
-
-    background: #eef4f9;
-
-    padding:
-        4px 8px;
-
-    border-radius: 20px;
+    font-size: 9px;
+    padding: 3px 7px;
+    margin-top: 4px;
 }
 
-
-/* =========================================================
+/* ---------------------------------------------------------
    SEPARADOR
-========================================================= */
+--------------------------------------------------------- */
 
 .ficha-separador {
-    height: 1px;
-
-    background: #edf0f4;
-
-    margin:
-        18px 0;
+    margin: 12px 0;
+    background: #e4eaf0;
 }
 
-
-/* =========================================================
-   DATOS FICHA
-========================================================= */
+/* ---------------------------------------------------------
+   DATOS
+--------------------------------------------------------- */
 
 .ficha-datos {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    column-gap: 28px;
-
-    row-gap: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
 }
+
+/* ---------------------------------------------------------
+   TARJETA DE CADA DATO
+--------------------------------------------------------- */
 
 .ficha-dato {
-    display: flex;
-
-    gap: 11px;
-
-    min-width: 0;
+    gap: 8px;
+    padding: 7px 8px;
+    border: 1px solid #edf1f5;
+    border-radius: 9px;
+    background: #fbfcfd;
 }
+
+/* ---------------------------------------------------------
+   ICONO DATO
+--------------------------------------------------------- */
 
 .ficha-dato-icono {
-    width: 30px;
-
-    min-width: 30px;
-
-    height: 30px;
-
-    border-radius: 8px;
-
-    background: #f5f8fc;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    font-size: 14px;
+    width: 27px;
+    min-width: 27px;
+    height: 27px;
+    border-radius: 7px;
+    background: #eef6fc;
+    font-size: 12px;
 }
+
+/* ---------------------------------------------------------
+   ETIQUETA
+--------------------------------------------------------- */
 
 .ficha-dato label {
-    display: block;
-
-    font-size: 10px;
-
-    color: #98a2b3;
-
-    margin-bottom: 3px;
-
-    font-weight: 600;
+    font-size: 8px;
+    color: #667085;
+    margin-bottom: 1px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
 }
+
+/* ---------------------------------------------------------
+   INFORMACIÓN
+--------------------------------------------------------- */
 
 .ficha-dato p {
-    font-size: 12px;
-
-    color: #344054;
-
-    line-height: 1.4;
-
-    word-break: break-word;
+    font-size: 10px;
+    color: #1f2937;
+    line-height: 1.3;
+    font-weight: 500;
 }
 
-
-/* =========================================================
-   ACCIONES FICHA
-========================================================= */
+/* ---------------------------------------------------------
+   ACCIONES
+--------------------------------------------------------- */
 
 .ficha-acciones {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-    gap: 10px;
-
-    margin-top: 20px;
-}
-
-
-/* =========================================================
-   GOOGLE MAPS
-========================================================= */
-
-.ficha-maps {
     display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    padding:
-        11px 14px;
-
-    border-radius: 9px;
-
-    background: #1769aa;
-
-    color: #ffffff;
-
-    text-decoration: none;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    transition:
-        background 0.15s ease;
+    flex-direction: column;
+    gap: 7px;
+    margin-top: 13px;
 }
 
-.ficha-maps:hover {
-    background: #12588f;
-}
-
-
-/* =========================================================
-   CÓMO LLEGAR
-========================================================= */
-
+.ficha-maps,
 .ficha-llegar {
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    gap: 8px;
-
-    padding:
-        11px 14px;
-
-    border-radius: 9px;
-
-    background: #f0f6fb;
-
-    color: #1769aa;
-
-    text-decoration: none;
-
-    border:
-        1px solid #d5e6f3;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    transition:
-        background 0.15s ease;
+    padding: 10px;
+    min-height: 37px;
+    font-size: 10px;
+    border-radius: 8px;
 }
 
-.ficha-llegar:hover {
-    background: #e5f1fa;
-}
 
+}
 
 /* =========================================================
-   CABECERA DE RESULTADOS
+CELULARES PEQUEÑOS
 ========================================================= */
+@media (max-width: 400px) {
 
-.resultados-header {
-    display: flex;
 
-    align-items: center;
-    justify-content: space-between;
-
-    margin-top: 12px;
-
-    padding:
-        10px 4px;
-
-    flex-shrink: 0;
-
-    border-bottom:
-        1px solid #e5eaf0;
+.header {
+    padding: 13px;
 }
 
-.resultados-header strong {
-    font-size: 14px;
-
-    color: #1f2937;
+.header h1 {
+    font-size: 16px;
 }
 
-.resultados-header span {
-    margin-left: 7px;
-
-    background: #eef4f9;
-
-    color: #52708c;
-
-    padding:
-        4px 8px;
-
-    border-radius: 20px;
-
-    font-size: 11px;
+.estado {
+    display: none;
 }
 
-.resultados-header button {
-    border: none;
+.workspace {
+    padding: 8px;
+    gap: 8px;
+}
 
-    background: transparent;
+/* ---------------------------------------------------------
+   MAPA MÁS PEQUEÑO
+--------------------------------------------------------- */
 
-    color: #1769aa;
+.mapa-container {
+    height: 22vh;
+    min-height: 160px;
+    max-height: 200px;
+    border-radius: 11px;
+}
 
-    font-size: 11px;
-
-    cursor: pointer;
+.lista-colegios {
+    gap: 7px;
 }
 
 .acciones-resultados {
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
+    gap: 4px;
 }
 
-.btn-exportar {
-    font-weight: 600;
+.resultados-header button {
+    font-size: 9px;
 }
 
+/* ---------------------------------------------------------
+   FICHA MUY PEQUEÑA
+   SIN SCROLL
+--------------------------------------------------------- */
 
-/* =========================================================
-   LISTADO DE ESTABLECIMIENTOS
-========================================================= */
+.ficha-colegio {
+    width: calc(100vw - 16px);
+    max-height: none;
+    border-radius: 13px;
+    overflow: visible;
+}
 
-.lista-colegios {
+.ficha-contenido {
+    padding: 14px;
+}
+
+.ficha-icono {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    margin-bottom: 6px;
+}
+
+.ficha-titulo h2 {
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.ficha-separador {
+    margin: 9px 0;
+}
+
+.ficha-datos {
+    gap: 5px;
+}
+
+.ficha-dato {
+    padding: 6px 7px;
+}
+
+.ficha-dato-icono {
+    width: 25px;
+    min-width: 25px;
+    height: 25px;
+    font-size: 11px;
+}
+
+.ficha-dato label {
+    font-size: 7px;
+}
+
+.ficha-dato p {
+    font-size: 9px;
+    line-height: 1.25;
+}
+
+.ficha-acciones {
     margin-top: 10px;
-
-    overflow-y: auto;
-
-    flex: 1;
-
-    min-height: 0;
-
-    padding:
-        2px 4px 10px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 12px;
-
-    align-content: start;
+    gap: 5px;
 }
 
+.ficha-maps,
+.ficha-llegar {
+    min-height: 34px;
+    padding: 8px;
+    font-size: 9px;
+}
+
+.ficha-cerrar {
+    width: 27px;
+    height: 27px;
+    top: 8px;
+    right: 8px;
+    font-size: 16px;
+}
+
+
+}
 
 /* =========================================================
-   TARJETA DE ESTABLECIMIENTO
+PANTALLAS MUY GRANDES
 ========================================================= */
-
-.colegio-card {
-    border:
-        1px solid #e7ecf2;
-
-    border-radius: 11px;
-
-    padding: 15px;
-
-    background: #ffffff;
-
-    cursor: pointer;
-
-    min-height: 145px;
-
-    transition:
-        border-color 0.15s ease,
-        background 0.15s ease,
-        box-shadow 0.15s ease,
-        transform 0.15s ease;
-}
-
-.colegio-card:hover {
-    border-color: #b9d7ef;
-
-    background: #fbfdff;
-
-    box-shadow:
-        0 4px 12px rgba(15, 23, 42, 0.06);
-
-    transform:
-        translateY(-1px);
-}
-
-.colegio-card.seleccionado {
-    border-color: #1769aa;
-
-    background: #f2f8ff;
-
-    box-shadow:
-        0 3px 10px rgba(23, 105, 170, 0.10);
-}
-
-
-/* =========================================================
-   NOMBRE DEL ESTABLECIMIENTO
-========================================================= */
-
-.colegio-nombre {
-    font-size: 13px;
-
-    font-weight: 600;
-
-    color: #344054;
-
-    margin-bottom: 8px;
-
-    line-height: 1.35;
-}
-
-
-/* =========================================================
-   INFORMACIÓN TARJETA
-========================================================= */
-
-.colegio-rbd {
-    font-size: 11px;
-
-    color: #667085;
-
-    margin-bottom: 5px;
-}
-
-.colegio-info {
-    font-size: 11px;
-
-    color: #7b8794;
-
-    line-height: 1.5;
-}
-
-
-/* =========================================================
-   SIN RESULTADOS
-========================================================= */
-
-.sin-resultados {
-    min-height: 180px;
-
-    display: flex;
-
-    flex-direction: column;
-
-    justify-content: center;
-    align-items: center;
-
-    text-align: center;
-
-    color: #98a2b3;
-
-    grid-column:
-        1 / -1;
-}
-
-.sin-resultados span {
-    font-size: 32px;
-
-    margin-bottom: 10px;
-}
-
-.sin-resultados p {
-    font-size: 12px;
-}
-
-
-/* =========================================================
-   SCROLLBAR
-========================================================= */
-
-.lista-colegios::-webkit-scrollbar,
-.ficha-colegio::-webkit-scrollbar {
-    width: 6px;
-}
-
-.lista-colegios::-webkit-scrollbar-thumb,
-.ficha-colegio::-webkit-scrollbar-thumb {
-    background: #d5dce5;
-
-    border-radius: 10px;
-}
-
-.lista-colegios::-webkit-scrollbar-track,
-.ficha-colegio::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-
-/* =========================================================
-   TABLET / PANTALLAS MEDIANAS
-========================================================= */
-
-@media (max-width: 1100px) {
-
-    .sidebar {
-        width: 220px;
-    }
-
-    .workspace {
-        padding:
-            16px 18px 18px;
-    }
-
-    .mapa-container {
-        height: 29vh;
-
-        min-height: 230px;
-
-        max-height: 290px;
-    }
-
-    .lista-colegios {
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-    }
-
-    .ficha-colegio {
-        width:
-            min(
-                760px,
-                calc(100vw - 50px)
-            );
-    }
-}
-
-
-/* =========================================================
-   TABLET PEQUEÑA
-========================================================= */
-
-@media (max-width: 900px) {
-
-    .sidebar {
-        width: 70px;
-    }
-
-    .logo div:not(.logo-icon),
-    .menu-item span:last-child,
-    .sidebar-footer {
-        display: none;
-    }
-
-    .logo {
-        justify-content: center;
-
-        padding:
-            4px 0 28px;
-    }
-
-    .menu-item {
-        justify-content: center;
-
-        padding:
-            12px 8px;
-    }
-
-    .filtros {
-        grid-template-columns:
-            repeat(3, minmax(0, 1fr));
-    }
-
-    .mapa-container {
-        height: 27vh;
-
-        min-height: 220px;
-
-        max-height: 280px;
-    }
-
-    .ficha-colegio {
-        width:
-            min(
-                700px,
-                calc(100vw - 40px)
-            );
-    }
-}
-
-
-/* =========================================================
-   CELULARES
-========================================================= */
-
-@media (max-width: 700px) {
-
-    body {
-        overflow-x: hidden;
-        overflow-y: auto;
-    }
-
-
-    /* ---------------------------------------------------------
-       ESTRUCTURA GENERAL
-    --------------------------------------------------------- */
-
-    .app {
-        height: auto;
-
-        min-height: 100vh;
-
-        flex-direction: column;
-
-        overflow: visible;
-    }
-
-
-    /* ---------------------------------------------------------
-       SIDEBAR
-    --------------------------------------------------------- */
-
-    .sidebar {
-        width: 100%;
-
-        height: auto;
-
-        padding:
-            10px 14px;
-
-        border-right: none;
-
-        border-bottom:
-            1px solid #e5eaf0;
-
-        flex-direction: row;
-
-        align-items: center;
-
-        justify-content: space-between;
-    }
-
-    .logo {
-        padding: 0;
-
-        justify-content: flex-start;
-    }
-
-    .logo div:not(.logo-icon) {
-        display: block;
-    }
-
-    .sidebar-footer {
-        display: none;
-    }
-
-    .menu {
-        flex-direction: row;
-
-        gap: 4px;
-    }
-
-    .menu-item {
-        width: auto;
-
-        padding:
-            9px 10px;
-
-        justify-content: center;
-    }
-
-    .menu-item span:last-child {
-        display: none;
-    }
-
-
-    /* ---------------------------------------------------------
-       MAIN
-    --------------------------------------------------------- */
-
-    .main {
-        width: 100%;
-    }
-
-
-    /* ---------------------------------------------------------
-       HEADER
-    --------------------------------------------------------- */
-
-    .header {
-        height: auto;
-
-        padding: 15px;
-
-        align-items: flex-start;
-
-        gap: 10px;
-    }
-
-    .header h1 {
-        font-size: 17px;
-
-        line-height: 1.25;
-    }
-
-    .header p {
-        font-size: 11px;
-
-        line-height: 1.4;
-    }
-
-    .estado {
-        font-size: 9px;
-
-        white-space: nowrap;
-
-        padding-top: 2px;
-    }
-
-
-    /* ---------------------------------------------------------
-       WORKSPACE
-    --------------------------------------------------------- */
-
-    .workspace {
-        display: flex;
-
-        flex-direction: column;
-
-        padding:
-            10px;
-
-        gap: 10px;
-
-        min-height: 0;
-
-        overflow: visible;
-    }
-
-
-    /* ---------------------------------------------------------
-       PANEL
-
-       IMPORTANTE:
-
-       El HTML actual tiene esta estructura:
-
-       workspace
-          ├── panel
-          │    ├── buscador
-          │    ├── filtros
-          │    ├── resultados
-          │    └── listado
-          │
-          └── mapa
-
-       En móvil hacemos que .panel no genere
-       una caja propia. Sus elementos pasan
-       visualmente a comportarse como hijos
-       directos de .workspace.
-
-       Esto permite colocar el mapa entre
-       los filtros y los resultados SIN
-       modificar el HTML.
-    --------------------------------------------------------- */
-
-    .panel {
-        display: contents;
-    }
-
-
-    /* ---------------------------------------------------------
-       ORDEN MÓVIL
-
-       1. Buscador
-       2. Filtros
-       3. Mapa
-       4. Resultados
-       5. Listado
-    --------------------------------------------------------- */
-
-    .search-box {
-        order: 1;
-
-        width: 100%;
-
-        height: 44px;
-    }
-
-    .filtros {
-        order: 2;
-
-        display: grid;
-
-        grid-template-columns: 1fr;
-
-        gap: 8px;
-
-        margin-top: 8px;
-    }
-
-    .mapa-container {
-        order: 3;
-    }
-
-    .resultados-header {
-        order: 4;
-    }
-
-    .lista-colegios {
-        order: 5;
-    }
-
-
-    /* ---------------------------------------------------------
-       BUSCADOR
-    --------------------------------------------------------- */
-
-    .search-box {
-        width: 100%;
-
-        height: 44px;
-    }
-
-
-    /* ---------------------------------------------------------
-       FILTROS
-    --------------------------------------------------------- */
-
-    .filtro select {
-        height: 38px;
-    }
-
-
-    /* ---------------------------------------------------------
-       MAPA MÓVIL
-
-       Ahora queda DESPUÉS DE LOS FILTROS
-       y ANTES DEL LISTADO.
-
-       Se mantiene pequeño para que no
-       ocupe demasiado espacio.
-    --------------------------------------------------------- */
-
-    .mapa-container {
-        width: 100%;
-
-        height: 24vh;
-
-        min-height: 180px;
-
-        max-height: 220px;
-
-        border-radius: 12px;
-
-        margin-top: 2px;
-
-        flex-shrink: 0;
-    }
-
-    #mapa {
-        width: 100%;
-
-        height: 100%;
-    }
-
-
-    /* ---------------------------------------------------------
-       CONTROLES MAPA
-    --------------------------------------------------------- */
-
-    .controles-ubicacion {
-        top: 8px;
-
-        left: 8px;
-
-        gap: 5px;
-    }
-
-    .boton-mapa {
-        padding:
-            8px 10px;
-
-        font-size: 10px;
-
-        border-radius: 8px;
-    }
-
-
-    /* ---------------------------------------------------------
-       RESULTADOS
-
-       Aparecen inmediatamente debajo
-       del mapa.
-    --------------------------------------------------------- */
-
-    .resultados-header {
-        margin-top: 0;
-
-        padding:
-            10px;
-
-        background: #ffffff;
-
-        border:
-            1px solid #e5eaf0;
-
-        border-radius: 10px;
-
-        flex-shrink: 0;
-    }
-
-    .resultados-header strong {
-        font-size: 12px;
-    }
-
-    .resultados-header button {
-        font-size: 10px;
-    }
-
-    .acciones-resultados {
-        gap: 7px;
-    }
-
-
-    /* ---------------------------------------------------------
-       LISTADO
-
-       Ahora aparece debajo del mapa
-       y de la cabecera de resultados.
-
-       Puede extenderse libremente hacia
-       abajo con el desplazamiento de la
-       página.
-    --------------------------------------------------------- */
-
-    .lista-colegios {
-        width: 100%;
-
-        height: auto;
-
-        max-height: none;
-
-        min-height: 180px;
-
-        overflow-y: visible;
-
-        background: transparent;
-
-        border: none;
-
-        border-radius: 0;
-
-        padding: 0;
-
-        margin-top: 0;
-
-        display: grid;
-
-        grid-template-columns: 1fr;
-
-        gap: 8px;
-
-        flex: none;
-    }
-
-    .colegio-card {
-        padding: 13px;
-
-        margin-bottom: 0;
-
-        min-height: auto;
-
-        background: #ffffff;
-    }
-
-    .colegio-nombre {
-        font-size: 13px;
-    }
-
-    .colegio-rbd,
-    .colegio-info {
-        font-size: 11px;
-    }
-
-
-    /* ---------------------------------------------------------
-       FICHA MÓVIL
-
-       Centrada exactamente en la pantalla.
-    --------------------------------------------------------- */
-
-    .ficha-colegio {
-        position: fixed;
-
-        top: 50%;
-        left: 50%;
-
-        width:
-            calc(100vw - 28px);
-
-        max-width:
-            500px;
-
-        max-height:
-            calc(100vh - 28px);
-
-        border-radius: 15px;
-
-        overflow-y: auto;
-
-        transform:
-            translate(-50%, -46%)
-            scale(0.96);
-    }
-
-    .ficha-colegio.visible {
-        transform:
-            translate(-50%, -50%)
-            scale(1);
-    }
-
-
-    /* ---------------------------------------------------------
-       FONDO FICHA MÓVIL
-    --------------------------------------------------------- */
-
-    .ficha-colegio::before {
-        position: fixed;
-
-        top: 0;
-        left: 0;
-
-        width: 100vw;
-        height: 100vh;
-
-        background:
-            rgba(15, 23, 42, 0.35);
-    }
-
-
-    /* ---------------------------------------------------------
-       CONTENIDO FICHA MÓVIL
-    --------------------------------------------------------- */
-
-    .ficha-contenido {
-        padding:
-            20px;
-    }
-
-    .ficha-icono {
-        width: 44px;
-
-        height: 44px;
-
-        font-size: 22px;
-
-        margin-bottom: 11px;
-    }
-
-    .ficha-titulo h2 {
-        font-size: 17px;
-
-        padding-right: 35px;
-    }
-
-
-    /* ---------------------------------------------------------
-       DATOS FICHA MÓVIL
-    --------------------------------------------------------- */
-
-    .ficha-datos {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 13px;
-    }
-
-
-    /* ---------------------------------------------------------
-       ACCIONES FICHA MÓVIL
-    --------------------------------------------------------- */
-
-    .ficha-acciones {
-        display: flex;
-
-        flex-direction: column;
-
-        gap: 8px;
-
-        margin-top: 18px;
-    }
-
-    .ficha-maps,
-    .ficha-llegar {
-        padding: 12px;
-
-        font-size: 12px;
-    }
-}
-
-
-/* =========================================================
-   CELULARES PEQUEÑOS
-========================================================= */
-
-@media (max-width: 400px) {
-
-    .header {
-        padding: 13px;
-    }
-
-    .header h1 {
-        font-size: 16px;
-    }
-
-    .estado {
-        display: none;
-    }
-
-    .workspace {
-        padding: 8px;
-
-        gap: 8px;
-    }
-
-
-    /* ---------------------------------------------------------
-       MAPA MÁS PEQUEÑO
-    --------------------------------------------------------- */
-
-    .mapa-container {
-        height: 21vh;
-
-        min-height: 155px;
-
-        max-height: 190px;
-
-        border-radius: 11px;
-    }
-
-
-    /* ---------------------------------------------------------
-       LISTADO
-    --------------------------------------------------------- */
-
-    .lista-colegios {
-        gap: 7px;
-    }
-
-    .acciones-resultados {
-        gap: 4px;
-    }
-
-    .resultados-header button {
-        font-size: 9px;
-    }
-
-
-    /* ---------------------------------------------------------
-       FICHA
-    --------------------------------------------------------- */
-
-    .ficha-colegio {
-        width:
-            calc(100vw - 20px);
-
-        max-height:
-            calc(100vh - 20px);
-
-        border-radius: 13px;
-    }
-
-    .ficha-contenido {
-        padding: 17px;
-    }
-}
-
-
-/* =========================================================
-   PANTALLAS MUY GRANDES
-========================================================= */
-
 @media (min-width: 1600px) {
 
-    .workspace {
-        padding-left: 28px;
 
-        padding-right: 28px;
-    }
+.workspace {
+    padding-left: 28px;
+    padding-right: 28px;
+}
 
-    .lista-colegios {
-        grid-template-columns:
-            repeat(4, minmax(0, 1fr));
-    }
+.lista-colegios {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
 
-    .mapa-container {
-        height: 30vh;
+.mapa-container {
+    height: 30vh;
+    max-height: 330px;
+}
 
-        max-height: 330px;
-    }
+.ficha-colegio {
+    width: 860px;
+    max-width: calc(100vw - 80px);
+    max-height: none;
+    overflow: visible;
+}
 
-    .ficha-colegio {
-        width: 860px;
 
-        max-width:
-            calc(100vw - 80px);
-    }
 }
