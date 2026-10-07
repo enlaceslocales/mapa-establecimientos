@@ -7296,3 +7296,35 @@ select {
         transform: translateY(-50%);
     }
 }
+
+/* =========================================================
+   LOGO INFERIOR DEL SIDEBAR
+   ========================================================= */
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 12px 6px 16px !important;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    gap: 2px;
+
+    text-align: center;
+
+    color: #98a2b3;
+    font-size: 10px;
+}
+
+.sidebar-footer-logo {
+    width: 62px;
+    height: 62px;
+
+    object-fit: contain;
+
+    margin-bottom: 7px;
+
+    display: block;
+}
