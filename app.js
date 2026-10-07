@@ -12,17 +12,18 @@
 
 /* =========================================================
 
-   CONEXIÓN CON GOOGLE SHEETS
+   CONEXIÓN CON SUPABASE
 
 \========================================================= */
 
+const SUPABASE_URL =
+    "https://qzbyslcmgcuemcwlqsky.supabase.co";
 
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_XCFxPZv5CaU6C9AluleYEQ_Xslw635e";
 
 const URL_DATOS =
-
-    "https://script.google.com/macros/s/AKfycbzIIdCiV8N2NjVerGX9YqVDMpY8IuPA4abZR7TpSJuPBaOgczkAt3MbhuylawSt9kCz/exec";
-
-
+    `${SUPABASE_URL}/rest/v1/establecimientos`;
 
 
 
@@ -272,98 +273,6 @@ const marcadores = {};
 
 /* =========================================================
 
-   FUNCIÓN PARA NORMALIZAR NOMBRES DE COLUMNAS
-
-\========================================================= */
-
-
-
-function normalizarClave(texto) {
-
-
-
-    return String(texto || "")
-
-        .normalize("NFD")
-
-        .replace(/[\u0300-\u036f]/g, "")
-
-        .replace(/\s+/g, " ")
-
-        .trim()
-
-        .toUpperCase();
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   OBTENER DATO DE GOOGLE SHEETS
-
-\========================================================= */
-
-
-
-function obtenerDato(colegio, nombreCampo) {
-
-
-
-    const claveBuscada =
-
-        normalizarClave(nombreCampo);
-
-
-
-
-
-    const claveReal =
-
-        Object.keys(colegio).find(
-
-            clave =>
-
-                normalizarClave(clave) ===
-
-                claveBuscada
-
-        );
-
-
-
-
-
-    if (!claveReal) {
-
-
-
-        return "";
-
-
-
-    }
-
-
-
-
-
-    return colegio[claveReal] ?? "";
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
    ACTUALIZAR ESTADO DE DATOS
 
 \========================================================= */
@@ -488,7 +397,7 @@ function actualizarEstadoDatos(
 
             estadoDatos.title =
 
-                `Google Sheets conectado correctamente. ${cantidad} establecimientos cargados.`;
+                `Supabase conectado correctamente. ${cantidad} establecimientos cargados.`;
 
 
 
@@ -538,7 +447,7 @@ function actualizarEstadoDatos(
 
         estadoDetalle.textContent =
 
-            "No fue posible obtener los datos desde Google Sheets";
+            "No fue posible obtener los datos desde Supabase";
 
 
 
@@ -550,7 +459,7 @@ function actualizarEstadoDatos(
 
             estadoDatos.title =
 
-                "Error de conexión con Google Sheets.";
+                "Error de conexión con Supabase.";
 
 
 
@@ -600,7 +509,7 @@ function actualizarEstadoDatos(
 
         estadoDetalle.textContent =
 
-            "Consultando Google Sheets...";
+            "Consultando Supabase...";
 
 
 
@@ -612,7 +521,7 @@ function actualizarEstadoDatos(
 
             estadoDatos.title =
 
-                "Consultando Google Sheets.";
+                "Consultando Supabase.";
 
 
 
@@ -902,427 +811,194 @@ function obtenerUrlComoLlegar(colegio) {
 
 /* =========================================================
 
-   CARGAR DATOS DESDE GOOGLE SHEETS
+   CARGAR DATOS DESDE SUPABASE
 
 \========================================================= */
 
-
-
 async function cargarDatos() {
 
-
-
     actualizarEstadoDatos(
-
         "cargando"
-
     );
-
-
-
-
 
     try {
 
-
+        const parametros =
+            new URLSearchParams({
+                select:
+                    "id,nombre,rbd,direccion,localidad,comuna,dependencia,nivel,director,correo,telefono,convivencia_escolar,telefono_convivencia,latitud,longitud",
+                order:
+                    "nombre.asc"
+            });
 
         const respuesta =
-
             await fetch(
+                `${URL_DATOS}?${parametros.toString()}`,
+                {
+                    method: "GET",
 
-                URL_DATOS +
+                    headers: {
+                        "apikey":
+                            SUPABASE_PUBLISHABLE_KEY,
 
-                "?v=" +
+                        "Authorization":
+                            `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
 
-                Date.now()
+                        "Accept":
+                            "application/json"
+                    },
 
+                    cache:
+                        "no-store"
+                }
             );
-
-
-
-
 
         if (!respuesta.ok) {
 
-
+            const detalleError =
+                await respuesta.text();
 
             throw new Error(
-
-                "No fue posible obtener los datos."
-
+                `Supabase respondió con estado ${respuesta.status}. ${detalleError}`
             );
-
-
 
         }
 
-
-
-
-
         const datos =
-
             await respuesta.json();
 
+        if (!Array.isArray(datos)) {
 
+            throw new Error(
+                "La respuesta recibida desde Supabase no tiene el formato esperado."
+            );
 
-
+        }
 
         console.log(
-
-            "Datos originales recibidos desde Google Sheets:",
-
+            "Datos originales recibidos desde Supabase:",
             datos
-
         );
-
-
-
-
 
         colegios =
-
             datos
 
-
-
                 .filter(
-
                     colegio =>
-
-                        obtenerDato(
-
-                            colegio,
-
-                            "ID"
-
-                        ) !== ""
-
+                        colegio.id !== null &&
+                        colegio.id !== undefined &&
+                        String(colegio.nombre || "").trim() !== ""
                 )
 
-
-
                 .map(
-
                     colegio => ({
 
-
-
                         id:
-
                             Number(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "ID"
-
-                                )
-
+                                colegio.id
                             ),
-
-
 
                         nombre:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "NOMBRE"
-
-                                )
-
+                                colegio.nombre ?? ""
                             ).trim(),
-
-
 
                         rbd:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "RBD"
-
-                                )
-
+                                colegio.rbd ?? ""
                             ).trim(),
-
-
 
                         direccion:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "DIRECCIÓN"
-
-                                )
-
+                                colegio.direccion ?? ""
                             ).trim(),
-
-
 
                         localidad:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "LOCALIDAD"
-
-                                )
-
+                                colegio.localidad ?? ""
                             ).trim(),
-
-
 
                         comuna:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "COMUNA"
-
-                                )
-
+                                colegio.comuna ?? ""
                             ).trim(),
-
-
 
                         dependencia:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "DEPENDENCIA"
-
-                                )
-
+                                colegio.dependencia ?? ""
                             ).trim(),
-
-
 
                         nivel:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "NIVEL"
-
-                                )
-
+                                colegio.nivel ?? ""
                             ).trim(),
-
-
 
                         director:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "DIRECTOR"
-
-                                )
-
+                                colegio.director ?? ""
                             ).trim(),
-
-
 
                         correo:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "CORREO"
-
-                                )
-
+                                colegio.correo ?? ""
                             ).trim(),
-
-
 
                         telefono:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "TELÉFONO"
-
-                                )
-
+                                colegio.telefono ?? ""
                             ).trim(),
-
-
 
                         convivencia:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "CONVIVENCIA ESCOLAR"
-
-                                )
-
+                                colegio.convivencia_escolar ?? ""
                             ).trim(),
-
-
 
                         telefonoConvivencia:
-
                             String(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "TELEFONO CONVIVENCIA"
-
-                                )
-
+                                colegio.telefono_convivencia ?? ""
                             ).trim(),
 
-
-
                         lat:
-
                             convertirCoordenada(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "LATITUD"
-
-                                )
-
+                                colegio.latitud
                             ),
 
-
-
                         lng:
-
                             convertirCoordenada(
-
-                                obtenerDato(
-
-                                    colegio,
-
-                                    "LONGITUD"
-
-                                )
-
+                                colegio.longitud
                             )
 
-
-
                     })
-
                 );
 
-
-
-
-
         console.log(
-
-            "Colegios procesados:",
-
+            "Colegios procesados desde Supabase:",
             colegios
-
         );
-
-
-
-
 
         actualizarEstadoDatos(
-
             "actualizado",
-
             colegios.length
-
         );
-
-
-
-
 
         iniciarSistema();
 
-
-
-
-
     } catch (error) {
 
-
-
         console.error(
-
-            "Error cargando los datos:",
-
+            "Error cargando los datos desde Supabase:",
             error
-
         );
-
-
-
-
 
         actualizarEstadoDatos(
-
             "error"
-
         );
-
-
-
-
 
         mostrarErrorConexion();
 
-
-
     }
 
-
-
 }
-
-
 
 
 
