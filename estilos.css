@@ -7274,3 +7274,25 @@ select {
         animation-iteration-count: 1 !important;
     }
 }
+/* =========================================================
+   CENTRAR TÍTULO DEL HEADER
+   ========================================================= */
+
+@media (min-width: 901px) {
+
+    .header {
+        position: relative;
+        justify-content: center !important;
+    }
+
+    .header > div:first-child {
+        text-align: center;
+    }
+
+    .estado {
+        position: absolute;
+        right: 22px;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
