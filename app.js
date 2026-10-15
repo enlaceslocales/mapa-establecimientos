@@ -1453,6 +1453,299 @@ function mostrarColegios(lista) {
 
 
 /* =========================================================
+   POPUP COMPACTO DEL ESTABLECIMIENTO — SOLO ESCRITORIO
+========================================================= */
+
+function esVistaEscritorio() {
+
+    return window.matchMedia(
+        "(min-width: 901px)"
+    ).matches;
+
+}
+
+
+function escaparHTML(valor) {
+
+    return String(
+        valor ?? ""
+    ).replace(
+        /[&<>"']/g,
+        caracter => ({
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#039;"
+        })[caracter]
+    );
+
+}
+
+
+function valorPopup(valor) {
+
+    const texto =
+        String(
+            valor ?? ""
+        ).trim();
+
+    return escaparHTML(
+        texto || "No informado"
+    );
+
+}
+
+
+function crearDatoPopup(
+    icono,
+    etiqueta,
+    valor
+) {
+
+    return `
+
+        <div class="popup-colegio-dato">
+
+            <span>
+                ${icono}
+            </span>
+
+            <div>
+
+                <small>
+                    ${escaparHTML(etiqueta)}
+                </small>
+
+                <p>
+                    ${valorPopup(valor)}
+                </p>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+function generarPopupColegio(colegio) {
+
+    const urlMaps =
+        obtenerUrlGoogleMaps(
+            colegio
+        );
+
+    const urlComoLlegar =
+        obtenerUrlComoLlegar(
+            colegio
+        );
+
+    return `
+
+        <div class="popup-colegio">
+
+            <div class="popup-colegio-cabecera">
+
+                <div class="popup-colegio-icono">
+                    🏫
+                </div>
+
+                <div>
+
+                    <strong>
+                        ${valorPopup(colegio.nombre)}
+                    </strong>
+
+                    <em>
+                        RBD ${valorPopup(colegio.rbd)}
+                    </em>
+
+                </div>
+
+            </div>
+
+            <div class="popup-colegio-grid">
+
+                ${crearDatoPopup(
+                    "📍",
+                    "Dirección",
+                    colegio.direccion
+                )}
+
+                ${crearDatoPopup(
+                    "🏘️",
+                    "Localidad",
+                    colegio.localidad
+                )}
+
+                ${crearDatoPopup(
+                    "🏛️",
+                    "Comuna",
+                    colegio.comuna
+                )}
+
+                ${crearDatoPopup(
+                    "🏫",
+                    "Dependencia",
+                    colegio.dependencia
+                )}
+
+                ${crearDatoPopup(
+                    "📚",
+                    "Nivel educacional",
+                    colegio.nivel
+                )}
+
+                ${crearDatoPopup(
+                    "👤",
+                    "Director/a",
+                    colegio.director
+                )}
+
+                ${crearDatoPopup(
+                    "✉️",
+                    "Correo",
+                    colegio.correo
+                )}
+
+                ${crearDatoPopup(
+                    "☎️",
+                    "Teléfono",
+                    colegio.telefono
+                )}
+
+                ${crearDatoPopup(
+                    "🤝",
+                    "Convivencia escolar",
+                    colegio.convivencia
+                )}
+
+                ${crearDatoPopup(
+                    "📞",
+                    "Tel. convivencia",
+                    colegio.telefonoConvivencia
+                )}
+
+            </div>
+
+            <div class="popup-colegio-acciones">
+
+                <a
+                    class="popup-colegio-maps"
+                    href="${escaparHTML(urlMaps)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    🗺️ Google Maps
+                </a>
+
+                <a
+                    class="popup-colegio-ruta"
+                    href="${escaparHTML(urlComoLlegar)}"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    🚗 Cómo llegar
+                </a>
+
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+function mostrarPopupColegio(colegio) {
+
+    if (!esVistaEscritorio()) {
+
+        return;
+
+    }
+
+    const marcador =
+        marcadores[
+            colegio.id
+        ];
+
+    if (!marcador) {
+
+        return;
+
+    }
+
+    mapa.closePopup();
+
+    marcador.unbindPopup();
+
+    marcador.bindPopup(
+        generarPopupColegio(
+            colegio
+        ),
+        {
+            maxWidth:
+                470,
+
+            minWidth:
+                420,
+
+            closeButton:
+                true,
+
+            autoPan:
+                true,
+
+            keepInView:
+                true,
+
+            autoPanPaddingTopLeft:
+                L.point(
+                    12,
+                    12
+                ),
+
+            autoPanPaddingBottomRight:
+                L.point(
+                    12,
+                    12
+                ),
+
+            offset:
+                L.point(
+                    0,
+                    -8
+                ),
+
+            className:
+                "popup-colegio-leaflet"
+        }
+    );
+
+    window.setTimeout(
+        () => {
+
+            if (
+                mapa.hasLayer(
+                    marcador
+                )
+            ) {
+
+                marcador.openPopup();
+
+            }
+
+        },
+        180
+    );
+
+}
+
+
+/* =========================================================
 
    SELECCIONAR COLEGIO
 
@@ -1462,102 +1755,74 @@ function mostrarColegios(lista) {
 
 function seleccionarColegio(colegio) {
 
-
-
     console.log(
-
         "Colegio seleccionado:",
-
         colegio.nombre
-
     );
 
-
-
-
-
     if (
-
         Number.isFinite(colegio.lat) &&
-
         Number.isFinite(colegio.lng)
-
     ) {
 
-
-
         mapa.setView(
-
             [
-
                 colegio.lat,
-
                 colegio.lng
-
             ],
-
-            16,
-
+            esVistaEscritorio()
+                ? 15
+                : 16,
             {
-
-                animate: true
-
+                animate:
+                    true
             }
-
         );
-
-
-
-
-
-        if (
-
-            marcadores[colegio.id]
-
-        ) {
-
-
-
-            marcadores[
-
-                colegio.id
-
-            ].openPopup();
-
-
-
-        }
-
-
 
     }
 
+    if (
+        esVistaEscritorio()
+    ) {
 
+        /*
+         * En PC mostramos una ficha compacta
+         * anclada directamente al marcador.
+         */
+        const ficha =
+            document.getElementById(
+                "fichaColegio"
+            );
 
+        if (ficha) {
 
+            ficha.classList.remove(
+                "visible"
+            );
 
-    mostrarFichaColegio(
+        }
 
-        colegio
+        mostrarPopupColegio(
+            colegio
+        );
 
-    );
+    } else {
 
+        /*
+         * En tablet y móvil se conserva
+         * la ficha modal original.
+         */
+        mostrarFichaColegio(
+            colegio
+        );
 
-
-
+    }
 
     seleccionarColegioVisualmente(
-
         colegio.id
-
     );
 
-
-
 }
-
-
-
 
 
 /* =========================================================
@@ -5234,47 +5499,40 @@ async function buscarColegioMasCercano() {
 
 
 
-        mostrarFichaColegio(
+        if (
+            esVistaEscritorio()
+        ) {
 
-            colegioMasCercano
+            const ficha =
+                document.getElementById(
+                    "fichaColegio"
+                );
 
-        );
+            if (ficha) {
 
+                ficha.classList.remove(
+                    "visible"
+                );
 
+            }
+
+            mostrarPopupColegio(
+                colegioMasCercano
+            );
+
+        } else {
+
+            mostrarFichaColegio(
+                colegioMasCercano
+            );
+
+        }
 
 
 
         seleccionarColegioVisualmente(
-
             colegioMasCercano.id
-
         );
-
-
-
-
-
-        if (
-
-            marcadores[
-
-                colegioMasCercano.id
-
-            ]
-
-        ) {
-
-
-
-            marcadores[
-
-                colegioMasCercano.id
-
-            ].openPopup();
-
-
-
-        }
 
 
 
@@ -5673,6 +5931,8 @@ if (cerrarFicha) {
         "click",
 
         function() {
+
+            mapa.closePopup();
 
 
 
